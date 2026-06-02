@@ -135,7 +135,9 @@ import { collection, getDocs, query, orderBy }
       return;
     }
     var start = (page - 1) * PER;
-    listEl.innerHTML = ARTICLES.slice(start, start + PER).map(function (a) {
+    var total = ARTICLES.length;
+    listEl.innerHTML = ARTICLES.slice(start, start + PER).map(function (a, i) {
+      var no = total - (start + i); // 일련번호(내림차순): 최신 글이 가장 큰 번호
       var hasUrl = a.url && a.url !== '#';
       var titleTag = hasUrl
         ? '<a href="' + esc(a.url) + '" target="_blank" rel="noopener" class="block text-on-surface font-semibold leading-snug group-hover:text-primary transition-colors mb-1.5">' + esc(a.title) + '</a>'
@@ -143,28 +145,50 @@ import { collection, getDocs, query, orderBy }
       var link = hasUrl
         ? '<a href="' + esc(a.url) + '" target="_blank" rel="noopener" class="text-primary text-xs font-semibold inline-flex items-center gap-0.5 hover:text-primary-container">기사원문보기<span class="material-symbols-outlined text-sm">north_east</span></a>'
         : '';
-      return '<div class="py-md px-sm group">' +
-        '<div class="text-xs text-on-surface-variant mb-1">' + esc(a.date) + ' · ' + esc(a.outlet) + '</div>' +
-        titleTag + link +
+      return '<div class="py-md px-sm group flex gap-3">' +
+        '<div class="shrink-0 pt-0.5">' +
+          '<span class="inline-flex items-center justify-center w-7 h-7 rounded-full border border-primary-container/40 bg-primary-container/10 text-primary-container text-xs font-bold tabular-nums">' + no + '</span>' +
+        '</div>' +
+        '<div class="flex-1 min-w-0">' +
+          '<div class="text-xs text-on-surface-variant mb-1">' + esc(a.date) + ' · ' + esc(a.outlet) + '</div>' +
+          titleTag + link +
+        '</div>' +
       '</div>';
     }).join('');
   }
 
+  var PAGE_GROUP = 10; // 페이지 번호를 10개씩 묶어서 표시
+
   function renderPager() {
     if (ARTICLES.length === 0) { pagerEl.innerHTML = ''; return; }
-    var html = '<button data-page="prev" class="w-8 h-8 rounded flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined text-base">chevron_left</span></button>';
-    for (var i = 1; i <= totalPages; i++) {
+    var group = Math.ceil(page / PAGE_GROUP);          // 현재 묶음 (1,2,3...)
+    var startPage = (group - 1) * PAGE_GROUP + 1;      // 묶음 첫 페이지
+    var endPage = Math.min(totalPages, group * PAGE_GROUP); // 묶음 끝 페이지
+    var html = '';
+
+    // << 이전 10개
+    if (startPage > 1) {
+      html += '<button data-page="prevg" class="w-8 h-8 rounded flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors" title="이전 10개"><span class="material-symbols-outlined text-base">keyboard_double_arrow_left</span></button>';
+    }
+    // 현재 묶음의 페이지 번호 (최대 10개)
+    for (var i = startPage; i <= endPage; i++) {
       html += '<button data-page="' + i + '" class="w-8 h-8 rounded transition-colors ' +
         (i === page ? 'bg-primary-container text-black font-bold' : 'text-on-surface-variant hover:text-primary') +
         '">' + i + '</button>';
     }
-    html += '<button data-page="next" class="w-8 h-8 rounded flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined text-base">chevron_right</span></button>';
+    // >> 다음 10개
+    if (endPage < totalPages) {
+      html += '<button data-page="nextg" class="w-8 h-8 rounded flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors" title="다음 10개"><span class="material-symbols-outlined text-base">keyboard_double_arrow_right</span></button>';
+    }
     pagerEl.innerHTML = html;
   }
 
   function go(p) {
-    if (p === 'prev') p = page - 1;
-    else if (p === 'next') p = page + 1;
+    if (p === 'prevg') {
+      p = Math.max(1, (Math.ceil(page / PAGE_GROUP) - 2) * PAGE_GROUP + 1); // 이전 묶음 첫 페이지
+    } else if (p === 'nextg') {
+      p = Math.min(totalPages, Math.ceil(page / PAGE_GROUP) * PAGE_GROUP + 1); // 다음 묶음 첫 페이지
+    }
     p = Math.min(totalPages, Math.max(1, p));
     if (p === page) return;
     page = p; renderList(); renderPager();
@@ -174,7 +198,7 @@ import { collection, getDocs, query, orderBy }
     var b = e.target.closest('button[data-page]');
     if (!b) return;
     var v = b.getAttribute('data-page');
-    go(v === 'prev' || v === 'next' ? v : parseInt(v, 10));
+    go((v === 'prevg' || v === 'nextg') ? v : parseInt(v, 10));
   });
 
   // Firestore 에서 소식 불러오기 (최신 보도일 순)
@@ -237,4 +261,5 @@ import { collection, getDocs, query, orderBy }
   })(h);
 })();
 </script>
+<script src="contact-modal.js"></script>
 </body></html>

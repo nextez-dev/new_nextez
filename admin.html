@@ -65,6 +65,21 @@
   <!-- ===== 관리 화면 ===== -->
   <section id="admin-view" class="hidden">
 
+    <!-- 뉴스 자동 가져오기 -->
+    <div class="bg-surface-container/60 border border-primary-container/30 rounded-xl p-lg mb-xl">
+      <h2 class="text-lg font-bold mb-md flex items-center gap-2">
+        <span class="material-symbols-outlined text-primary-container">cloud_download</span>뉴스 자동 가져오기
+      </h2>
+      <div class="flex flex-col sm:flex-row gap-2 mb-3">
+        <input id="fetch-keyword" type="text" class="field sm:flex-1" value="넥스트이지" placeholder="검색어 (예: 넥스트이지)">
+        <button id="fetch-btn" class="bg-primary-container text-black font-bold rounded-lg px-5 py-2.5 hover:brightness-110 transition flex items-center justify-center gap-1 shrink-0">
+          <span class="material-symbols-outlined text-lg">search</span>뉴스 가져오기
+        </button>
+      </div>
+      <p id="fetch-msg" class="text-sm text-on-surface-variant mb-2"></p>
+      <div id="candidate-list" class="space-y-2"></div>
+    </div>
+
     <!-- 등록/수정 폼 -->
     <div class="bg-surface-container/60 border border-white/10 rounded-xl p-lg mb-xl">
       <h2 id="form-title" class="text-lg font-bold mb-md flex items-center gap-2">
@@ -108,11 +123,13 @@
 </main>
 
 <script type="module">
-import { auth, db } from './firebase-init.js';
+import { auth, db, functions } from './firebase-init.js';
 import { signInWithEmailAndPassword, signOut, onAuthStateChanged }
   from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
 import { collection, addDoc, getDocs, deleteDoc, updateDoc, doc, query, orderBy, serverTimestamp }
   from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+import { httpsCallable }
+  from "https://www.gstatic.com/firebasejs/10.12.5/firebase-functions.js";
 
 // ---- 화면 요소 ----
 const loginView = document.getElementById('login-view');
@@ -270,6 +287,85 @@ newsList.addEventListener('click', async (e) => {
     } catch (err) {
       alert('삭제 실패: ' + err.message);
     }
+  }
+});
+
+// ============================================================
+//  뉴스 자동 가져오기 (서버 함수 fetchNews 호출)
+// ============================================================
+const fetchBtn = document.getElementById('fetch-btn');
+const fetchKeyword = document.getElementById('fetch-keyword');
+const fetchMsg = document.getElementById('fetch-msg');
+const candidateList = document.getElementById('candidate-list');
+const fetchNewsFn = httpsCallable(functions, 'fetchNews');
+let candidates = [];
+
+fetchBtn.addEventListener('click', async () => {
+  const keyword = (fetchKeyword.value || '넥스트이지').trim();
+  fetchBtn.disabled = true;
+  candidateList.innerHTML = '';
+  fetchMsg.textContent = '뉴스를 검색하는 중...';
+  try {
+    const res = await fetchNewsFn({ keyword });
+    candidates = (res.data && res.data.items) ? res.data.items : [];
+    fetchMsg.textContent = candidates.length === 0
+      ? '새로 가져올 뉴스가 없습니다. (이미 등록됐거나 결과 없음)'
+      : candidates.length + '건을 찾았어요. [등록]을 누르면 홈페이지에 올라갑니다.';
+    renderCandidates();
+  } catch (err) {
+    console.error(err);
+    fetchMsg.textContent = '가져오기 실패: ' + (err.message || err.code || '알 수 없는 오류');
+  } finally {
+    fetchBtn.disabled = false;
+  }
+});
+
+function renderCandidates() {
+  candidateList.innerHTML = candidates.map(function (a, i) {
+    return '<div class="bg-surface-container-low border border-white/10 rounded-lg p-md" data-cand="' + i + '">' +
+      '<div class="flex items-start gap-3">' +
+        '<div class="flex-1 min-w-0">' +
+          '<div class="text-xs text-on-surface-variant mb-1">' + esc(a.date || '') + ' · ' + esc(a.outlet || '') + '</div>' +
+          '<a href="' + esc(a.url) + '" target="_blank" rel="noopener" class="font-semibold leading-snug hover:text-primary block mb-1">' + esc(a.title || '') + '</a>' +
+          (a.desc ? '<p class="text-xs text-on-surface-variant/70">' + esc(a.desc) + '</p>' : '') +
+        '</div>' +
+        '<div class="flex items-center gap-1 shrink-0">' +
+          '<button data-add="' + i + '" class="bg-primary-container text-black text-sm font-bold rounded-md px-3 py-1.5 hover:brightness-110">등록</button>' +
+          '<button data-skip="' + i + '" class="text-sm text-on-surface-variant hover:text-error rounded-md px-2 py-1.5">무시</button>' +
+        '</div>' +
+      '</div>' +
+    '</div>';
+  }).join('');
+}
+
+candidateList.addEventListener('click', async (e) => {
+  const addBtn = e.target.closest('button[data-add]');
+  const skipBtn = e.target.closest('button[data-skip]');
+
+  if (addBtn) {
+    const idx = parseInt(addBtn.getAttribute('data-add'), 10);
+    const a = candidates[idx];
+    if (!a) return;
+    addBtn.disabled = true;
+    addBtn.textContent = '등록 중...';
+    try {
+      await addDoc(collection(db, 'news'), {
+        title: a.title, outlet: a.outlet, date: a.date, url: a.url,
+        createdAt: serverTimestamp()
+      });
+      const row = candidateList.querySelector('[data-cand="' + idx + '"]');
+      if (row) row.innerHTML = '<div class="text-sm text-primary font-semibold py-1">✓ 등록됨 — 홈페이지에 올라갔어요</div>';
+      loadNews(); // 아래 "등록된 소식" 목록 갱신
+    } catch (err) {
+      alert('등록 실패: ' + err.message);
+      addBtn.disabled = false;
+      addBtn.textContent = '등록';
+    }
+  }
+
+  if (skipBtn) {
+    const row = candidateList.querySelector('[data-cand="' + skipBtn.getAttribute('data-skip') + '"]');
+    if (row) row.remove();
   }
 });
 </script>
