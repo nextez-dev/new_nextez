@@ -1,0 +1,205 @@
+<!DOCTYPE html><html class="dark" lang="ko">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>NEXTEZ | Capabilities Overview</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link as="style" crossorigin="" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface-tint": "#ffb596", "surface": "#131313", "secondary-fixed-dim": "#c8c6c5",
+                        "secondary-container": "#474746", "outline-variant": "#5a4136", "on-secondary-fixed": "#1c1b1b",
+                        "primary-fixed": "#ffdbcd", "surface-bright": "#3a3939", "on-background": "#e5e2e1",
+                        "surface-container-lowest": "#0e0e0e", "outline": "#aa8a7d", "surface-variant": "#353534",
+                        "surface-container-low": "#1c1b1b", "surface-container": "#201f1f", "error-container": "#93000a",
+                        "tertiary": "#c8c6c6", "on-error-container": "#ffdad6", "secondary": "#c8c6c5",
+                        "inverse-primary": "#a33e00", "error": "#ffb4ab", "on-surface": "#e5e2e1", "on-secondary": "#313030",
+                        "tertiary-fixed-dim": "#c8c6c6", "tertiary-fixed": "#e4e2e1", "tertiary-container": "#989696",
+                        "surface-dim": "#131313", "on-error": "#690005", "on-tertiary-container": "#2f2f2f",
+                        "background": "#131313", "on-primary-fixed-variant": "#7c2e00", "surface-container-high": "#2a2a2a",
+                        "secondary-fixed": "#e5e2e1", "on-secondary-fixed-variant": "#474746", "on-surface-variant": "#e3bfb1",
+                        "inverse-on-surface": "#313030", "on-primary-fixed": "#360f00", "surface-container-highest": "#353534",
+                        "primary-container": "#ff6600", "on-primary": "#581e00", "inverse-surface": "#e5e2e1",
+                        "on-secondary-container": "#b7b5b4", "primary": "#ffb596", "on-tertiary-fixed": "#1b1c1c",
+                        "on-primary-container": "#561d00", "primary-fixed-dim": "#ffb596", "on-tertiary": "#303030",
+                        "on-tertiary-fixed-variant": "#474747"
+                    },
+                    borderRadius: { "DEFAULT": "0.5rem", "lg": "0.75rem", "xl": "1rem", "full": "9999px" },
+                    spacing: { "md": "16px", "xs": "4px", "xl": "40px", "container-max": "1280px", "gutter": "24px", "sm": "8px", "unit": "4px", "lg": "24px" }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Pretendard Variable', Pretendard, sans-serif; background-color: #131313; color: #e5e2e1; overflow: hidden; }
+        .slide-number { -webkit-text-stroke: 1.5px rgba(255, 102, 0, 0.4); color: transparent; }
+        .glass-panel { background: rgba(26, 26, 26, 0.35); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(46, 46, 46, 0.5); }
+        .kinetic-gradient { background: linear-gradient(135deg, #ff6600 0%, #ffb596 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
+        /* main copy shimmer + 강조점 (index 동일) */
+        .char { display: inline-block; will-change: filter; filter: brightness(0.8); animation: charShine 5s ease-in-out infinite; }
+        @keyframes charShine { 0%,55%,100% { filter: brightness(0.8); } 26% { filter: brightness(1.55) drop-shadow(0 0 8px rgba(255,255,255,0.35)); } }
+        .emph .char { position: relative; }
+        .emph .char::before { content:''; position:absolute; top:-0.34em; left:50%; transform:translateX(-50%); width:0.16em; height:0.16em; border-radius:9999px; background:#ff6600; }
+    </style>
+</head>
+<body class="bg-background text-on-surface antialiased h-[100dvh] overflow-hidden selection:bg-primary-container selection:text-on-primary-container">
+<!-- Background -->
+<div class="fixed inset-0 z-0">
+<img class="w-full h-full object-cover opacity-60" alt="" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJgAwoZeNH-uvXwSXG-39COP-quT4rnVjMQhmlwgu243YZZX0jhO2DwRhnD1SHC5icCCBztmUNsXxOYUe2nJeByxkw7b0a_9SZbCTS4ql5NBIjWYTfeSsm6ZJbwdI04OEoyU8MLKhccvEBQu9w4H-qTaKTf_zxul3y3Li0nZ800dpR8ivvBaypUpDriKjnlOOUkQ2fdWiz0zdjtPgrPkY7IWlNgaLSgp2VcERZCb4gmcpWhoqdcDvLPZ9zy_SGAS-0DbLTclwqH1Vl">
+<div class="absolute inset-0 bg-gradient-to-b from-background/80 via-background/40 to-background/75"></div>
+</div>
+<!-- TopNavBar (Fixed) -->
+<header class="fixed w-full top-0 border-b border-white/10 bg-background/50 backdrop-blur-md z-50">
+<div class="flex items-center w-full px-lg py-md max-w-[1600px] mx-auto">
+<div class="flex items-center gap-sm">
+<a href="index.html" class="text-[32px] leading-none font-bold text-on-surface tracking-tight" style="font-family:'Pretendard Variable',Pretendard,sans-serif">NEXT<span class="text-primary-container ml-1 relative top-[-0.3em] inline-block">EZ</span></a>
+</div>
+<nav class="hidden md:flex items-center gap-lg ml-auto"><a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors hover:bg-surface-container-highest px-sm py-xs rounded" href="index.html">Home</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors hover:bg-surface-container-highest px-sm py-xs rounded" href="services.html">Services</a>
+<a class="font-body-md text-body-md text-primary font-bold border-b-2 border-primary pb-1" href="capabilities.html">Capabilities</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors hover:bg-surface-container-highest px-sm py-xs rounded" href="portfolio.html">Project Portfolio</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors hover:bg-surface-container-highest px-sm py-xs rounded" href="about.html">About</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors hover:bg-surface-container-highest px-sm py-xs rounded" href="news.html">News &amp; Community</a></nav>
+</div>
+</header>
+<!-- Right Social Sidebar -->
+<div class="hidden xl:flex fixed right-2 top-1/2 -translate-y-1/2 z-40 flex-col items-center gap-lg">
+<div class="w-px h-20 bg-white/20"></div>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined">share</span></a>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined">mail</span></a>
+<p class="text-[12px] text-on-surface-variant tracking-widest uppercase rotate-180" style="writing-mode: vertical-rl;">Follow Us</p>
+</div>
+<!-- Single-screen layout: all 4 capabilities -->
+<main class="relative z-10 h-[100dvh] flex flex-col justify-center pt-[80px] pb-8 px-lg md:px-12">
+<div class="w-full max-w-[1600px] mx-auto">
+<!-- Header -->
+<div class="mb-lg lg:mb-xl max-w-4xl">
+<span class="font-bold text-[12px] tracking-widest text-primary uppercase mb-sm block">Capabilities</span>
+<h1 id="main-copy" class="text-[40px] md:text-[64px] leading-[1.1] font-bold tracking-tight mb-md drop-shadow-2xl">산업의 본질을 꿰뚫는 <span class="text-primary-container emph">넥스트이지</span><span class="kinetic-gradient">의 독보적 역량</span></h1>
+<p class="text-on-surface text-lg drop-shadow-md">현장 데이터로 AI를 만들고, AI로 다시 현장을 운영합니다 — <span class="text-primary-container font-semibold">데이터 → AI → 구축 → 운영</span> 전 과정을 직접 수행하는 4대 역량.</p>
+</div>
+<!-- 4 capability cards -->
+<div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-md lg:gap-lg">
+<!-- 01 Domain Data -->
+<div class="glass-panel rounded-xl p-lg flex flex-col border-t-2 border-t-primary hover:border-primary transition-colors group">
+<div class="flex items-start justify-between mb-md">
+<span class="text-[44px] font-bold slide-number leading-none">01</span>
+<span class="material-symbols-outlined text-primary-container text-[32px]">database</span>
+</div>
+<h3 class="text-xl font-bold mb-xs">Domain Data</h3>
+<p class="text-[12px] text-on-surface/50 uppercase tracking-widest mb-md">도메인 데이터</p>
+<ul class="space-y-sm text-sm text-on-surface/80 flex-grow">
+<li class="flex gap-sm"><span class="text-primary-container">·</span> 수집·정제·표준화·결합·품질검증 파이프라인</li>
+<li class="flex gap-sm"><span class="text-primary-container">·</span> 관광·농업 데이터 허브·공공데이터 API 개방</li>
+<li class="flex gap-sm"><span class="text-primary-container">·</span> IoT 데이터 수집(기상·토양·서리·트랩)</li>
+</ul>
+<div class="mt-lg pt-md border-t border-white/10 leading-snug">
+<div class="text-sm"><span class="font-bold text-primary">관광</span> 60여종 · 4억여건</div>
+<div class="text-sm"><span class="font-bold text-primary">농업</span> 50여종 · 9백만여건</div>
+</div>
+</div>
+<!-- 02 AI Engineering -->
+<div class="glass-panel rounded-xl p-lg flex flex-col border-t-2 border-t-primary hover:border-primary transition-colors group">
+<div class="flex items-start justify-between mb-md">
+<span class="text-[44px] font-bold slide-number leading-none">02</span>
+<span class="material-symbols-outlined text-primary-container text-[32px]">neurology</span>
+</div>
+<h3 class="text-xl font-bold mb-xs">AI Engineering</h3>
+<p class="text-[12px] text-on-surface/50 uppercase tracking-widest mb-md">현장 특화 AI</p>
+<ul class="space-y-sm text-sm text-on-surface/80 flex-grow">
+<li class="flex gap-sm"><span class="text-primary-container">·</span> Computer Vision · LLM/RAG</li>
+<li class="flex gap-sm"><span class="text-primary-container">·</span> 예측·고장예지 · RPA 자동화</li>
+<li class="flex gap-sm"><span class="text-primary-container">·</span> 운영형 AI (TTA 95%+ · KPX 93.9%)</li>
+</ul>
+<div class="mt-lg pt-md border-t border-white/10 flex items-baseline gap-sm">
+<span class="text-2xl font-bold text-primary">15+</span>
+<span class="text-[11px] text-on-surface/50 uppercase tracking-widest">AI Models</span>
+</div>
+</div>
+<!-- 03 Platform & Build -->
+<div class="glass-panel rounded-xl p-lg flex flex-col border-t-2 border-t-primary hover:border-primary transition-colors group">
+<div class="flex items-start justify-between mb-md">
+<span class="text-[44px] font-bold slide-number leading-none">03</span>
+<span class="material-symbols-outlined text-primary-container text-[32px]">dashboard</span>
+</div>
+<h3 class="text-xl font-bold mb-xs">Platform &amp; Build</h3>
+<p class="text-[12px] text-on-surface/50 uppercase tracking-widest mb-md">플랫폼·서비스 구축</p>
+<ul class="space-y-sm text-sm text-on-surface/80 flex-grow">
+<li class="flex gap-sm"><span class="text-primary-container">·</span> CMS 저작툴 · 플랫폼/포털 구축</li>
+<li class="flex gap-sm"><span class="text-primary-container">·</span> 모바일 서비스 · OTA · MICE 시스템</li>
+<li class="flex gap-sm"><span class="text-primary-container">·</span> OpenAPI 연동</li>
+</ul>
+<div class="mt-lg pt-md border-t border-white/10 flex items-baseline gap-sm">
+<span class="text-2xl font-bold text-primary">71+</span>
+<span class="text-[11px] text-on-surface/50 uppercase tracking-widest">CMS Sites</span>
+</div>
+</div>
+<!-- 04 Operate & Transform -->
+<div class="glass-panel rounded-xl p-lg flex flex-col border-t-2 border-t-primary hover:border-primary transition-colors group">
+<div class="flex items-start justify-between mb-md">
+<span class="text-[44px] font-bold slide-number leading-none">04</span>
+<span class="material-symbols-outlined text-primary-container text-[32px]">autorenew</span>
+</div>
+<h3 class="text-xl font-bold mb-xs">Operate &amp; Transform</h3>
+<p class="text-[12px] text-on-surface/50 uppercase tracking-widest mb-md">운영·AX 전환</p>
+<ul class="space-y-sm text-sm text-on-surface/80 flex-grow">
+<li class="flex gap-sm"><span class="text-primary-container">·</span> 자체 서비스 직접 운영(jeju114·섬프로·탐라이브·포토비)</li>
+<li class="flex gap-sm"><span class="text-primary-container">·</span> 발전·IoT·빅데이터 현장 관제</li>
+<li class="flex gap-sm"><span class="text-primary-container">·</span> DX·AX 컨설팅(전략·ISP·RFP)</li>
+</ul>
+<div class="mt-lg pt-md border-t border-white/10 flex items-baseline gap-sm">
+<span class="text-2xl font-bold text-primary">27Y+</span>
+<span class="text-[11px] text-on-surface/50 uppercase tracking-widest">Operation</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- BOTTOM : 회사 정보 + 인증 (공통) -->
+<footer class="fixed bottom-0 left-0 w-full z-40 bg-surface-container-lowest/85 backdrop-blur-md border-t border-white/10">
+<div class="max-w-[1600px] mx-auto px-lg lg:px-[88px] py-sm flex flex-col md:flex-row md:items-center justify-between gap-2 text-xs">
+<div class="flex flex-wrap items-center gap-x-md gap-y-1 text-on-surface-variant">
+<span class="font-bold text-on-surface">㈜넥스트이지</span>
+<span class="text-on-surface/25">|</span><span>대표이사 강주경</span>
+<span class="text-on-surface/25">|</span><span>제주특별자치도 제주시 첨단로 213-3, 408·409호</span>
+<span class="text-on-surface/25">|</span><span class="text-primary-container font-semibold">064-721-8118</span>
+</div>
+<div class="flex flex-wrap items-center gap-1.5">
+<span class="px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-[11px] text-on-surface-variant">벤처기업</span>
+<span class="px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-[11px] text-on-surface-variant">기술혁신형(INNOBIZ)</span>
+<span class="px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-[11px] text-on-surface-variant">경영혁신형(MAINBIZ)</span>
+<span class="px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-[11px] text-on-surface-variant">가족친화 인증기업</span>
+<span class="px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-[11px] text-on-surface-variant">ISO 9001·14001</span>
+<span class="px-2 py-0.5 rounded-full bg-primary-container/15 border border-primary-container/30 text-[11px] text-primary font-semibold">외 인증 13건</span>
+</div>
+</div>
+</footer>
+<script>
+(function(){
+  var h=document.getElementById('main-copy'); if(!h) return;
+  var idx=0;
+  (function walk(node){
+    Array.prototype.slice.call(node.childNodes).forEach(function(child){
+      if(child.nodeType===3){
+        var frag=document.createDocumentFragment();
+        Array.from(child.textContent).forEach(function(ch){
+          if(ch===' '){frag.appendChild(document.createTextNode(' '));return;}
+          var s=document.createElement('span'); s.className='char'; s.textContent=ch;
+          s.style.animationDelay=(idx*0.05).toFixed(2)+'s'; idx++;
+          frag.appendChild(s);
+        });
+        node.replaceChild(frag,child);
+      } else if(child.nodeType===1 && child.tagName!=='BR' && !child.classList.contains('kinetic-gradient')){
+        walk(child);
+      }
+    });
+  })(h);
+})();
+</script>
+</body></html>

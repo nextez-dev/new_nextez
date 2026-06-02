@@ -1,0 +1,371 @@
+<!DOCTYPE html><html class="dark" lang="ko">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>NEXTEZ - Portfolio</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link as="style" crossorigin="" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface-tint": "#ffb596", "surface": "#131313", "outline-variant": "#5a4136",
+                        "primary-fixed": "#ffdbcd", "on-background": "#e5e2e1", "surface-container-lowest": "#0e0e0e",
+                        "outline": "#aa8a7d", "surface-variant": "#353534", "surface-container-low": "#1c1b1b",
+                        "surface-container": "#201f1f", "on-surface": "#e5e2e1", "surface-dim": "#131313",
+                        "background": "#131313", "surface-container-high": "#2a2a2a", "on-surface-variant": "#e3bfb1",
+                        "surface-container-highest": "#353534", "primary-container": "#ff6600", "on-primary": "#581e00",
+                        "secondary": "#c8c6c5", "primary": "#ffb596", "on-primary-container": "#561d00",
+                        "on-primary-fixed-variant": "#7c2e00"
+                    },
+                    borderRadius: { "DEFAULT": "0.5rem", "lg": "0.75rem", "xl": "1rem", "full": "9999px" },
+                    spacing: { "md": "16px", "xs": "4px", "xl": "40px", "gutter": "24px", "sm": "8px", "unit": "4px", "lg": "24px" },
+                    fontFamily: {
+                        "body-md": ["'Pretendard Variable'", "Pretendard", "sans-serif"], "label-bold": ["'Pretendard Variable'", "Pretendard", "sans-serif"],
+                        "headline-xl": ["'Pretendard Variable'", "Pretendard", "sans-serif"], "headline-lg": ["'Pretendard Variable'", "Pretendard", "sans-serif"]
+                    },
+                    fontSize: {
+                        "body-md": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+                        "label-bold": ["12px", { lineHeight: "16px", letterSpacing: "0.05em", fontWeight: "700" }],
+                        "headline-xl": ["48px", { lineHeight: "56px", letterSpacing: "-0.02em", fontWeight: "700" }],
+                        "headline-lg": ["32px", { lineHeight: "40px", letterSpacing: "-0.01em", fontWeight: "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Pretendard Variable', Pretendard, sans-serif; background-color: #131313; color: #e5e2e1; overflow: hidden; }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.12); border-radius: 5px; }
+        .bg-fixed-layer {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
+            background-image: linear-gradient(to top, rgba(19,19,19,0.94), rgba(19,19,19,0.6)), linear-gradient(to right, rgba(19,19,19,0.9), rgba(19,19,19,0.62) 60%, rgba(19,19,19,0.45)), url('IMG/port.jpg');
+            background-size: cover; background-position: center; opacity: 1;
+        }
+        .glass-card { background: rgba(26, 26, 26, 0.5); backdrop-filter: blur(12px); border: 1px solid rgba(90, 65, 54, 0.4); }
+        .glass-panel { background: rgba(26, 26, 26, 0.35); backdrop-filter: blur(12px); border: 1px solid rgba(90, 65, 54, 0.3); }
+        .grid-pattern { background-image: linear-gradient(to right,rgba(46,46,46,.5) 1px,transparent 1px),linear-gradient(to bottom,rgba(46,46,46,.5) 1px,transparent 1px); background-size: 24px 24px; }
+        .kinetic-accent { color: #ff6600; }
+        @keyframes floaty {
+            0%, 100% { transform: translateY(calc(-50% - 8px)); }
+            50%      { transform: translateY(calc(-50% + 8px)); }
+        }
+        .float-aside {
+            left: max(24px, calc((100vw - 1600px) / 2 + 24px));
+            animation: floaty 6s ease-in-out infinite;
+        }
+        .view { position: absolute; inset: 0; opacity: 0; transform: translateY(20px); pointer-events: none; transition: opacity .5s ease, transform .5s ease; }
+        .view.active { opacity: 1; transform: translateY(0); pointer-events: auto; }
+        .tf-card.tf-active { border-color: #ff6600; box-shadow: 0 0 24px rgba(255,102,0,0.16); }
+        /* main copy shimmer + 강조점 (index 동일) */
+        .char { display: inline-block; will-change: filter; filter: brightness(0.8); animation: charShine 5s ease-in-out infinite; }
+        @keyframes charShine { 0%,55%,100% { filter: brightness(0.8); } 26% { filter: brightness(1.55) drop-shadow(0 0 8px rgba(255,255,255,0.35)); } }
+        .emph .char { position: relative; }
+        .emph .char::before { content:''; position:absolute; top:-0.34em; left:50%; transform:translateX(-50%); width:0.16em; height:0.16em; border-radius:9999px; background:#ff6600; }
+    </style>
+</head>
+<body class="bg-background text-on-surface antialiased selection:bg-primary-container h-[100dvh] overflow-hidden">
+<div class="bg-fixed-layer"></div>
+<div class="fixed inset-0 z-0 grid-pattern opacity-[0.07] pointer-events-none"></div>
+<!-- TopNavBar -->
+<header class="fixed w-full top-0 border-b border-white/10 bg-background/70 backdrop-blur-md z-50">
+<div class="flex items-center w-full px-lg py-md max-w-[1600px] mx-auto">
+<div class="flex items-center gap-sm">
+<a href="index.html" class="text-[32px] leading-none font-bold text-on-surface tracking-tight" style="font-family:'Pretendard Variable',Pretendard,sans-serif">NEXT<span class="text-primary-container ml-1 relative top-[-0.3em] inline-block">EZ</span></a>
+</div>
+<nav class="hidden md:flex items-center gap-lg ml-auto"><a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors hover:bg-surface-container-highest px-sm py-xs rounded" href="index.html">Home</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors hover:bg-surface-container-highest px-sm py-xs rounded" href="services.html">Services</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors hover:bg-surface-container-highest px-sm py-xs rounded" href="capabilities.html">Capabilities</a>
+<a class="font-body-md text-body-md text-primary font-bold border-b-2 border-primary pb-1" href="portfolio.html">Project Portfolio</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors hover:bg-surface-container-highest px-sm py-xs rounded" href="about.html">About</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors hover:bg-surface-container-highest px-sm py-xs rounded" href="news.html">News &amp; Community</a></nav>
+</div>
+</header>
+<!-- Side Bar (floating, left-aligned to logo) : 4 기술분야 -->
+<aside class="float-aside fixed top-1/2 w-12 rounded-xl bg-surface-container-low/50 backdrop-blur-xl border border-outline-variant/20 shadow-2xl flex flex-col items-center py-md space-y-xl z-40">
+<a class="nav-icon relative flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors group" href="#" data-view="ai">
+<span class="material-symbols-outlined">smart_toy</span>
+<span class="absolute left-full ml-3 whitespace-nowrap px-3 py-1 rounded-md bg-surface-container-high text-on-surface text-xs font-bold opacity-0 -translate-x-2 pointer-events-none group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-200 shadow-lg">AI · Data</span>
+</a>
+<a class="nav-icon relative flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors group" href="#" data-view="platform">
+<span class="material-symbols-outlined">hub</span>
+<span class="absolute left-full ml-3 whitespace-nowrap px-3 py-1 rounded-md bg-surface-container-high text-on-surface text-xs font-bold opacity-0 -translate-x-2 pointer-events-none group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-200 shadow-lg">Platform · Solution</span>
+</a>
+<a class="nav-icon relative flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors group" href="#" data-view="si">
+<span class="material-symbols-outlined">dns</span>
+<span class="absolute left-full ml-3 whitespace-nowrap px-3 py-1 rounded-md bg-surface-container-high text-on-surface text-xs font-bold opacity-0 -translate-x-2 pointer-events-none group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-200 shadow-lg">Web · System Integration</span>
+</a>
+<a class="nav-icon relative flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors group" href="#" data-view="iot">
+<span class="material-symbols-outlined">sensors</span>
+<span class="absolute left-full ml-3 whitespace-nowrap px-3 py-1 rounded-md bg-surface-container-high text-on-surface text-xs font-bold opacity-0 -translate-x-2 pointer-events-none group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-200 shadow-lg">IoT · Energy</span>
+</a>
+</aside>
+<!-- Single-screen Portfolio -->
+<main class="h-[100dvh] w-full relative overflow-hidden">
+<!-- view: OVERVIEW -->
+<div id="view-overview" class="view active h-full flex items-center px-lg md:pl-[96px] pt-[80px] pb-12">
+<div class="w-full max-w-[1280px] mx-auto grid md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] gap-xl items-center">
+<!-- LEFT : main copy + control -->
+<div>
+<span class="font-label-bold text-label-bold text-primary uppercase tracking-widest block mb-md">Portfolio</span>
+<h1 id="main-copy" class="text-[64px] leading-[1.1] font-bold mb-lg">25년, 수많은 <span class="text-primary-container emph">현장</span>에서 만든 것이<br><span class="text-primary-container">지금도 멈추지 않고 돌아갑니다</span></h1>
+<p class="text-on-surface-variant text-base leading-relaxed max-w-lg mb-xl">제주 공공·산업 현장에 적용된 360여 개 프로젝트와 54건의 정부 R&amp;D·사업화 — 직접 기획하고, 구축하고, 운영한 결과물을 분야별로 만나보세요.</p>
+<!-- carousel control (보조) -->
+<div class="inline-flex items-center gap-md rounded-full bg-surface-container-low/70 border border-white/10 backdrop-blur-md px-2 py-1.5">
+<button id="tf-prev" aria-label="이전" class="w-8 h-8 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-primary-container hover:text-black transition-colors"><span class="material-symbols-outlined text-lg">chevron_left</span></button>
+<button id="tf-next" aria-label="다음" class="w-8 h-8 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-primary-container hover:text-black transition-colors"><span class="material-symbols-outlined text-lg">chevron_right</span></button>
+<div class="flex items-center gap-2 pl-sm pr-md" id="tf-dots"></div>
+</div>
+</div>
+<!-- RIGHT : 4 tech-field cards -->
+<div id="tf-cards" class="space-y-md max-h-[74vh] overflow-y-auto pr-1"></div>
+</div>
+</div>
+<!-- detail views injected here -->
+<div id="detail-views"></div>
+</main>
+<script src="portfolio-data.js"></script>
+<script>
+        // ===== 농업 플래그십 =====
+        const FLAGSHIP = {
+            title: '제주 농업 디지털기반 영농지원 시스템 고도화',
+            org: '제주특별자치도농업기술원',
+            budget: '54.9억원', budgetSub: '1단계 36억 + 2단계 18.9억',
+            period: "'24.03 ~ '26.10", periodSub: '31개월 · 주관사 ㈜넥스트이지',
+            scale: '7대 과업 · 28개 세부과제',
+            tasks: ['데이터 허브', '통계·시각화', '병해충 예찰·예보', '관측', '토양', '통합 플랫폼 웹·앱', '업무자동화·컨설팅'],
+            byField: {
+                ai: ['병해충 AI 식별모델 12종 (YOLOv8·YOLO26x 컴퓨터비전)', '감귤나무 3D 생성 파이프라인 — 분석 2시간→30분', 'LLM 기반 통합 AI 검색 (임베딩·멀티턴 대화)', '태풍 피해규모 예측 AI · RPA 업무 자동화'],
+                platform: ['제주DA · JADX 농업 통합 플랫폼 운영', '데이터 허브 34종 구축·표준화', '영농일지 웹·앱 (작물 7종·제주DA 전회원)'],
+                iot: ['토양수분센서 35대 · 수분장력센서 74대', '서리센서 10개소 · 디지털트랩 이미지 연계', 'IoT 장비 유지관리 점검·모니터링 시스템']
+            }
+        };
+
+        // ===== 기술분야 데이터 =====
+        const TECH_FIELDS = [
+            {
+                key: 'ai', icon: 'smart_toy', en: 'AI · Data', kr: 'AI · 빅데이터', count: '12+',
+                desc: '컴퓨터비전·예측·3D 모델과 데이터 파이프라인 — 현장 데이터로 학습하고, 현장 문제를 푸는 AI.',
+                services: ['AI 모델 개발 (컴퓨터비전·예측·3D)', 'DATA 수집·정제·표준화·품질검증 (데이터 파이프라인 구조)'],
+                skills: ['컴퓨터비전(YOLO)', '예측 모델', '3D 파이프라인', 'LLM·임베딩', '데이터 품질검증'],
+                groups: [
+                    { label: 'SI', items: [
+                        { n: '제주농업 DX기반 구축 사업', c: '제주특별자치도농업기술원', flag: true },
+                        { n: '제주 농업 디지털 영농지원', c: '제주특별자치도농업기술원', flag: true }
+                    ]},
+                    { label: 'R&D', items: [
+                        { n: '빅데이터 플랫폼 구축 및 센터', c: '한국정보화진흥원' },
+                        { n: '인공지능 기반 맞춤형 관광 추천', c: '문화체육관광부' },
+                        { n: '그린에너지 AI융합 지원', c: '정보통신산업진흥원' }
+                    ]}
+                ]
+            },
+            {
+                key: 'platform', icon: 'hub', en: 'Platform · Solution', kr: '플랫폼 · 솔루션', count: '37+',
+                desc: '농업·관광·에너지 등 산업 특화 서비스 플랫폼 — OTA·MICE·라이브커머스·쇼핑을 직접 기획하고 운영.',
+                services: ['농업·관광·에너지 등 서비스 플랫폼', 'OTA · MICE · Live Commerce · Shopping'],
+                skills: ['OTA·예약', 'MICE 통합운영', 'Live Commerce', 'Shopping', '서비스 플랫폼'],
+                groups: [
+                    { label: 'SI', items: [
+                        { n: '탐나오', c: '제주관광협회' },
+                        { n: '여수엔', c: '여수시청' },
+                        { n: '제주DA 플랫폼', c: '제주특별자치도농업기술원', flag: true },
+                        { n: '제주국제전기차엑스포', c: '' }
+                    ]},
+                    { label: 'R&D', items: [
+                        { n: '노인 통합돌봄 영양관리 재가서비스 플랫폼', c: '중소벤처기업부' },
+                        { n: '제주관광 라이브 커머스 OTA 플랫폼', c: '중소벤처기업부' },
+                        { n: '테마프리마켓 운영 서비스 플랫폼', c: '중소벤처기업부' },
+                        { n: '제주관광 O2O 서비스 플랫폼', c: '산업통상자원부' },
+                        { n: '관광지 할인 Ticket 판매 운영 플랫폼', c: '산업통상자원부' },
+                        { n: '관광 챗봇 서비스 플랫폼', c: '산업통상자원부' }
+                    ]}
+                ]
+            },
+            {
+                key: 'si', icon: 'dns', en: 'Web · System Integration', kr: '웹 · 시스템 구축 (SI)', count: '200+',
+                desc: '공공 포털·홈페이지(반응형 웹)부터 대규모 통합 시스템·콘텐츠 관리(CMS)까지 — 25년간 쌓아온 구축 실적.',
+                services: ['공공 포털·홈페이지 구축 (반응형 웹)', '대규모 통합 시스템 · 콘텐츠 관리 시스템(CMS)'],
+                skills: ['공공 포털', '반응형 웹', '통합 시스템', 'CMS', '대규모 유지관리'],
+                groups: [
+                    { label: 'SI', items: [
+                        { n: '제주시청', c: '' },
+                        { n: '제주관광협회', c: '' },
+                        { n: '제주특별자치도농업기술원', c: '' }
+                    ]}
+                ]
+            },
+            {
+                key: 'iot', icon: 'sensors', en: 'IoT · Energy', kr: 'IoT · 에너지', count: '7+',
+                desc: 'IoT 센서 데이터를 수집·정제하고 장비를 관제하며, 신재생에너지를 예측·운영하는 IoT·에너지 기술.',
+                services: ['IoT 센서 데이터 수집·정제, 장비 관제·모니터링', '태양광 발전량 예측·고장예지, 신재생에너지 운영 플랫폼 (ESS·풍력)'],
+                skills: ['IoT 센서·관제', '발전량 예측', '고장 예지', 'ESS·풍력', '신재생 운영'],
+                groups: [
+                    { label: 'R&D', items: [
+                        { n: '제주 그린에너지 AI융합 지원', c: '정보통신산업진흥원' },
+                        { n: '전기차 운영 서비스 기술 개발', c: '산업통상자원부' },
+                        { n: 'ESS 연계형 스마트 풍력에너지 운영', c: '제주지역사업평가원' }
+                    ]}
+                ]
+            }
+        ];
+
+        (function () {
+            const esc = s => (s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+            const fieldByKey = k => TECH_FIELDS.find(f => f.key === k);
+
+            // ===== OVERVIEW : 4 cards =====
+            const cardsEl = document.getElementById('tf-cards');
+            cardsEl.innerHTML = TECH_FIELDS.map((f, i) =>
+                '<div class="tf-card glass-card rounded-xl p-lg transition-all" data-i="' + i + '" data-key="' + f.key + '">' +
+                    '<div class="flex items-start justify-between gap-md mb-sm">' +
+                        '<div class="flex items-baseline gap-sm flex-wrap"><h3 class="text-xl md:text-2xl font-bold leading-tight">' + f.en + '</h3>' +
+                        '<span class="text-xs text-on-surface/40">' + f.kr + ' · ' + f.count + '건</span></div>' +
+                        '<span class="material-symbols-outlined text-primary-container text-2xl shrink-0">' + f.icon + '</span>' +
+                    '</div>' +
+                    '<p class="text-sm text-on-surface-variant mb-sm leading-relaxed">' + esc(f.services.join(', ')) + '</p>' +
+                    '<div class="pt-sm border-t border-white/10">' +
+                        '<div class="flex items-center justify-between gap-md mb-xs">' +
+                            '<span class="text-[11px] font-bold text-primary uppercase tracking-widest">KEY PROJECT</span>' +
+                            '<button class="tf-more shrink-0 text-primary hover:text-primary-container text-xs font-semibold inline-flex items-center gap-0.5" data-view="' + f.key + '">···자세히 보기<span class="material-symbols-outlined text-sm">chevron_right</span></button>' +
+                        '</div>' +
+                        f.groups.map(g => '<div class="text-xs text-on-surface-variant leading-relaxed mb-0.5"><span class="text-primary-container font-semibold">(' + g.label + ')</span> ' + esc(g.items.map(it => it.n + (it.c ? '(' + it.c + ')' : '')).join(', ')) + '</div>').join('') +
+                    '</div>' +
+                '</div>'
+            ).join('');
+
+            // carousel control (보조) : highlight + scroll
+            const dotsWrap = document.getElementById('tf-dots');
+            const cardNodes = Array.from(cardsEl.querySelectorAll('.tf-card'));
+            let active = 0;
+            cardNodes.forEach((c, i) => {
+                const d = document.createElement('button');
+                d.className = 'tf-dot w-2 h-2 rounded-full bg-outline-variant transition-colors';
+                d.addEventListener('click', () => setActive(i));
+                dotsWrap.appendChild(d);
+            });
+            const dots = Array.from(dotsWrap.querySelectorAll('.tf-dot'));
+            function setActive(i) {
+                active = (i + cardNodes.length) % cardNodes.length;
+                cardNodes.forEach((c, k) => c.classList.toggle('tf-active', k === active));
+                dots.forEach((d, k) => { d.classList.toggle('bg-primary-container', k === active); d.classList.toggle('bg-outline-variant', k !== active); });
+                cardNodes[active].scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+            document.getElementById('tf-prev').addEventListener('click', () => setActive(active - 1));
+            document.getElementById('tf-next').addEventListener('click', () => setActive(active + 1));
+            setActive(0);
+
+            // ===== DETAIL VIEWS =====
+            function flagshipBlock(key) {
+                if (key !== 'ai') return '';
+                const pts = FLAGSHIP.byField.ai;
+                return '<div class="glass-panel rounded-xl p-lg md:p-xl mb-lg border border-primary-container/40 shadow-[0_0_24px_rgba(255,102,0,0.14)]">' +
+                    '<div class="flex flex-wrap items-center gap-2 mb-sm"><span class="text-[10px] px-2 py-0.5 rounded-full bg-primary-container/25 text-primary border border-primary-container/40">대표 실적 · FLAGSHIP</span><span class="text-[10px] px-2 py-0.5 rounded-full bg-white/5 text-on-surface-variant border border-white/10">누적 54.9억</span></div>' +
+                    '<h3 class="text-lg md:text-xl font-bold mb-xs">' + FLAGSHIP.title + '</h3>' +
+                    '<div class="text-xs text-on-surface/50 mb-md">' + FLAGSHIP.org + ' · ' + FLAGSHIP.period + ' · ' + FLAGSHIP.scale + '</div>' +
+                    '<div class="grid grid-cols-1 sm:grid-cols-2 gap-sm">' +
+                    pts.map(p => '<div class="flex gap-sm text-sm text-on-surface/85 leading-snug"><span class="material-symbols-outlined text-primary-container text-base shrink-0">check_circle</span>' + esc(p) + '</div>').join('') +
+                    '</div></div>';
+            }
+            function projItem(p) {
+                return '<div class="rounded-lg p-md flex flex-col ' + (p.flag ? 'bg-primary-container/[0.08] border border-primary-container/40' : 'glass-card') + '">' +
+                    (p.flag ? '<span class="text-[10px] px-1.5 py-0.5 rounded-full bg-primary-container/25 text-primary border border-primary-container/40 self-start mb-xs">대표</span>' : '') +
+                    '<h4 class="font-semibold text-sm leading-snug flex-grow ' + (p.c ? 'mb-sm' : '') + '">' + esc(p.n) + '</h4>' +
+                    (p.c ? '<div class="text-xs text-on-surface-variant pt-sm border-t border-white/10">' + esc(p.c) + '</div>' : '') +
+                '</div>';
+            }
+            function groupsBlock(f) {
+                return f.groups.map(g =>
+                    '<div class="mb-lg">' +
+                    '<div class="flex items-center gap-sm mb-sm"><span class="text-[11px] font-bold px-2 py-0.5 rounded ' + (g.label === 'R&D' ? 'bg-primary/15 text-primary border border-primary/30' : 'bg-primary-container/15 text-primary-container border border-primary-container/40') + '">' + g.label + '</span><span class="text-xs text-on-surface/40">' + g.items.length + '건</span></div>' +
+                    '<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-md">' + g.items.map(projItem).join('') + '</div>' +
+                    '</div>'
+                ).join('');
+            }
+            const AI_DETAIL = "<p class=\"text-on-surface-variant text-sm md:text-base mb-lg max-w-2xl\">현장 데이터를 <span class=\"text-on-surface font-semibold\">수집·정제·표준화</span>하고, 그 위에 <span class=\"text-primary-container font-semibold\">검증된 AI 모델을 직접 구축·운영</span>하는 End-to-End 역량.</p><div class=\"mb-lg\"><div class=\"mb-sm\"><span class=\"text-[11px] font-bold text-primary uppercase tracking-widest block\">Pipeline</span><h3 class=\"text-lg font-bold text-on-surface\">데이터 → AI → 운영 순환 구조</h3></div><div class=\"glass-panel rounded-xl p-lg flex items-center justify-between gap-1 flex-wrap\"><div class=\"flex flex-col items-center gap-1 shrink-0\"><div class=\"w-12 h-12 rounded-xl bg-primary-container/15 border border-primary-container/40 flex items-center justify-center\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"#ff6600\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"w-5 h-5\"><path d=\"M12 3v10\"/><path d=\"M8 11l4 4 4-4\"/><path d=\"M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2\"/></svg></div><div class=\"text-[11px] font-semibold text-on-surface text-center leading-tight\">데이터 수집</div></div><svg viewBox=\"0 0 24 24\" class=\"w-5 h-5 shrink-0\" fill=\"none\" stroke=\"#ff6600\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M5 12h13\"/><path d=\"M12 6l6 6-6 6\"/></svg><div class=\"flex flex-col items-center gap-1 shrink-0\"><div class=\"w-12 h-12 rounded-xl bg-primary-container/15 border border-primary-container/40 flex items-center justify-center\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"#ff6600\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"w-5 h-5\"><path d=\"M3 4h18l-7 8v6l-4 2v-8z\"/></svg></div><div class=\"text-[11px] font-semibold text-on-surface text-center leading-tight\">정제·표준화</div></div><svg viewBox=\"0 0 24 24\" class=\"w-5 h-5 shrink-0\" fill=\"none\" stroke=\"#ff6600\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M5 12h13\"/><path d=\"M12 6l6 6-6 6\"/></svg><div class=\"flex flex-col items-center gap-1 shrink-0\"><div class=\"w-12 h-12 rounded-xl bg-primary-container/15 border border-primary-container/40 flex items-center justify-center\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"#ff6600\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"w-5 h-5\"><rect x=\"6\" y=\"6\" width=\"12\" height=\"12\" rx=\"2\"/><path d=\"M9 1v3M15 1v3M9 20v3M15 20v3M1 9h3M1 15h3M20 9h3M20 15h3\"/></svg></div><div class=\"text-[11px] font-semibold text-on-surface text-center leading-tight\">AI 모델</div></div><svg viewBox=\"0 0 24 24\" class=\"w-5 h-5 shrink-0\" fill=\"none\" stroke=\"#ff6600\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M5 12h13\"/><path d=\"M12 6l6 6-6 6\"/></svg><div class=\"flex flex-col items-center gap-1 shrink-0\"><div class=\"w-12 h-12 rounded-xl bg-primary-container/15 border border-primary-container/40 flex items-center justify-center\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"#ff6600\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"w-5 h-5\"><rect x=\"3\" y=\"4\" width=\"18\" height=\"16\" rx=\"2\"/><path d=\"M3 9h18M8 14h3\"/></svg></div><div class=\"text-[11px] font-semibold text-on-surface text-center leading-tight\">서비스 구축</div></div><svg viewBox=\"0 0 24 24\" class=\"w-5 h-5 shrink-0\" fill=\"none\" stroke=\"#ff6600\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M5 12h13\"/><path d=\"M12 6l6 6-6 6\"/></svg><div class=\"flex flex-col items-center gap-1 shrink-0\"><div class=\"w-12 h-12 rounded-xl bg-primary-container/15 border border-primary-container/40 flex items-center justify-center\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"#ff6600\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"w-5 h-5\"><path d=\"M21 12a9 9 0 1 1-3-6.7\"/><path d=\"M21 4v5h-5\"/></svg></div><div class=\"text-[11px] font-semibold text-on-surface text-center leading-tight\">운영·AX</div></div></div><div class=\"text-center text-xs text-on-surface-variant mt-2\">↻ 운영 데이터가 다시 학습에 환류되는 <span class=\"text-primary-container\">Data Flywheel</span></div></div><div class=\"mb-lg\"><div class=\"mb-sm\"><span class=\"text-[11px] font-bold text-primary uppercase tracking-widest block\">Key Project</span><h3 class=\"text-lg font-bold text-on-surface\">대표 사업 (SI)</h3></div><div class=\"grid grid-cols-1 md:grid-cols-2 gap-md\"><div class=\"bg-white/[0.04] border border-white/10 rounded-lg p-md\"><div class=\"flex items-center gap-2 mb-1\"><span class=\"text-[10px] px-1.5 py-0.5 rounded bg-primary-container/20 text-primary border border-primary-container/30 shrink-0\">SI</span><span class=\"text-[11px] text-on-surface/50 truncate\">제주특별자치도농업기술원</span></div><h4 class=\"text-sm font-bold text-on-surface mb-1 leading-snug\">제주농업 DX기반 구축 사업 <span class=\"text-[11px] font-normal text-on-surface/45\">('24~'25)</span></h4><p class=\"text-[12px] text-on-surface-variant leading-snug\">제주DA·JADX 플랫폼 도입, 7대 실무서비스 + 데이터 허브(34종) 구축 (1단계 · 36억)</p></div><div class=\"bg-white/[0.04] border border-white/10 rounded-lg p-md\"><div class=\"flex items-center gap-2 mb-1\"><span class=\"text-[10px] px-1.5 py-0.5 rounded bg-primary-container/20 text-primary border border-primary-container/30 shrink-0\">SI</span><span class=\"text-[11px] text-on-surface/50 truncate\">제주특별자치도농업기술원</span></div><h4 class=\"text-sm font-bold text-on-surface mb-1 leading-snug\">제주 농업 디지털영농시스템 고도화 사업 <span class=\"text-[11px] font-normal text-on-surface/45\">('25~'26)</span></h4><p class=\"text-[12px] text-on-surface-variant leading-snug\">병해충 AI·감귤 3D·LLM 검색·IoT 관제 등 AI·데이터 고도화 (2단계 · 18.9억)</p></div></div></div><div><div class=\"mb-sm\"><span class=\"text-[11px] font-bold text-primary uppercase tracking-widest block\">R&D Project</span><h3 class=\"text-lg font-bold text-on-surface\">연구개발 (R&D)</h3></div><div class=\"grid grid-cols-1 md:grid-cols-2 gap-md\"><div class=\"bg-white/[0.04] border border-white/10 rounded-lg p-md\"><div class=\"flex items-center gap-2 mb-1\"><span class=\"text-[10px] px-1.5 py-0.5 rounded bg-primary-container/20 text-primary border border-primary-container/30 shrink-0\">R&D</span><span class=\"text-[11px] text-on-surface/50 truncate\">산업기술평가원</span></div><h4 class=\"text-sm font-bold text-on-surface mb-1 leading-snug\">AI기반 제조공정 최적화 기술개발 <span class=\"text-[11px] font-normal text-on-surface/45\">('25~'29)</span></h4><p class=\"text-[12px] text-on-surface-variant leading-snug\">제조 공정 데이터를 학습해 품질·생산성을 높이는 최적화 AI 개발</p></div><div class=\"bg-white/[0.04] border border-white/10 rounded-lg p-md\"><div class=\"flex items-center gap-2 mb-1\"><span class=\"text-[10px] px-1.5 py-0.5 rounded bg-primary-container/20 text-primary border border-primary-container/30 shrink-0\">R&D</span><span class=\"text-[11px] text-on-surface/50 truncate\">한국정보화진흥원</span></div><h4 class=\"text-sm font-bold text-on-surface mb-1 leading-snug\">빅데이터 플랫폼 구축 및 센터 <span class=\"text-[11px] font-normal text-on-surface/45\">('21~'23)</span></h4><p class=\"text-[12px] text-on-surface-variant leading-snug\">국가 빅데이터 플랫폼·센터 — 데이터 수집·통합·활용 인프라 구축</p></div><div class=\"bg-white/[0.04] border border-white/10 rounded-lg p-md\"><div class=\"flex items-center gap-2 mb-1\"><span class=\"text-[10px] px-1.5 py-0.5 rounded bg-primary-container/20 text-primary border border-primary-container/30 shrink-0\">R&D</span><span class=\"text-[11px] text-on-surface/50 truncate\">문화체육관광부</span></div><h4 class=\"text-sm font-bold text-on-surface mb-1 leading-snug\">인공지능 기반 맞춤형 관광 추천 <span class=\"text-[11px] font-normal text-on-surface/45\">('23~'25)</span></h4><p class=\"text-[12px] text-on-surface-variant leading-snug\">관광 데이터셋 규격화 + AI 개인 맞춤형 관광 추천 플랫폼 개발</p></div><div class=\"bg-white/[0.04] border border-white/10 rounded-lg p-md\"><div class=\"flex items-center gap-2 mb-1\"><span class=\"text-[10px] px-1.5 py-0.5 rounded bg-primary-container/20 text-primary border border-primary-container/30 shrink-0\">R&D</span><span class=\"text-[11px] text-on-surface/50 truncate\">정보통신산업진흥원</span></div><h4 class=\"text-sm font-bold text-on-surface mb-1 leading-snug\">그린에너지 AI융합 지원 <span class=\"text-[11px] font-normal text-on-surface/45\">('22~'23)</span></h4><p class=\"text-[12px] text-on-surface-variant leading-snug\">제주 그린에너지산업에 AI 기술을 융합 지원</p></div></div></div>";
+            const PLATFORM_DETAIL = "<p class=\"text-on-surface-variant text-sm md:text-base mb-lg max-w-2xl\">기획·설계·구축·운영 <span class=\"text-on-surface font-semibold\">풀스택</span>으로, 관광·커머스·MICE·콘텐츠 영역의 <span class=\"text-primary-container font-semibold\">서비스 플랫폼과 자체 제품을 직접 만들고 운영</span>합니다.</p><div class=\"mb-lg\"><div class=\"mb-sm\"><span class=\"text-[11px] font-bold text-primary uppercase tracking-widest block\">Full-Stack</span><h3 class=\"text-lg font-bold text-on-surface\">기획 → 운영 풀스택 구축</h3></div><div class=\"glass-panel rounded-xl p-lg flex items-center justify-between gap-1 flex-wrap\"><div class=\"flex flex-col items-center gap-1 shrink-0\"><div class=\"w-12 h-12 rounded-xl bg-primary-container/15 border border-primary-container/40 flex items-center justify-center\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"#ff6600\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"w-5 h-5\"><path d=\"M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12c1 1 1 2 1 3h6c0-1 0-2 1-3a7 7 0 0 0-4-12z\"/></svg></div><div class=\"text-[11px] font-semibold text-on-surface text-center leading-tight\">기획</div></div><svg viewBox=\"0 0 24 24\" class=\"w-5 h-5 shrink-0\" fill=\"none\" stroke=\"#ff6600\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M5 12h13\"/><path d=\"M12 6l6 6-6 6\"/></svg><div class=\"flex flex-col items-center gap-1 shrink-0\"><div class=\"w-12 h-12 rounded-xl bg-primary-container/15 border border-primary-container/40 flex items-center justify-center\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"#ff6600\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"w-5 h-5\"><rect x=\"3\" y=\"3\" width=\"18\" height=\"6\" rx=\"1\"/><rect x=\"3\" y=\"11\" width=\"8\" height=\"10\" rx=\"1\"/><rect x=\"13\" y=\"11\" width=\"8\" height=\"10\" rx=\"1\"/></svg></div><div class=\"text-[11px] font-semibold text-on-surface text-center leading-tight\">설계</div></div><svg viewBox=\"0 0 24 24\" class=\"w-5 h-5 shrink-0\" fill=\"none\" stroke=\"#ff6600\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M5 12h13\"/><path d=\"M12 6l6 6-6 6\"/></svg><div class=\"flex flex-col items-center gap-1 shrink-0\"><div class=\"w-12 h-12 rounded-xl bg-primary-container/15 border border-primary-container/40 flex items-center justify-center\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"#ff6600\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"w-5 h-5\"><path d=\"M8 6l-5 6 5 6M16 6l5 6-5 6\"/></svg></div><div class=\"text-[11px] font-semibold text-on-surface text-center leading-tight\">개발</div></div><svg viewBox=\"0 0 24 24\" class=\"w-5 h-5 shrink-0\" fill=\"none\" stroke=\"#ff6600\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M5 12h13\"/><path d=\"M12 6l6 6-6 6\"/></svg><div class=\"flex flex-col items-center gap-1 shrink-0\"><div class=\"w-12 h-12 rounded-xl bg-primary-container/15 border border-primary-container/40 flex items-center justify-center\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"#ff6600\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"w-5 h-5\"><circle cx=\"6\" cy=\"12\" r=\"2.5\"/><circle cx=\"18\" cy=\"6\" r=\"2.5\"/><circle cx=\"18\" cy=\"18\" r=\"2.5\"/><path d=\"M8.2 11l7.5-3.7M8.2 13l7.5 3.7\"/></svg></div><div class=\"text-[11px] font-semibold text-on-surface text-center leading-tight\">OpenAPI 연동</div></div><svg viewBox=\"0 0 24 24\" class=\"w-5 h-5 shrink-0\" fill=\"none\" stroke=\"#ff6600\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M5 12h13\"/><path d=\"M12 6l6 6-6 6\"/></svg><div class=\"flex flex-col items-center gap-1 shrink-0\"><div class=\"w-12 h-12 rounded-xl bg-primary-container/15 border border-primary-container/40 flex items-center justify-center\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"#ff6600\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"w-5 h-5\"><path d=\"M21 12a9 9 0 1 1-3-6.7\"/><path d=\"M21 4v5h-5\"/></svg></div><div class=\"text-[11px] font-semibold text-on-surface text-center leading-tight\">운영</div></div></div></div><div class=\"mb-lg\"><div class=\"mb-sm\"><span class=\"text-[11px] font-bold text-primary uppercase tracking-widest block\">Key Project</span><h3 class=\"text-lg font-bold text-on-surface\">대표 사업 (SI)</h3></div><div class=\"grid grid-cols-1 md:grid-cols-2 gap-md\"><div class=\"bg-white/[0.04] border border-white/10 rounded-lg p-md\"><div class=\"flex items-center gap-2 mb-1\"><span class=\"text-[10px] px-1.5 py-0.5 rounded bg-primary-container/20 text-primary border border-primary-container/30 shrink-0\">SI</span><span class=\"text-[11px] text-on-surface/50 truncate\">제주관광협회</span></div><h4 class=\"text-sm font-bold text-on-surface mb-1 leading-snug\">탐나오 <span class=\"text-[11px] font-normal text-on-surface/45\">('16~'18)</span></h4><p class=\"text-[12px] text-on-surface-variant leading-snug\">제주관광협회 공식 관광 통합 플랫폼</p></div><div class=\"bg-white/[0.04] border border-white/10 rounded-lg p-md\"><div class=\"flex items-center gap-2 mb-1\"><span class=\"text-[10px] px-1.5 py-0.5 rounded bg-primary-container/20 text-primary border border-primary-container/30 shrink-0\">SI</span><span class=\"text-[11px] text-on-surface/50 truncate\">여수시청</span></div><h4 class=\"text-sm font-bold text-on-surface mb-1 leading-snug\">여수엔 <span class=\"text-[11px] font-normal text-on-surface/45\">('22~'25)</span></h4><p class=\"text-[12px] text-on-surface-variant leading-snug\">여수 스마트관광도시 통합 플랫폼 (관광·편의·모빌리티)</p></div><div class=\"bg-white/[0.04] border border-white/10 rounded-lg p-md\"><div class=\"flex items-center gap-2 mb-1\"><span class=\"text-[10px] px-1.5 py-0.5 rounded bg-primary-container/20 text-primary border border-primary-container/30 shrink-0\">SI</span><span class=\"text-[11px] text-on-surface/50 truncate\">제주특별자치도농업기술원</span></div><h4 class=\"text-sm font-bold text-on-surface mb-1 leading-snug\">제주DA 플랫폼 <span class=\"text-[11px] font-normal text-on-surface/45\">('24~'26)</span></h4><p class=\"text-[12px] text-on-surface-variant leading-snug\">제주농업 디지털 통합 플랫폼(JADX)·데이터허브·CMS</p></div><div class=\"bg-white/[0.04] border border-white/10 rounded-lg p-md\"><div class=\"flex items-center gap-2 mb-1\"><span class=\"text-[10px] px-1.5 py-0.5 rounded bg-primary-container/20 text-primary border border-primary-container/30 shrink-0\">SI</span><span class=\"text-[11px] text-on-surface/50 truncate\">(사)국제전기자동차엑스포</span></div><h4 class=\"text-sm font-bold text-on-surface mb-1 leading-snug\">제주국제전기차엑스포 <span class=\"text-[11px] font-normal text-on-surface/45\">('14~'23)</span></h4><p class=\"text-[12px] text-on-surface-variant leading-snug\">국제 전기차엑스포 홈페이지·운영 시스템</p></div></div></div><div><div class=\"mb-sm\"><span class=\"text-[11px] font-bold text-primary uppercase tracking-widest block\">R&D Project</span><h3 class=\"text-lg font-bold text-on-surface\">연구개발 (R&D)</h3></div><div class=\"grid grid-cols-1 md:grid-cols-2 gap-md\"><div class=\"bg-white/[0.04] border border-white/10 rounded-lg p-md\"><div class=\"flex items-center gap-2 mb-1\"><span class=\"text-[10px] px-1.5 py-0.5 rounded bg-primary-container/20 text-primary border border-primary-container/30 shrink-0\">R&D</span><span class=\"text-[11px] text-on-surface/50 truncate\">중소벤처기업부</span></div><h4 class=\"text-sm font-bold text-on-surface mb-1 leading-snug\">노인 통합돌봄 영양관리 재가서비스 플랫폼 <span class=\"text-[11px] font-normal text-on-surface/45\">('24~'25)</span></h4><p class=\"text-[12px] text-on-surface-variant leading-snug\">노인 돌봄·식사 영양관리 재가서비스 플랫폼·제품 개발</p></div><div class=\"bg-white/[0.04] border border-white/10 rounded-lg p-md\"><div class=\"flex items-center gap-2 mb-1\"><span class=\"text-[10px] px-1.5 py-0.5 rounded bg-primary-container/20 text-primary border border-primary-container/30 shrink-0\">R&D</span><span class=\"text-[11px] text-on-surface/50 truncate\">중소벤처기업부</span></div><h4 class=\"text-sm font-bold text-on-surface mb-1 leading-snug\">제주관광 라이브 커머스 OTA 플랫폼 <span class=\"text-[11px] font-normal text-on-surface/45\">('23~'24)</span></h4><p class=\"text-[12px] text-on-surface-variant leading-snug\">라이브 방송 기반 실시간 예약·결제 OTA (특허)</p></div><div class=\"bg-white/[0.04] border border-white/10 rounded-lg p-md\"><div class=\"flex items-center gap-2 mb-1\"><span class=\"text-[10px] px-1.5 py-0.5 rounded bg-primary-container/20 text-primary border border-primary-container/30 shrink-0\">R&D</span><span class=\"text-[11px] text-on-surface/50 truncate\">중소벤처기업부</span></div><h4 class=\"text-sm font-bold text-on-surface mb-1 leading-snug\">테마프리마켓 운영 서비스 플랫폼 <span class=\"text-[11px] font-normal text-on-surface/45\">('18~'19)</span></h4><p class=\"text-[12px] text-on-surface-variant leading-snug\">플리마켓 공통 운영 서비스 플랫폼 개발</p></div><div class=\"bg-white/[0.04] border border-white/10 rounded-lg p-md\"><div class=\"flex items-center gap-2 mb-1\"><span class=\"text-[10px] px-1.5 py-0.5 rounded bg-primary-container/20 text-primary border border-primary-container/30 shrink-0\">R&D</span><span class=\"text-[11px] text-on-surface/50 truncate\">산업통상자원부</span></div><h4 class=\"text-sm font-bold text-on-surface mb-1 leading-snug\">제주관광 O2O 서비스 플랫폼 <span class=\"text-[11px] font-normal text-on-surface/45\">('15~'18)</span></h4><p class=\"text-[12px] text-on-surface-variant leading-snug\">실시간 예약 데이터 공유 기반 O2O 관광 플랫폼</p></div><div class=\"bg-white/[0.04] border border-white/10 rounded-lg p-md\"><div class=\"flex items-center gap-2 mb-1\"><span class=\"text-[10px] px-1.5 py-0.5 rounded bg-primary-container/20 text-primary border border-primary-container/30 shrink-0\">R&D</span><span class=\"text-[11px] text-on-surface/50 truncate\">산업통상자원부</span></div><h4 class=\"text-sm font-bold text-on-surface mb-1 leading-snug\">관광지 할인 Ticket 판매 운영 플랫폼 <span class=\"text-[11px] font-normal text-on-surface/45\">('13~'15)</span></h4><p class=\"text-[12px] text-on-surface-variant leading-snug\">openAPI 기반 할인 티켓 판매·운영 시스템(s-mTicket)</p></div><div class=\"bg-white/[0.04] border border-white/10 rounded-lg p-md\"><div class=\"flex items-center gap-2 mb-1\"><span class=\"text-[10px] px-1.5 py-0.5 rounded bg-primary-container/20 text-primary border border-primary-container/30 shrink-0\">R&D</span><span class=\"text-[11px] text-on-surface/50 truncate\">산업통상자원부</span></div><h4 class=\"text-sm font-bold text-on-surface mb-1 leading-snug\">관광 챗봇 서비스 플랫폼 <span class=\"text-[11px] font-normal text-on-surface/45\">('17~'18)</span></h4><p class=\"text-[12px] text-on-surface-variant leading-snug\">공개 챗봇 API를 활용한 제주여행 챗봇 플랫폼</p></div></div></div>";
+            const SI_DETAIL = "<p class=\"text-on-surface-variant text-sm md:text-base mb-lg max-w-2xl\">제주 공공 홈페이지·포털·통합 시스템을 <span class=\"text-on-surface font-semibold\">25년간 가장 두텁게 구축·운영</span>해온 SI 역량 (<span class=\"text-primary-container font-semibold\">500+건</span>).</p><div class=\"mb-lg\"><div class=\"mb-sm\"><span class=\"text-[11px] font-bold text-primary uppercase tracking-widest block\">Build Types</span><h3 class=\"text-lg font-bold text-on-surface\">5대 구축 유형</h3></div><div class=\"glass-panel rounded-xl p-lg flex items-center justify-between gap-1 flex-wrap\"><div class=\"flex flex-col items-center gap-1 shrink-0\"><div class=\"w-12 h-12 rounded-xl bg-primary-container/15 border border-primary-container/40 flex items-center justify-center\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"#ff6600\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"w-5 h-5\"><rect x=\"3\" y=\"4\" width=\"18\" height=\"16\" rx=\"2\"/><path d=\"M3 9h18M7 13h10M7 16h6\"/></svg></div><div class=\"text-[11px] font-semibold text-on-surface text-center leading-tight\">공공 포털</div></div><svg viewBox=\"0 0 24 24\" class=\"w-5 h-5 shrink-0\" fill=\"none\" stroke=\"#ff6600\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M5 12h13\"/><path d=\"M12 6l6 6-6 6\"/></svg><div class=\"flex flex-col items-center gap-1 shrink-0\"><div class=\"w-12 h-12 rounded-xl bg-primary-container/15 border border-primary-container/40 flex items-center justify-center\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"#ff6600\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"w-5 h-5\"><path d=\"M4 6c0-1.7 3.6-3 8-3s8 1.3 8 3-3.6 3-8 3-8-1.3-8-3z\"/><path d=\"M4 6v12c0 1.7 3.6 3 8 3s8-1.3 8-3V6\"/><path d=\"M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3\"/></svg></div><div class=\"text-[11px] font-semibold text-on-surface text-center leading-tight\">통합 시스템·DB</div></div><svg viewBox=\"0 0 24 24\" class=\"w-5 h-5 shrink-0\" fill=\"none\" stroke=\"#ff6600\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M5 12h13\"/><path d=\"M12 6l6 6-6 6\"/></svg><div class=\"flex flex-col items-center gap-1 shrink-0\"><div class=\"w-12 h-12 rounded-xl bg-primary-container/15 border border-primary-container/40 flex items-center justify-center\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"#ff6600\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"w-5 h-5\"><rect x=\"2\" y=\"4\" width=\"14\" height=\"11\" rx=\"1\"/><rect x=\"17\" y=\"8\" width=\"5\" height=\"11\" rx=\"1\"/><path d=\"M2 19h11\"/></svg></div><div class=\"text-[11px] font-semibold text-on-surface text-center leading-tight\">반응형·접근성</div></div><svg viewBox=\"0 0 24 24\" class=\"w-5 h-5 shrink-0\" fill=\"none\" stroke=\"#ff6600\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M5 12h13\"/><path d=\"M12 6l6 6-6 6\"/></svg><div class=\"flex flex-col items-center gap-1 shrink-0\"><div class=\"w-12 h-12 rounded-xl bg-primary-container/15 border border-primary-container/40 flex items-center justify-center\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"#ff6600\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"w-5 h-5\"><circle cx=\"6\" cy=\"12\" r=\"2.5\"/><circle cx=\"18\" cy=\"6\" r=\"2.5\"/><circle cx=\"18\" cy=\"18\" r=\"2.5\"/><path d=\"M8.2 11l7.5-3.7M8.2 13l7.5 3.7\"/></svg></div><div class=\"text-[11px] font-semibold text-on-surface text-center leading-tight\">OpenAPI 연동</div></div><svg viewBox=\"0 0 24 24\" class=\"w-5 h-5 shrink-0\" fill=\"none\" stroke=\"#ff6600\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M5 12h13\"/><path d=\"M12 6l6 6-6 6\"/></svg><div class=\"flex flex-col items-center gap-1 shrink-0\"><div class=\"w-12 h-12 rounded-xl bg-primary-container/15 border border-primary-container/40 flex items-center justify-center\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"#ff6600\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"w-5 h-5\"><path d=\"M21 12a9 9 0 1 1-3-6.7\"/><path d=\"M21 4v5h-5\"/></svg></div><div class=\"text-[11px] font-semibold text-on-surface text-center leading-tight\">대규모 유지관리</div></div></div></div><div><div class=\"mb-sm\"><span class=\"text-[11px] font-bold text-primary uppercase tracking-widest block\">Key Project</span><h3 class=\"text-lg font-bold text-on-surface\">대표 사업 (SI)</h3></div><div class=\"grid grid-cols-1 md:grid-cols-2 gap-md\"><div class=\"bg-white/[0.04] border border-white/10 rounded-lg p-md\"><div class=\"flex items-center gap-2 mb-1\"><span class=\"text-[10px] px-1.5 py-0.5 rounded bg-primary-container/20 text-primary border border-primary-container/30 shrink-0\">SI</span><span class=\"text-[11px] text-on-surface/50 truncate\">제주아트센터</span></div><h4 class=\"text-sm font-bold text-on-surface mb-1 leading-snug\">제주아트센터 통합매표 시스템 고도화 <span class=\"text-[11px] font-normal text-on-surface/45\">('26)</span></h4><p class=\"text-[12px] text-on-surface-variant leading-snug\">공연·전시 통합 매표 시스템 고도화</p></div><div class=\"bg-white/[0.04] border border-white/10 rounded-lg p-md\"><div class=\"flex items-center gap-2 mb-1\"><span class=\"text-[10px] px-1.5 py-0.5 rounded bg-primary-container/20 text-primary border border-primary-container/30 shrink-0\">SI</span><span class=\"text-[11px] text-on-surface/50 truncate\">노루생태관찰원</span></div><h4 class=\"text-sm font-bold text-on-surface mb-1 leading-snug\">노루생태관찰원 통합매표시스템 <span class=\"text-[11px] font-normal text-on-surface/45\">('26)</span></h4><p class=\"text-[12px] text-on-surface-variant leading-snug\">생태관찰원 입장·매표 통합 시스템</p></div><div class=\"bg-white/[0.04] border border-white/10 rounded-lg p-md\"><div class=\"flex items-center gap-2 mb-1\"><span class=\"text-[10px] px-1.5 py-0.5 rounded bg-primary-container/20 text-primary border border-primary-container/30 shrink-0\">SI</span><span class=\"text-[11px] text-on-surface/50 truncate\">제주시</span></div><h4 class=\"text-sm font-bold text-on-surface mb-1 leading-snug\">제주시청 통합 포털 <span class=\"text-[11px] font-normal text-on-surface/45\">('10~'26)</span></h4><p class=\"text-[12px] text-on-surface-variant leading-snug\">제주시 대표 홈페이지 통합 구축·다년 연속 유지관리</p></div><div class=\"bg-white/[0.04] border border-white/10 rounded-lg p-md\"><div class=\"flex items-center gap-2 mb-1\"><span class=\"text-[10px] px-1.5 py-0.5 rounded bg-primary-container/20 text-primary border border-primary-container/30 shrink-0\">SI</span><span class=\"text-[11px] text-on-surface/50 truncate\">제주시</span></div><h4 class=\"text-sm font-bold text-on-surface mb-1 leading-snug\">제주시청 스마트청사안내 시스템 <span class=\"text-[11px] font-normal text-on-surface/45\">('19)</span></h4><p class=\"text-[12px] text-on-surface-variant leading-snug\">청사 안내 키오스크·디지털 안내 시스템 구축</p></div><div class=\"bg-white/[0.04] border border-white/10 rounded-lg p-md\"><div class=\"flex items-center gap-2 mb-1\"><span class=\"text-[10px] px-1.5 py-0.5 rounded bg-primary-container/20 text-primary border border-primary-container/30 shrink-0\">SI</span><span class=\"text-[11px] text-on-surface/50 truncate\">제주시</span></div><h4 class=\"text-sm font-bold text-on-surface mb-1 leading-snug\">제주시 모바일고지 안내시스템 <span class=\"text-[11px] font-normal text-on-surface/45\">('20)</span></h4><p class=\"text-[12px] text-on-surface-variant leading-snug\">모바일 고지서 안내·발송 시스템 구축</p></div><div class=\"bg-white/[0.04] border border-white/10 rounded-lg p-md\"><div class=\"flex items-center gap-2 mb-1\"><span class=\"text-[10px] px-1.5 py-0.5 rounded bg-primary-container/20 text-primary border border-primary-container/30 shrink-0\">SI</span><span class=\"text-[11px] text-on-surface/50 truncate\">제주테크노파크</span></div><h4 class=\"text-sm font-bold text-on-surface mb-1 leading-snug\">제주테크노파크 산업정보서비스 <span class=\"text-[11px] font-normal text-on-surface/45\">('19)</span></h4><p class=\"text-[12px] text-on-surface-variant leading-snug\">산업정보 제공 서비스·시스템 구축</p></div><div class=\"bg-white/[0.04] border border-white/10 rounded-lg p-md\"><div class=\"flex items-center gap-2 mb-1\"><span class=\"text-[10px] px-1.5 py-0.5 rounded bg-primary-container/20 text-primary border border-primary-container/30 shrink-0\">SI</span><span class=\"text-[11px] text-on-surface/50 truncate\">제주별빛누리공원</span></div><h4 class=\"text-sm font-bold text-on-surface mb-1 leading-snug\">제주별빛누리공원 통합매표시스템 <span class=\"text-[11px] font-normal text-on-surface/45\">('16)</span></h4><p class=\"text-[12px] text-on-surface-variant leading-snug\">천문과학관·공원 통합 매표 시스템</p></div><div class=\"rounded-lg p-md flex flex-col items-center justify-center text-center bg-primary-container/[0.08] border border-primary-container/40\"><div class=\"text-2xl font-bold text-primary-container leading-none\">+ 500여 개</div><div class=\"text-[12px] text-on-surface-variant mt-1.5\">외 공공·기관 시스템 구축·운영</div></div></div></div>";
+            const IOT_DETAIL = "<p class=\"text-on-surface-variant text-sm md:text-base mb-lg max-w-2xl\">현장 IoT 센서·장비를 데이터로 연결하고, <span class=\"text-on-surface font-semibold\">노이즈 많은 센서 데이터를 정제·표준화</span>해 <span class=\"text-primary-container font-semibold\">신재생에너지를 예측·운영</span>합니다.</p><div class=\"mb-lg\"><div class=\"mb-sm\"><span class=\"text-[11px] font-bold text-primary uppercase tracking-widest block\">IoT</span><h3 class=\"text-lg font-bold text-on-surface\">IoT 분야</h3></div><div class=\"grid grid-cols-1 md:grid-cols-2 gap-md\"><div class=\"bg-white/[0.04] border border-white/10 rounded-lg p-md\"><div class=\"flex items-center gap-sm mb-sm\"><span class=\"w-9 h-9 rounded-lg bg-primary-container/15 border border-primary-container/30 flex items-center justify-center shrink-0\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"#ff6600\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"w-5 h-5\"><path d=\"M5 12a7 7 0 0 1 14 0\"/><path d=\"M8.5 12a3.5 3.5 0 0 1 7 0\"/><circle cx=\"12\" cy=\"12\" r=\"1\" fill=\"#ff6600\" stroke=\"none\"/></svg></span><div><strong class=\"text-on-surface font-semibold block leading-none\">IoT 센서 특성</strong><span class=\"text-[11px] text-on-surface-variant uppercase tracking-wide\">Sensor Data Traits</span></div></div><ul class=\"space-y-0.5 text-sm text-on-surface-variant leading-snug\"><li>· 고빈도 시계열 · 대용량</li><li>· 통신 단절 · 결측 빈번</li><li>· 센서 오작동 → 이상치·노이즈</li><li>· 센서별 단위·캘리브레이션 차이</li></ul></div><div class=\"bg-white/[0.04] border border-white/10 rounded-lg p-md\"><div class=\"flex items-center gap-2 mb-sm\"><span class=\"text-[10px] px-1.5 py-0.5 rounded bg-primary-container/20 text-primary border border-primary-container/30 shrink-0\">KEY PROJECT</span><span class=\"text-[11px] text-on-surface/50 truncate\">제주특별자치도농업기술원</span></div><div class=\"space-y-sm\"><div><strong class=\"text-sm text-on-surface font-semibold\">IoT 센서 운영</strong><p class=\"text-[12px] text-on-surface-variant leading-snug mt-0.5\">농업 IoT 센서 100여 대 — 토양수분센서 35·수분장력센서 74·서리센서·디지털트랩 운영·관제</p></div><div><strong class=\"text-sm text-on-surface font-semibold\">센서 데이터 정제</strong><p class=\"text-[12px] text-on-surface-variant leading-snug mt-0.5\">결측 보간·이상치 제거·노이즈 필터·캘리브레이션 보정·표준화·품질검증</p></div></div></div></div></div><div><div class=\"mb-sm\"><span class=\"text-[11px] font-bold text-primary uppercase tracking-widest block\">Energy</span><h3 class=\"text-lg font-bold text-on-surface\">Energy 분야</h3></div><div class=\"grid grid-cols-1 md:grid-cols-2 gap-md\"><div class=\"bg-white/[0.04] border border-white/10 rounded-lg p-md\"><div class=\"flex items-center gap-2 mb-1\"><span class=\"text-[10px] px-1.5 py-0.5 rounded bg-primary-container/20 text-primary border border-primary-container/30 shrink-0\">R&D</span><span class=\"text-[11px] text-on-surface/50 truncate\">정보통신산업진흥원</span></div><h4 class=\"text-sm font-bold text-on-surface mb-1 leading-snug\">AI 그린에너지산업 융합지원 <span class=\"text-[11px] font-normal text-on-surface/45\">('22~'23)</span></h4><p class=\"text-[12px] text-on-surface-variant leading-snug\">제주 그린에너지산업에 AI 기술을 융합 지원하는 연구개발</p></div><div class=\"bg-white/[0.04] border border-white/10 rounded-lg p-md\"><div class=\"flex items-center gap-sm mb-sm\"><span class=\"w-9 h-9 rounded-lg bg-primary-container/15 border border-primary-container/30 flex items-center justify-center shrink-0\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"#ff6600\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"w-5 h-5\"><path d=\"M12 3l7 3v6c0 4-3 7-7 9-4-2-7-5-7-9V6z\"/><path d=\"M9 12l2 2 4-4\"/></svg></span><div><strong class=\"text-on-surface font-semibold block leading-none\">성과</strong><span class=\"text-[11px] text-on-surface-variant uppercase tracking-wide\">Achievements</span></div></div><ul class=\"space-y-0.5 text-sm text-on-surface-variant leading-snug\"><li>· 발전량 예측 정확도 <span class=\"text-primary-container font-semibold\">95% 이상</span></li><li>· KPX 소규모전력중개사업 예측정산금제도 참여</li><li>· 특허출원 — 다수 태양광 발전소 통합 발전량 예측 모델</li></ul></div></div></div>";
+            const detailWrap = document.getElementById('detail-views');
+            detailWrap.innerHTML = TECH_FIELDS.map(f =>
+                '<div id="view-' + f.key + '" class="view overflow-y-auto px-lg md:pl-[96px] pt-[80px] pb-16">' +
+                ((f.key === 'ai' || f.key === 'platform' || f.key === 'si' || f.key === 'iot') ? '<div class="min-h-full flex flex-col justify-center"><div class="max-w-4xl mx-auto w-full py-4">' : '<div class="max-w-4xl mx-auto py-4">') +
+                    '<button class="tf-back text-xs text-on-surface-variant hover:text-primary inline-flex items-center gap-0.5 mb-md" data-view="overview"><span class="material-symbols-outlined text-sm">arrow_back</span> 전체 분야</button>' +
+                    '<div class="flex items-center gap-md mb-xs"><span class="material-symbols-outlined text-primary-container text-3xl">' + f.icon + '</span>' +
+                    '<div><h1 class="text-2xl md:text-4xl font-bold leading-tight">' + f.en + '</h1><span class="text-sm text-on-surface/50">' + f.kr + ' · 실적 ' + f.count + '건</span></div></div>' +
+                    '<p class="text-on-surface-variant text-sm max-w-2xl mb-md">' + f.desc + '</p>' +
+                    (f.key === 'ai' ? ('<div class="rounded-2xl p-lg md:p-xl" style="background:rgba(18,18,20,0.92);border:1px solid rgba(255,102,0,0.3);box-shadow:0 8px 40px rgba(0,0,0,0.45)">' + AI_DETAIL + '</div>') : f.key === 'platform' ? ('<div class="rounded-2xl p-lg md:p-xl" style="background:rgba(18,18,20,0.92);border:1px solid rgba(255,102,0,0.3);box-shadow:0 8px 40px rgba(0,0,0,0.45)">' + PLATFORM_DETAIL + '</div>') : f.key === 'si' ? ('<div class="rounded-2xl p-lg md:p-xl" style="background:rgba(18,18,20,0.92);border:1px solid rgba(255,102,0,0.3);box-shadow:0 8px 40px rgba(0,0,0,0.45)">' + SI_DETAIL + '</div>') : f.key === 'iot' ? ('<div class="rounded-2xl p-lg md:p-xl" style="background:rgba(18,18,20,0.92);border:1px solid rgba(255,102,0,0.3);box-shadow:0 8px 40px rgba(0,0,0,0.45)">' + IOT_DETAIL + '</div>') : (
+                    '<div class="mb-lg"><div class="text-[11px] font-bold text-primary uppercase tracking-widest mb-sm">주요 서비스</div><div class="grid grid-cols-1 md:grid-cols-2 gap-sm">' + f.services.map(s => '<div class="flex gap-sm text-sm text-on-surface/85 leading-snug glass-card rounded-lg p-md"><span class="material-symbols-outlined text-primary-container text-base shrink-0">check</span>' + esc(s) + '</div>').join('') + '</div></div>' +
+                    flagshipBlock(f.key) +
+                    '<div class="text-[11px] font-bold text-primary uppercase tracking-widest mb-sm">대표 실적</div>' +
+                    groupsBlock(f))) +
+                ((f.key === 'ai' || f.key === 'platform' || f.key === 'si' || f.key === 'iot') ? '</div></div></div>' : '</div></div>')
+            ).join('');
+
+            // ===== VIEW SWITCHING (about pattern) =====
+            const viewIds = ['overview', 'ai', 'platform', 'si', 'iot'];
+            const views = {};
+            viewIds.forEach(v => views[v] = document.getElementById('view-' + v));
+            let current = 'overview';
+            function showView(name) {
+                if (!views[name]) return;
+                Object.keys(views).forEach(k => views[k].classList.toggle('active', k === name));
+                document.querySelectorAll('.nav-icon').forEach(a => a.classList.toggle('text-primary', a.dataset.view === name));
+                if (views[name]) views[name].scrollTop = 0;
+                current = name;
+            }
+            document.querySelectorAll('[data-view]').forEach(a => {
+                a.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const v = a.dataset.view;
+                    showView(current === v ? 'overview' : v);
+                });
+            });
+        })();
+    </script>
+<!-- BOTTOM : 회사 정보 + 인증 (공통) -->
+<footer class="fixed bottom-0 left-0 w-full z-40 bg-surface-container-lowest/85 backdrop-blur-md border-t border-white/10">
+<div class="max-w-[1600px] mx-auto px-lg lg:px-[88px] py-sm flex flex-col md:flex-row md:items-center justify-between gap-2 text-xs">
+<div class="flex flex-wrap items-center gap-x-md gap-y-1 text-on-surface-variant">
+<span class="font-bold text-on-surface">㈜넥스트이지</span>
+<span class="text-on-surface/25">|</span><span>대표이사 강주경</span>
+<span class="text-on-surface/25">|</span><span>제주특별자치도 제주시 첨단로 213-3, 408·409호</span>
+<span class="text-on-surface/25">|</span><span class="text-primary-container font-semibold">064-721-8118</span>
+</div>
+<div class="flex flex-wrap items-center gap-1.5">
+<span class="px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-[11px] text-on-surface-variant">벤처기업</span>
+<span class="px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-[11px] text-on-surface-variant">기술혁신형(INNOBIZ)</span>
+<span class="px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-[11px] text-on-surface-variant">경영혁신형(MAINBIZ)</span>
+<span class="px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-[11px] text-on-surface-variant">가족친화 인증기업</span>
+<span class="px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-[11px] text-on-surface-variant">ISO 9001·14001</span>
+<span class="px-2 py-0.5 rounded-full bg-primary-container/15 border border-primary-container/30 text-[11px] text-primary font-semibold">외 인증 13건</span>
+</div>
+</div>
+</footer>
+<script>
+(function(){
+  var h=document.getElementById('main-copy'); if(!h) return;
+  var idx=0;
+  (function walk(node){
+    Array.prototype.slice.call(node.childNodes).forEach(function(child){
+      if(child.nodeType===3){
+        var frag=document.createDocumentFragment();
+        Array.from(child.textContent).forEach(function(ch){
+          if(ch===' '){frag.appendChild(document.createTextNode(' '));return;}
+          var s=document.createElement('span'); s.className='char'; s.textContent=ch;
+          s.style.animationDelay=(idx*0.05).toFixed(2)+'s'; idx++;
+          frag.appendChild(s);
+        });
+        node.replaceChild(frag,child);
+      } else if(child.nodeType===1 && child.tagName!=='BR' && !child.classList.contains('kinetic-gradient')){
+        walk(child);
+      }
+    });
+  })(h);
+})();
+</script>
+</body></html>

@@ -1,0 +1,350 @@
+<!DOCTYPE html><html class="dark" lang="ko" style="">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>NEXTEZ - Digital Transformation Solutions</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link as="style" crossorigin="" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface-tint": "#ffb596",
+                        "surface": "#131313",
+                        "secondary-fixed-dim": "#c8c6c5",
+                        "secondary-container": "#474746",
+                        "outline-variant": "#5a4136",
+                        "on-secondary-fixed": "#1c1b1b",
+                        "primary-fixed": "#ffdbcd",
+                        "surface-bright": "#3a3939",
+                        "on-background": "#e5e2e1",
+                        "surface-container-lowest": "#0e0e0e",
+                        "outline": "#aa8a7d",
+                        "surface-variant": "#353534",
+                        "surface-container-low": "#1c1b1b",
+                        "surface-container": "#201f1f",
+                        "error-container": "#93000a",
+                        "tertiary": "#c8c6c6",
+                        "on-error-container": "#ffdad6",
+                        "secondary": "#c8c6c5",
+                        "inverse-primary": "#a33e00",
+                        "error": "#ffb4ab",
+                        "on-surface": "#e5e2e1",
+                        "on-secondary": "#313030",
+                        "tertiary-fixed-dim": "#c8c6c6",
+                        "tertiary-fixed": "#e4e2e1",
+                        "tertiary-container": "#989696",
+                        "surface-dim": "#131313",
+                        "on-error": "#690005",
+                        "on-tertiary-container": "#2f2f2f",
+                        "background": "#131313",
+                        "on-primary-fixed-variant": "#7c2e00",
+                        "surface-container-high": "#2a2a2a",
+                        "secondary-fixed": "#e5e2e1",
+                        "on-secondary-fixed-variant": "#474746",
+                        "on-surface-variant": "#e3bfb1",
+                        "inverse-on-surface": "#313030",
+                        "on-primary-fixed": "#360f00",
+                        "surface-container-highest": "#353534",
+                        "primary-container": "#ff6600",
+                        "on-primary": "#581e00",
+                        "inverse-surface": "#e5e2e1",
+                        "on-secondary-container": "#b7b5b4",
+                        "primary": "#ffb596",
+                        "on-tertiary-fixed": "#1b1c1c",
+                        "on-primary-container": "#561d00",
+                        "primary-fixed-dim": "#ffb596",
+                        "on-tertiary": "#303030",
+                        "on-tertiary-fixed-variant": "#474747"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "0.75rem",
+                        "xl": "1rem",
+                        "full": "9999px"
+                    },
+                    spacing: {
+                        "md": "16px",
+                        "xs": "4px",
+                        "xl": "40px",
+                        "container-max": "1280px",
+                        "gutter": "24px",
+                        "sm": "8px",
+                        "unit": "4px",
+                        "lg": "24px"
+                    },
+                    fontFamily: {
+                        "body-md": ["'Pretendard Variable'", "Pretendard", "sans-serif"],
+                        "label-md": ["'Pretendard Variable'", "Pretendard", "sans-serif"],
+                        "label-bold": ["'Pretendard Variable'", "Pretendard", "sans-serif"],
+                        "headline-xl": ["'Pretendard Variable'", "Pretendard", "sans-serif"],
+                        "body-sm": ["'Pretendard Variable'", "Pretendard", "sans-serif"],
+                        "headline-lg-mobile": ["'Pretendard Variable'", "Pretendard", "sans-serif"],
+                        "headline-lg": ["'Pretendard Variable'", "Pretendard", "sans-serif"]
+                    },
+                    fontSize: {
+                        "body-md": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+                        "label-md": ["12px", { lineHeight: "16px", fontWeight: "500" }],
+                        "label-bold": ["12px", { lineHeight: "16px", letterSpacing: "0.05em", fontWeight: "700" }],
+                        "headline-xl": ["48px", { lineHeight: "56px", letterSpacing: "-0.02em", fontWeight: "700" }],
+                        "body-sm": ["14px", { lineHeight: "20px", fontWeight: "400" }],
+                        "headline-lg-mobile": ["24px", { lineHeight: "32px", fontWeight: "600" }],
+                        "headline-lg": ["32px", { lineHeight: "40px", letterSpacing: "-0.01em", fontWeight: "600" }]
+                    },
+                    animation: {
+                        'ken-burns': 'ken-burns 20s ease-out infinite alternate',
+                    },
+                    keyframes: {
+                        'ken-burns': {
+                            '0%': { transform: 'scale(1)' },
+                            '100%': { transform: 'scale(1.05)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Pretendard Variable', Pretendard, sans-serif;
+            background-color: #131313;
+            color: #e5e2e1;
+        }
+        .grid-pattern {
+            background-image:
+                linear-gradient(to right, rgba(46, 46, 46, 0.5) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(46, 46, 46, 0.5) 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+        .kinetic-glow {
+            box-shadow: 0 0 20px rgba(255, 102, 0, 0.15);
+        }
+        .hero-bg-anim {
+            animation: ken-burns 30s ease-in-out infinite alternate;
+            transform-origin: center center;
+        }
+        @keyframes ken-burns {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.1); }
+        }
+        /* Horizontal Scroll Utilities */
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .slide-number {
+            -webkit-text-stroke: 2px rgba(255, 102, 0, 0.3);
+            color: transparent;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface antialiased selection:bg-primary-container selection:text-on-primary-container overflow-hidden">
+<!-- TopNavBar (Fixed) -->
+<header class="fixed w-full top-0 border-b border-white/10 bg-background/50 backdrop-blur-md z-50">
+<div class="flex items-center w-full px-lg py-md max-w-[1600px] mx-auto">
+<div class="flex items-center gap-sm">
+<a href="index.html" class="font-headline-lg text-headline-lg font-bold text-on-surface">NEXTEZ</a>
+</div>
+<nav class="hidden md:flex items-center gap-lg ml-auto"><a class="font-body-md text-body-md text-primary font-bold border-b-2 border-primary pb-1" href="#hero">Home</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors hover:bg-surface-container-highest px-sm py-xs rounded" href="services.html">Services</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors hover:bg-surface-container-highest px-sm py-xs rounded" href="capabilities.html">Capabilities</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors hover:bg-surface-container-highest px-sm py-xs rounded" href="portfolio.html">Project Portfolio</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors hover:bg-surface-container-highest px-sm py-xs rounded" href="about.html">About</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors hover:bg-surface-container-highest px-sm py-xs rounded" href="news.html">News &amp; Community</a></nav>
+</div>
+</header>
+<!-- Fixed Dot Navigation -->
+<div class="fixed bottom-lg left-1/2 -translate-x-1/2 z-50 flex gap-sm bg-surface-container/50 backdrop-blur-md px-md py-sm rounded-full border border-white/10">
+<a class="w-3 h-3 rounded-full bg-primary-container" href="#hero"></a>
+<a class="w-3 h-3 rounded-full bg-outline-variant hover:bg-primary transition-colors" href="#cycle"></a>
+<a class="w-3 h-3 rounded-full bg-outline-variant hover:bg-primary transition-colors" href="#agriculture"></a>
+<a class="w-3 h-3 rounded-full bg-outline-variant hover:bg-primary transition-colors" href="#energy"></a>
+<a class="w-3 h-3 rounded-full bg-outline-variant hover:bg-primary transition-colors" href="#cta"></a>
+</div>
+<!-- Fixed Social/Info Sidebar (Right) -->
+<div class="hidden lg:flex fixed right-lg top-1/2 -translate-y-1/2 z-40 flex-col items-center gap-lg">
+<div class="w-px h-24 bg-white/20"></div>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined">share</span></a>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined">mail</span></a>
+<p class="writing-vertical-rl text-label-md text-on-surface-variant tracking-widest uppercase rotate-180" style="writing-mode: vertical-rl;">Follow Us</p>
+</div>
+<!-- Main Horizontal Scroll Container -->
+<main class="flex h-[100dvh] w-screen overflow-x-auto snap-x snap-mandatory hide-scrollbar scroll-smooth">
+<!-- Slide 1: Hero Section -->
+<section class="relative min-w-[100vw] h-full snap-start flex items-center shrink-0 pt-[72px]" id="hero">
+<div class="absolute inset-0 bg-background">
+<img alt="Digital Transformation AI" class="w-full h-full object-cover hero-bg-anim opacity-50 mix-blend-screen" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBY8ibJqkKUbNnuCFi8nIOXCWBVpy8H40VUaFfOnM2q1VgyqGyIrbiJiOvNKIPraLCZEMaBIFCD9haPyBYmvQ_9g8p_Fc6qNkDpTlpCVnvbNnKKw9GFAuSD5KxA_qAMcvbMpEigiVqW7hKUrPvbDI420uIKD_GbIWG5XCDNkHo33hAKeiAFM5GZFtqqYS7HtMRW0cIjyMHQo5rgWd12NqGHmL14aThSEcua2MIH1fuQ12GQxdwoLujkCawHHZNAHYb-1RSu-SzqjRoM">
+</div>
+<div class="absolute inset-0 bg-gradient-to-r from-background via-background/80 to-transparent"></div>
+<div class="relative z-10 w-full max-w-[1600px] mx-auto px-lg flex items-center justify-between">
+<div class="max-w-3xl">
+<div class="inline-flex items-center gap-sm bg-surface-container/50 backdrop-blur-md border border-outline-variant/30 rounded-full px-md py-xs mb-lg">
+<span class="w-2 h-2 rounded-full bg-primary-container animate-pulse"></span>
+<span class="font-label-bold text-label-bold text-primary shadow-sm">AX 전환 전문가</span>
+</div>
+<h1 class="text-[64px] leading-[1.1] mb-md drop-shadow-2xl font-bold">산업 현장의 <span class="text-primary-container">데이터</span>로<br>AI를 만들고, AI로 <br><span class="text-primary-container">산업 현장</span>을 지휘합니다.</h1>
+<p class="font-body-md text-body-md text-on-surface max-w-2xl mb-xl drop-shadow-md text-lg">㈜넥스트이지는 산업 현장의 실전 데이터로 최적화된 AI 솔루션을 구축하며, 지능화된 운영을 통해 대한민국 산업의 AX를 이끌고 있습니다.</p>
+<div class="flex flex-col sm:flex-row items-center gap-md justify-start">
+<button class="bg-primary-container text-black font-label-bold text-label-bold px-xl py-md rounded w-full sm:w-auto hover:bg-primary transition-all hover:scale-105 active:scale-95 shadow-lg flex items-center justify-center gap-sm">
+                        플랫폼 알아보기
+                        <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+<button class="bg-white/10 backdrop-blur-md border border-white/20 text-on-surface font-label-bold text-label-bold px-xl py-md rounded w-full sm:w-auto hover:bg-white/20 transition-all flex items-center justify-center gap-sm shadow-lg">
+                        사례 연구 보기
+                    </button>
+</div>
+</div>
+<div class="hidden lg:block text-right pr-24">
+<div class="text-[180px] font-bold slide-number leading-none">01.</div>
+<h2 class="text-4xl font-bold text-primary-container mt-4">AX LEADERS</h2>
+</div>
+</div>
+</section>
+<!-- Slide 2: The AX Cycle Section -->
+<section class="relative min-w-[100vw] h-full snap-start flex flex-col justify-center shrink-0 bg-surface-container-lowest pt-[72px]" id="cycle">
+<div class="w-full max-w-[1600px] mx-auto px-lg relative">
+<div class="absolute right-12 top-0 lg:-top-24 hidden lg:block text-right">
+<div class="text-[180px] font-bold slide-number leading-none">02.</div>
+<h2 class="text-4xl font-bold text-primary-container mt-4">AX CYCLE</h2>
+</div>
+<div class="mb-xl lg:max-w-xl">
+<h2 class="font-headline-xl text-headline-xl mb-sm font-bold">AX <span class="text-primary-container">사이클</span></h2>
+<p class="font-body-md text-body-md text-on-surface-variant text-lg">데이터와 AI를 통한 지속적인 운영 개선 방법론입니다.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-lg relative mt-12">
+<!-- Connecting line for desktop -->
+<div class="hidden md:block absolute top-1/2 left-0 right-0 h-px bg-outline-variant -z-10 transform -translate-y-1/2"></div>
+<!-- Step 1 -->
+<div class="bg-surface-container p-xl rounded-xl border border-outline-variant flex flex-col items-start text-left group hover:border-primary transition-colors kinetic-glow backdrop-blur-sm bg-opacity-80">
+<div class="w-20 h-20 rounded-full bg-background border border-outline-variant flex items-center justify-center mb-lg group-hover:border-primary-container transition-colors">
+<span class="material-symbols-outlined text-primary-container text-[40px]">precision_manufacturing</span>
+</div>
+<h3 class="text-2xl mb-md font-bold">도메인 운영</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">활성 산업 환경에서 고충실도 데이터를 수집합니다.</p>
+</div>
+<!-- Step 2 -->
+<div class="bg-surface-container p-xl rounded-xl border border-outline-variant flex flex-col items-start text-left group hover:border-primary transition-colors kinetic-glow backdrop-blur-sm bg-opacity-80">
+<div class="w-20 h-20 rounded-full bg-background border border-outline-variant flex items-center justify-center mb-lg group-hover:border-primary-container transition-colors">
+<span class="material-symbols-outlined text-primary-container text-[40px]">model_training</span>
+</div>
+<h3 class="text-2xl mb-md font-bold">AI 솔루션 제작</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">특화된 운영 데이터 세트를 사용하여 강력한 AI 모델을 훈련시킵니다.</p>
+</div>
+<!-- Step 3 -->
+<div class="bg-surface-container p-xl rounded-xl border border-outline-variant flex flex-col items-start text-left group hover:border-primary transition-colors kinetic-glow backdrop-blur-sm bg-opacity-80">
+<div class="w-20 h-20 rounded-full bg-background border border-outline-variant flex items-center justify-center mb-lg group-hover:border-primary-container transition-colors">
+<span class="material-symbols-outlined text-primary-container text-[40px]">cycle</span>
+</div>
+<h3 class="text-2xl mb-md font-bold">AX로 환원</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">AI를 운영에 다시 배포하여 프로세스를 지휘하고 최적화합니다.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Slide 3: Agriculture -->
+<section class="relative min-w-[100vw] h-full snap-start flex items-center shrink-0 pt-[72px]" id="agriculture">
+<div class="absolute inset-0 bg-[#1a2e1a]">
+<div class="absolute inset-0 bg-gradient-to-r from-background via-background/90 to-transparent z-10"></div>
+<div class="absolute inset-0 bg-black/40"></div>
+</div>
+<div class="relative z-20 w-full max-w-[1600px] mx-auto px-lg flex justify-between items-center">
+<div class="max-w-2xl">
+<span class="font-label-bold text-label-bold text-primary mb-sm block tracking-widest uppercase">핵심 사업 영역</span>
+<h2 class="text-6xl font-bold mb-lg flex items-center gap-sm">
+<span class="material-symbols-outlined text-[56px] text-primary">agriculture</span>
+                    농업 <span class="text-primary-container">AX</span>
+</h2>
+<div class="bg-surface-container/60 backdrop-blur-md p-lg rounded-xl border border-outline-variant/50 mb-lg">
+<span class="bg-primary/20 text-primary border border-primary/30 px-sm py-xs rounded font-label-bold text-label-bold uppercase tracking-wider text-[12px] mb-sm inline-block">사업 규모</span>
+<p class="text-4xl text-white font-bold mb-md">54.9억 원</p>
+<p class="text-lg text-on-surface-variant leading-relaxed">
+                        31개월·54.9억원 규모의 데이터 수집. 제주 농업의 디지털 전환을 단독 주관으로 함께 그리며, 15종 이상의 AI 모델과 자동화 시스템을 구축합니다.
+                    </p>
+</div>
+<button class="bg-transparent border-2 border-primary text-primary font-label-bold text-label-bold py-md px-xl rounded hover:bg-primary hover:text-black transition-colors text-lg">
+                    농업 기술 알아보기
+                </button>
+</div>
+<div class="hidden lg:block text-right pr-24">
+<div class="text-[180px] font-bold slide-number leading-none">03.</div>
+<h2 class="text-4xl font-bold text-[#8bc34a] mt-4 uppercase">Agriculture</h2>
+</div>
+</div>
+</section>
+<!-- Slide 4: Energy -->
+<section class="relative min-w-[100vw] h-full snap-start flex items-center shrink-0 pt-[72px]" id="energy">
+<div class="absolute inset-0 bg-[#2e1a1a]">
+<div class="absolute inset-0 bg-gradient-to-r from-background via-background/90 to-transparent z-10"></div>
+<div class="absolute inset-0 bg-black/40"></div>
+</div>
+<div class="relative z-20 w-full max-w-[1600px] mx-auto px-lg flex justify-between items-center">
+<div class="max-w-2xl">
+<span class="font-label-bold text-label-bold text-primary mb-sm block tracking-widest uppercase">핵심 사업 영역</span>
+<h2 class="text-6xl font-bold mb-lg flex items-center gap-sm">
+<span class="material-symbols-outlined text-[56px] text-primary">bolt</span>
+                    에너지 <span class="text-primary-container">AX</span>
+</h2>
+<div class="bg-surface-container/60 backdrop-blur-md p-lg rounded-xl border border-outline-variant/50 mb-lg">
+<span class="bg-primary/20 text-primary border border-primary/30 px-sm py-xs rounded font-label-bold text-label-bold uppercase tracking-wider text-[12px] mb-sm inline-block">TTA 인증 정확도</span>
+<p class="text-4xl text-white font-bold mb-md">95%+</p>
+<p class="text-lg text-on-surface-variant leading-relaxed">
+                        고정밀 에너지 최적화. 기상과 발전 데이터로 학습된 태양광 AI 솔루션을 제공하며, 실제 거래·정산 시장에 들어가 검증되고 있는 운영형 AI입니다.
+                    </p>
+</div>
+<button class="bg-transparent border-2 border-primary text-primary font-label-bold text-label-bold py-md px-xl rounded hover:bg-primary hover:text-black transition-colors text-lg">
+                    에너지 솔루션 알아보기
+                </button>
+</div>
+<div class="hidden lg:block text-right pr-24">
+<div class="text-[180px] font-bold slide-number leading-none">04.</div>
+<h2 class="text-4xl font-bold text-[#ff9800] mt-4 uppercase">Energy</h2>
+</div>
+</div>
+</section>
+<!-- Slide 5: CTA & Footer -->
+<section class="relative min-w-[100vw] h-full snap-start flex flex-col shrink-0 bg-surface-container-high pt-[72px]" id="cta">
+<div class="absolute inset-0 grid-pattern opacity-20"></div>
+<!-- CTA Content -->
+<div class="flex-grow flex items-center justify-center relative z-10">
+<div class="max-w-[1600px] mx-auto px-lg text-center w-full flex justify-between items-center">
+<div class="text-left max-w-3xl">
+<h2 class="text-6xl mb-lg font-bold"><span class="text-primary-container">미래</span>를 구축할<br>준비가 되셨나요?</h2>
+<p class="text-xl text-on-surface-variant mb-xl">
+                        표준 모델을 구축하고 실행 가능한 데이터 서비스를 도출하기 위해 고객과 함께 끊임없이 연구하고 노력하는 저희와 함께 하세요.
+                    </p>
+<button class="bg-primary-container text-black font-label-bold text-[18px] px-12 py-4 rounded-lg hover:bg-primary transition-colors hover:scale-105 active:scale-95 shadow-xl inline-flex items-center gap-md">
+                        파트너십 맺기
+                        <span class="material-symbols-outlined">handshake</span>
+</button>
+</div>
+<div class="hidden lg:block text-right pr-24">
+<div class="text-[180px] font-bold slide-number leading-none">05.</div>
+<h2 class="text-4xl font-bold text-primary-container mt-4">JOIN US</h2>
+</div>
+</div>
+</div>
+<!-- Compact Footer -->
+<footer class="bg-surface-container-low border-t border-white/10 relative z-20 shrink-0">
+<div class="flex flex-col md:flex-row justify-between items-center px-lg py-md max-w-[1600px] mx-auto gap-md">
+<div class="flex items-center gap-md">
+<div class="font-headline-lg-mobile text-headline-lg-mobile font-bold text-primary">NEXTEZ</div>
+<div class="w-px h-4 bg-outline-variant"></div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">© 2024 NEXTEZ ICT Solutions. All rights reserved.</p>
+</div>
+<div class="flex gap-lg">
+<a class="font-label-md text-label-md text-secondary hover:text-primary transition-colors" href="#">디지털 콘텐츠</a>
+<a class="font-label-md text-label-md text-secondary hover:text-primary transition-colors" href="#">스마트 투어</a>
+<a class="font-label-md text-label-md text-secondary hover:text-primary transition-colors" href="#">개인정보 처리방침</a>
+<a class="font-label-md text-label-md text-secondary hover:text-primary transition-colors" href="#">이용 약관</a>
+</div>
+</div>
+</footer>
+</section>
+</main>
+</body></html>

@@ -1,0 +1,231 @@
+<!DOCTYPE html><html class="dark" lang="ko">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>NEXTEZ - News &amp; Community</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link as="style" crossorigin="" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface-tint": "#ffb596", "surface": "#131313", "secondary-fixed-dim": "#c8c6c5",
+                        "secondary-container": "#474746", "outline-variant": "#5a4136", "on-secondary-fixed": "#1c1b1b",
+                        "primary-fixed": "#ffdbcd", "surface-bright": "#3a3939", "on-background": "#e5e2e1",
+                        "surface-container-lowest": "#0e0e0e", "outline": "#aa8a7d", "surface-variant": "#353534",
+                        "surface-container-low": "#1c1b1b", "surface-container": "#201f1f", "error-container": "#93000a",
+                        "tertiary": "#c8c6c6", "on-error-container": "#ffdad6", "secondary": "#c8c6c5",
+                        "inverse-primary": "#a33e00", "error": "#ffb4ab", "on-surface": "#e5e2e1", "on-secondary": "#313030",
+                        "tertiary-fixed-dim": "#c8c6c6", "tertiary-fixed": "#e4e2e1", "tertiary-container": "#989696",
+                        "surface-dim": "#131313", "on-error": "#690005", "on-tertiary-container": "#2f2f2f",
+                        "background": "#131313", "on-primary-fixed-variant": "#7c2e00", "surface-container-high": "#2a2a2a",
+                        "secondary-fixed": "#e5e2e1", "on-secondary-fixed-variant": "#474746", "on-surface-variant": "#e3bfb1",
+                        "inverse-on-surface": "#313030", "on-primary-fixed": "#360f00", "surface-container-highest": "#353534",
+                        "primary-container": "#ff6600", "on-primary": "#581e00", "inverse-surface": "#e5e2e1",
+                        "on-secondary-container": "#b7b5b4", "primary": "#ffb596", "on-tertiary-fixed": "#1b1c1c",
+                        "on-primary-container": "#561d00", "primary-fixed-dim": "#ffb596", "on-tertiary": "#303030",
+                        "on-tertiary-fixed-variant": "#474747"
+                    },
+                    borderRadius: { "DEFAULT": "0.5rem", "lg": "0.75rem", "xl": "1rem", "full": "9999px" },
+                    spacing: { "md": "16px", "xs": "4px", "xl": "40px", "container-max": "1280px", "gutter": "24px", "sm": "8px", "unit": "4px", "lg": "24px" },
+                    fontFamily: {
+                        "body-md": ["'Pretendard Variable'", "Pretendard", "sans-serif"], "label-md": ["'Pretendard Variable'", "Pretendard", "sans-serif"],
+                        "label-bold": ["'Pretendard Variable'", "Pretendard", "sans-serif"], "headline-xl": ["'Pretendard Variable'", "Pretendard", "sans-serif"],
+                        "body-sm": ["'Pretendard Variable'", "Pretendard", "sans-serif"], "headline-lg-mobile": ["'Pretendard Variable'", "Pretendard", "sans-serif"],
+                        "headline-lg": ["'Pretendard Variable'", "Pretendard", "sans-serif"]
+                    },
+                    fontSize: {
+                        "body-md": ["16px", { lineHeight: "24px", fontWeight: "400" }], "label-md": ["12px", { lineHeight: "16px", fontWeight: "500" }],
+                        "label-bold": ["12px", { lineHeight: "16px", letterSpacing: "0.05em", fontWeight: "700" }], "headline-xl": ["48px", { lineHeight: "56px", letterSpacing: "-0.02em", fontWeight: "700" }],
+                        "body-sm": ["14px", { lineHeight: "20px", fontWeight: "400" }], "headline-lg-mobile": ["24px", { lineHeight: "32px", fontWeight: "600" }],
+                        "headline-lg": ["32px", { lineHeight: "40px", letterSpacing: "-0.01em", fontWeight: "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Pretendard Variable', Pretendard, sans-serif; background-color: #131313; color: #e5e2e1; overflow: hidden; }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .kinetic-glow { box-shadow: 0 0 20px rgba(255, 102, 0, 0.12); }
+        .hero-fallback { background: linear-gradient(180deg, #2b6fd6 0%, #5aa0e6 45%, #4a7a2e 100%); }
+        .tab-panel { animation: fadein .4s ease; }
+        @keyframes fadein { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+        /* main copy shimmer + 강조점 (index 동일) */
+        .char { display: inline-block; will-change: filter; filter: brightness(0.8); animation: charShine 5s ease-in-out infinite; }
+        @keyframes charShine { 0%,55%,100% { filter: brightness(0.8); } 26% { filter: brightness(1.55) drop-shadow(0 0 8px rgba(255,255,255,0.35)); } }
+        .emph .char { position: relative; }
+        .emph .char::before { content:''; position:absolute; top:-0.34em; left:50%; transform:translateX(-50%); width:0.16em; height:0.16em; border-radius:9999px; background:#ff6600; }
+    </style>
+</head>
+<body class="bg-background text-on-surface antialiased h-[100dvh] overflow-hidden selection:bg-primary-container selection:text-on-primary-container">
+<!-- Background -->
+<div class="fixed inset-0 z-0 hero-fallback">
+<img alt="넥스트이지 창립 8주년 — 들판에서 NEXT 글자를 들고 점프하는 구성원들" class="w-full h-full object-cover opacity-70" src="IMG/nextez-anniversary01.jpg">
+<div class="absolute inset-0 bg-gradient-to-r from-background via-background/80 to-background/40"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-background/30 to-transparent"></div>
+</div>
+<!-- TopNavBar (Fixed) -->
+<header class="fixed w-full top-0 border-b border-white/10 bg-background/50 backdrop-blur-md z-50">
+<div class="flex items-center w-full px-lg py-md max-w-[1600px] mx-auto">
+<div class="flex items-center gap-sm">
+<a href="index.html" class="text-[32px] leading-none font-bold text-on-surface tracking-tight" style="font-family:'Pretendard Variable',Pretendard,sans-serif">NEXT<span class="text-primary-container ml-1 relative top-[-0.3em] inline-block">EZ</span></a>
+</div>
+<nav class="hidden md:flex items-center gap-lg ml-auto"><a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors hover:bg-surface-container-highest px-sm py-xs rounded" href="index.html">Home</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors hover:bg-surface-container-highest px-sm py-xs rounded" href="services.html">Services</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors hover:bg-surface-container-highest px-sm py-xs rounded" href="capabilities.html">Capabilities</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors hover:bg-surface-container-highest px-sm py-xs rounded" href="portfolio.html">Project Portfolio</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors hover:bg-surface-container-highest px-sm py-xs rounded" href="about.html">About</a>
+<a class="font-body-md text-body-md text-primary font-bold border-b-2 border-primary pb-1" href="news.html">News &amp; Community</a></nav>
+</div>
+</header>
+<!-- Fixed Social/Info Sidebar (Right) -->
+<div class="hidden lg:flex fixed right-lg top-1/2 -translate-y-1/2 z-40 flex-col items-center gap-lg">
+<div class="w-px h-24 bg-white/20"></div>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined">share</span></a>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined">mail</span></a>
+<p class="text-label-md text-on-surface-variant tracking-widest uppercase rotate-180" style="writing-mode: vertical-rl;">Follow Us</p>
+</div>
+<!-- Single-Screen Layout: copy (left) + tabbed panel (right) -->
+<main class="relative z-10 h-[100dvh] flex items-center pt-[72px] pb-8">
+<div class="w-full max-w-[1600px] mx-auto px-lg flex flex-col lg:flex-row items-center gap-xl">
+<!-- LEFT: main copy -->
+<div class="w-full lg:w-[40%] shrink-0">
+<div class="inline-flex items-center gap-sm bg-surface-container/50 backdrop-blur-md border border-outline-variant/30 rounded-full px-md py-xs mb-lg">
+<span class="w-2 h-2 rounded-full bg-primary-container animate-pulse"></span>
+<span class="font-label-bold text-label-bold text-primary">News &amp; Community</span>
+</div>
+<h1 id="main-copy" class="text-[40px] md:text-[52px] leading-[1.15] mb-md drop-shadow-2xl font-bold">헤드라인 너머의 넥스트이지,<br><span class="text-primary-container"><span class="emph">사람</span>의 이야기</span>로 잇다.</h1>
+<p class="font-body-md text-body-md text-on-surface-variant text-lg drop-shadow-md max-w-md">언론이 전한 성과와 그 뒤에서 함께 달려온 사람들 — 넥스트이지의 소식과 커뮤니티를 한곳에서 만나보세요.</p>
+</div>
+<!-- RIGHT: tabbed panel -->
+<div class="w-full lg:w-[60%] bg-surface-container/40 backdrop-blur-xl border border-white/10 rounded-xl p-lg lg:p-xl shadow-2xl">
+<!-- Tabs -->
+<div class="flex items-center gap-xl border-b border-white/10 mb-lg">
+<button class="tab-btn text-primary border-b-2 border-primary pb-sm font-bold text-xl flex items-center gap-sm transition-colors" data-tab="news">
+<span class="material-symbols-outlined">feed</span> News
+</button>
+<button class="tab-btn text-on-surface-variant border-b-2 border-transparent pb-sm font-bold text-xl flex items-center gap-sm transition-colors hover:text-on-surface" data-tab="community">
+<span class="material-symbols-outlined">groups</span> Community
+</button>
+</div>
+<!-- Panel: News -->
+<div id="panel-news" class="tab-panel">
+<div class="border-y border-white/10 divide-y divide-white/10">
+<div class="flex items-center gap-sm md:gap-md py-sm px-sm group hover:bg-white/[0.03] transition-colors"><span class="w-9 shrink-0 text-center text-on-surface-variant text-body-sm">460</span><a href="http://www.nextez.co.kr/contents/index.php?job=detail&amp;ebcf_id=notice&amp;mid=0501&amp;eb_seq=460" target="_blank" rel="noopener" class="flex-1 min-w-0 truncate text-on-surface group-hover:text-primary transition-colors">AI기반 영농일지 통합 고도화 용역(1차분) 계약 체결</a><span class="shrink-0 hidden lg:block text-on-surface-variant/55 text-xs">2026.04.23</span><a href="http://www.nextez.co.kr/contents/index.php?job=detail&amp;ebcf_id=notice&amp;mid=0501&amp;eb_seq=460" target="_blank" rel="noopener" class="shrink-0 text-primary text-xs font-semibold inline-flex items-center gap-0.5 hover:text-primary-container whitespace-nowrap">(뉴스보기)<span class="material-symbols-outlined text-sm">north_east</span></a></div>
+<div class="flex items-center gap-sm md:gap-md py-sm px-sm group hover:bg-white/[0.03] transition-colors"><span class="w-9 shrink-0 text-center text-on-surface-variant text-body-sm">459</span><a href="http://www.nextez.co.kr/contents/index.php?job=detail&amp;ebcf_id=notice&amp;mid=0501&amp;eb_seq=459" target="_blank" rel="noopener" class="flex-1 min-w-0 truncate text-on-surface group-hover:text-primary transition-colors">건축기본계획 사전검토 프로그램 개발용역 계약 체결</a><span class="shrink-0 hidden lg:block text-on-surface-variant/55 text-xs">2026.03.04</span><a href="http://www.nextez.co.kr/contents/index.php?job=detail&amp;ebcf_id=notice&amp;mid=0501&amp;eb_seq=459" target="_blank" rel="noopener" class="shrink-0 text-primary text-xs font-semibold inline-flex items-center gap-0.5 hover:text-primary-container whitespace-nowrap">(뉴스보기)<span class="material-symbols-outlined text-sm">north_east</span></a></div>
+<div class="flex items-center gap-sm md:gap-md py-sm px-sm group hover:bg-white/[0.03] transition-colors"><span class="w-9 shrink-0 text-center text-on-surface-variant text-body-sm">458</span><a href="http://www.nextez.co.kr/contents/index.php?job=detail&amp;ebcf_id=notice&amp;mid=0501&amp;eb_seq=458" target="_blank" rel="noopener" class="flex-1 min-w-0 truncate text-on-surface group-hover:text-primary transition-colors">제주노동권익센터 홈페이지 유지보수 계약 체결</a><span class="shrink-0 hidden lg:block text-on-surface-variant/55 text-xs">2026.02.12</span><a href="http://www.nextez.co.kr/contents/index.php?job=detail&amp;ebcf_id=notice&amp;mid=0501&amp;eb_seq=458" target="_blank" rel="noopener" class="shrink-0 text-primary text-xs font-semibold inline-flex items-center gap-0.5 hover:text-primary-container whitespace-nowrap">(뉴스보기)<span class="material-symbols-outlined text-sm">north_east</span></a></div>
+<div class="flex items-center gap-sm md:gap-md py-sm px-sm group hover:bg-white/[0.03] transition-colors"><span class="w-9 shrink-0 text-center text-on-surface-variant text-body-sm">457</span><a href="http://www.nextez.co.kr/contents/index.php?job=detail&amp;ebcf_id=notice&amp;mid=0501&amp;eb_seq=457" target="_blank" rel="noopener" class="flex-1 min-w-0 truncate text-on-surface group-hover:text-primary transition-colors">2026년 제주시 자기주도학습지원센터 홈페이지 유지보수 및 웹진 제작 계약 체결</a><span class="shrink-0 hidden lg:block text-on-surface-variant/55 text-xs">2026.01.28</span><a href="http://www.nextez.co.kr/contents/index.php?job=detail&amp;ebcf_id=notice&amp;mid=0501&amp;eb_seq=457" target="_blank" rel="noopener" class="shrink-0 text-primary text-xs font-semibold inline-flex items-center gap-0.5 hover:text-primary-container whitespace-nowrap">(뉴스보기)<span class="material-symbols-outlined text-sm">north_east</span></a></div>
+<div class="flex items-center gap-sm md:gap-md py-sm px-sm group hover:bg-white/[0.03] transition-colors"><span class="w-9 shrink-0 text-center text-on-surface-variant text-body-sm">456</span><a href="http://www.nextez.co.kr/contents/index.php?job=detail&amp;ebcf_id=notice&amp;mid=0501&amp;eb_seq=456" target="_blank" rel="noopener" class="flex-1 min-w-0 truncate text-on-surface group-hover:text-primary transition-colors">2026년도 제주특별자치도 노동자종합복지관 홈페이지 유지보수 계약 체결</a><span class="shrink-0 hidden lg:block text-on-surface-variant/55 text-xs">2026.01.19</span><a href="http://www.nextez.co.kr/contents/index.php?job=detail&amp;ebcf_id=notice&amp;mid=0501&amp;eb_seq=456" target="_blank" rel="noopener" class="shrink-0 text-primary text-xs font-semibold inline-flex items-center gap-0.5 hover:text-primary-container whitespace-nowrap">(뉴스보기)<span class="material-symbols-outlined text-sm">north_east</span></a></div>
+<div class="flex items-center gap-sm md:gap-md py-sm px-sm group hover:bg-white/[0.03] transition-colors"><span class="w-9 shrink-0 text-center text-on-surface-variant text-body-sm">455</span><a href="http://www.nextez.co.kr/contents/index.php?job=detail&amp;ebcf_id=notice&amp;mid=0501&amp;eb_seq=455" target="_blank" rel="noopener" class="flex-1 min-w-0 truncate text-on-surface group-hover:text-primary transition-colors">4.3 생존 희생자,유족 및 며느리 진료비 지원 시스템 유지보수 계약 체결</a><span class="shrink-0 hidden lg:block text-on-surface-variant/55 text-xs">2026.01.13</span><a href="http://www.nextez.co.kr/contents/index.php?job=detail&amp;ebcf_id=notice&amp;mid=0501&amp;eb_seq=455" target="_blank" rel="noopener" class="shrink-0 text-primary text-xs font-semibold inline-flex items-center gap-0.5 hover:text-primary-container whitespace-nowrap">(뉴스보기)<span class="material-symbols-outlined text-sm">north_east</span></a></div>
+<div class="flex items-center gap-sm md:gap-md py-sm px-sm group hover:bg-white/[0.03] transition-colors"><span class="w-9 shrink-0 text-center text-on-surface-variant text-body-sm">454</span><a href="http://www.nextez.co.kr/contents/index.php?job=detail&amp;ebcf_id=notice&amp;mid=0501&amp;eb_seq=454" target="_blank" rel="noopener" class="flex-1 min-w-0 truncate text-on-surface group-hover:text-primary transition-colors">2026년 제주시 스마트청사안내 시스템 유지관리 용역 계약 체결</a><span class="shrink-0 hidden lg:block text-on-surface-variant/55 text-xs">2026.01.13</span><a href="http://www.nextez.co.kr/contents/index.php?job=detail&amp;ebcf_id=notice&amp;mid=0501&amp;eb_seq=454" target="_blank" rel="noopener" class="shrink-0 text-primary text-xs font-semibold inline-flex items-center gap-0.5 hover:text-primary-container whitespace-nowrap">(뉴스보기)<span class="material-symbols-outlined text-sm">north_east</span></a></div>
+<div class="flex items-center gap-sm md:gap-md py-sm px-sm group hover:bg-white/[0.03] transition-colors"><span class="w-9 shrink-0 text-center text-on-surface-variant text-body-sm">453</span><a href="http://www.nextez.co.kr/contents/index.php?job=detail&amp;ebcf_id=notice&amp;mid=0501&amp;eb_seq=453" target="_blank" rel="noopener" class="flex-1 min-w-0 truncate text-on-surface group-hover:text-primary transition-colors">2026년 제주시 대표 홈페이지 통합 유지관리 계약 체결</a><span class="shrink-0 hidden lg:block text-on-surface-variant/55 text-xs">2026.01.13</span><a href="http://www.nextez.co.kr/contents/index.php?job=detail&amp;ebcf_id=notice&amp;mid=0501&amp;eb_seq=453" target="_blank" rel="noopener" class="shrink-0 text-primary text-xs font-semibold inline-flex items-center gap-0.5 hover:text-primary-container whitespace-nowrap">(뉴스보기)<span class="material-symbols-outlined text-sm">north_east</span></a></div>
+</div>
+<div class="flex items-center justify-center gap-1 mt-lg">
+<button class="w-8 h-8 rounded flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined text-base">chevron_left</span></button>
+<button class="w-8 h-8 rounded bg-primary-container text-black font-bold">1</button><button class="w-8 h-8 rounded text-on-surface-variant hover:text-primary transition-colors">2</button><button class="w-8 h-8 rounded text-on-surface-variant hover:text-primary transition-colors">3</button>
+<button class="w-8 h-8 rounded flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined text-base">chevron_right</span></button>
+</div>
+</div>
+<!-- Panel: Community -->
+<div id="panel-community" class="tab-panel hidden">
+<div class="flex flex-col gap-lg">
+<div>
+<h3 class="text-2xl font-bold mb-sm">함께하는 <span class="text-primary-container">사람들</span></h3>
+<p class="text-on-surface-variant leading-relaxed">기술보다 먼저, 사람을 봅니다. 넥스트이지는 서로의 성장을 응원하고 현장에서 함께 답을 찾는 사람들의 공동체입니다. 우리의 문화와 사람, 그리고 함께 만들어갈 내일을 소개합니다.</p>
+</div>
+<div class="grid grid-cols-3 gap-md">
+<div class="bg-surface-container/70 rounded-xl p-md text-center border border-outline-variant">
+<div class="text-3xl font-bold text-primary-container">8<span class="text-lg">주년</span></div>
+<div class="text-body-sm text-on-surface-variant mt-1">함께한 시간</div>
+</div>
+<div class="bg-surface-container/70 rounded-xl p-md text-center border border-outline-variant">
+<div class="text-3xl font-bold text-primary-container">25<span class="text-lg">Y+</span></div>
+<div class="text-body-sm text-on-surface-variant mt-1">도메인 경험</div>
+</div>
+<div class="bg-surface-container/70 rounded-xl p-md text-center border border-outline-variant">
+<div class="text-3xl font-bold text-primary-container">71<span class="text-lg">+</span></div>
+<div class="text-body-sm text-on-surface-variant mt-1">함께한 파트너</div>
+</div>
+</div>
+<div class="flex flex-col sm:flex-row gap-md">
+<button class="bg-primary-container text-black font-label-bold text-label-bold py-md px-xl rounded hover:bg-primary transition-colors inline-flex items-center justify-center gap-sm">
+                            채용 둘러보기 <span class="material-symbols-outlined">work</span>
+</button>
+<button class="bg-transparent border-2 border-primary text-primary font-label-bold text-label-bold py-md px-xl rounded hover:bg-primary hover:text-black transition-colors">
+                            문의하기
+                        </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<script>
+        (function () {
+            const tabs = Array.from(document.querySelectorAll('.tab-btn'));
+            const panels = {
+                news: document.getElementById('panel-news'),
+                community: document.getElementById('panel-community')
+            };
+            function activate(name) {
+                tabs.forEach(t => {
+                    const on = t.dataset.tab === name;
+                    t.classList.toggle('text-primary', on);
+                    t.classList.toggle('border-primary', on);
+                    t.classList.toggle('text-on-surface-variant', !on);
+                    t.classList.toggle('border-transparent', !on);
+                });
+                Object.entries(panels).forEach(([key, el]) => {
+                    el.classList.toggle('hidden', key !== name);
+                });
+            }
+            tabs.forEach(t => t.addEventListener('click', () => activate(t.dataset.tab)));
+        })();
+    </script>
+<!-- BOTTOM : 회사 정보 + 인증 (공통) -->
+<footer class="fixed bottom-0 left-0 w-full z-40 bg-surface-container-lowest/85 backdrop-blur-md border-t border-white/10">
+<div class="max-w-[1600px] mx-auto px-lg lg:px-[88px] py-sm flex flex-col md:flex-row md:items-center justify-between gap-2 text-xs">
+<div class="flex flex-wrap items-center gap-x-md gap-y-1 text-on-surface-variant">
+<span class="font-bold text-on-surface">㈜넥스트이지</span>
+<span class="text-on-surface/25">|</span><span>대표이사 강주경</span>
+<span class="text-on-surface/25">|</span><span>제주특별자치도 제주시 첨단로 213-3, 408·409호</span>
+<span class="text-on-surface/25">|</span><span class="text-primary-container font-semibold">064-721-8118</span>
+</div>
+<div class="flex flex-wrap items-center gap-1.5">
+<span class="px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-[11px] text-on-surface-variant">벤처기업</span>
+<span class="px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-[11px] text-on-surface-variant">기술혁신형(INNOBIZ)</span>
+<span class="px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-[11px] text-on-surface-variant">경영혁신형(MAINBIZ)</span>
+<span class="px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-[11px] text-on-surface-variant">가족친화 인증기업</span>
+<span class="px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-[11px] text-on-surface-variant">ISO 9001·14001</span>
+<span class="px-2 py-0.5 rounded-full bg-primary-container/15 border border-primary-container/30 text-[11px] text-primary font-semibold">외 인증 13건</span>
+</div>
+</div>
+</footer>
+<script>
+(function(){
+  var h=document.getElementById('main-copy'); if(!h) return;
+  var idx=0;
+  (function walk(node){
+    Array.prototype.slice.call(node.childNodes).forEach(function(child){
+      if(child.nodeType===3){
+        var frag=document.createDocumentFragment();
+        Array.from(child.textContent).forEach(function(ch){
+          if(ch===' '){frag.appendChild(document.createTextNode(' '));return;}
+          var s=document.createElement('span'); s.className='char'; s.textContent=ch;
+          s.style.animationDelay=(idx*0.05).toFixed(2)+'s'; idx++;
+          frag.appendChild(s);
+        });
+        node.replaceChild(frag,child);
+      } else if(child.nodeType===1 && child.tagName!=='BR' && !child.classList.contains('kinetic-gradient')){
+        walk(child);
+      }
+    });
+  })(h);
+})();
+</script>
+</body></html>

@@ -1,0 +1,269 @@
+<!DOCTYPE html><html class="dark" lang="ko">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>NEXTEZ - Digital Transformation Solutions</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link as="style" crossorigin="" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface-tint": "#ffb596", "surface": "#131313", "outline-variant": "#5a4136",
+                        "primary-fixed": "#ffdbcd", "on-background": "#e5e2e1", "surface-container-lowest": "#0e0e0e",
+                        "outline": "#aa8a7d", "surface-variant": "#353534", "surface-container-low": "#1c1b1b",
+                        "surface-container": "#201f1f", "on-surface": "#e5e2e1", "surface-dim": "#131313",
+                        "background": "#131313", "surface-container-high": "#2a2a2a", "on-surface-variant": "#e3bfb1",
+                        "surface-container-highest": "#353534", "primary-container": "#ff6600", "on-primary": "#581e00",
+                        "secondary": "#c8c6c5", "primary": "#ffb596", "on-primary-container": "#561d00",
+                        "on-primary-fixed-variant": "#7c2e00"
+                    },
+                    borderRadius: { "DEFAULT": "0.5rem", "lg": "0.75rem", "xl": "1rem", "full": "9999px" },
+                    spacing: { "md": "16px", "xs": "4px", "xl": "40px", "gutter": "24px", "sm": "8px", "unit": "4px", "lg": "24px" },
+                    fontFamily: {
+                        "body-md": ["'Pretendard Variable'", "Pretendard", "sans-serif"], "label-bold": ["'Pretendard Variable'", "Pretendard", "sans-serif"],
+                        "headline-xl": ["'Pretendard Variable'", "Pretendard", "sans-serif"], "headline-lg": ["'Pretendard Variable'", "Pretendard", "sans-serif"]
+                    },
+                    fontSize: {
+                        "body-md": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+                        "label-bold": ["12px", { lineHeight: "16px", letterSpacing: "0.05em", fontWeight: "700" }],
+                        "headline-xl": ["48px", { lineHeight: "56px", letterSpacing: "-0.02em", fontWeight: "700" }],
+                        "headline-lg": ["32px", { lineHeight: "40px", letterSpacing: "-0.01em", fontWeight: "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Pretendard Variable', Pretendard, sans-serif; background-color: #131313; color: #e5e2e1; overflow: hidden; }
+        .hero-img { animation: kb 30s ease-in-out infinite alternate; transform-origin: center; }
+        @keyframes kb { 0% { transform: scale(1.02); } 100% { transform: scale(1.12); } }
+        .slide-number { -webkit-text-stroke: 1.5px rgba(255, 102, 0, 0.35); color: transparent; }
+        @keyframes floaty { 0%,100% { transform: translateY(-4px);} 50%{ transform: translateY(4px);} }
+        .floaty { animation: floaty 5s ease-in-out infinite; }
+        /* AI orbital network visual */
+        .orbit-spin   { transform-origin: 200px 200px; animation: spin 38s linear infinite; }
+        .orbit-spin-r { transform-origin: 200px 200px; animation: spin 28s linear infinite reverse; }
+        .orbit-spin-s { transform-origin: 200px 200px; animation: spin 60s linear infinite; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .core-pulse { animation: corePulse 3.2s ease-in-out infinite; transform-origin: 200px 200px; }
+        @keyframes corePulse { 0%,100% { opacity:.55; transform: scale(1);} 50% { opacity:1; transform: scale(1.08);} }
+        .node-pulse { animation: nodePulse 2.6s ease-in-out infinite; }
+        .node-pulse-2 { animation: nodePulse 2.6s ease-in-out infinite; animation-delay: .8s; }
+        .node-pulse-3 { animation: nodePulse 2.6s ease-in-out infinite; animation-delay: 1.6s; }
+        @keyframes nodePulse { 0%,100% { opacity:.35; r:3;} 50% { opacity:1; r:5;} }
+        .net-line { stroke-dasharray: 6 8; animation: dash 3s linear infinite; }
+        @keyframes dash { to { stroke-dashoffset: -28; } }
+        /* rotating main copy */
+        .copy-rotator { position: relative; }
+        /* dissolve (cross-fade) between copies */
+        .copy-slide { position: absolute; inset: 0; opacity: 0; transition: opacity 1.1s ease; pointer-events: none; }
+        .copy-slide.active { opacity: 1; pointer-events: auto; }
+        /* per-character gradient shimmer sweep (L→R), no movement */
+        .char { display: inline-block; will-change: filter; filter: brightness(0.8); animation: charShine 5s ease-in-out infinite; }
+        @keyframes charShine {
+            0%, 55%, 100% { filter: brightness(0.8); }
+            26% { filter: brightness(1.55) drop-shadow(0 0 8px rgba(255,255,255,0.35)); }
+        }
+        /* 드러냄표 : 강조 단어 글자 위 동그라미 점 */
+        .emph .char { position: relative; }
+        .emph .char::before {
+            content: ''; position: absolute; top: -0.34em; left: 50%; transform: translateX(-50%);
+            width: 0.16em; height: 0.16em; border-radius: 9999px; background: #ff6600;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface antialiased selection:bg-primary-container h-[100dvh] overflow-hidden">
+<!-- TopNavBar -->
+<header class="fixed w-full top-0 bg-gradient-to-b from-background/70 to-transparent z-50">
+<div class="flex items-center w-full px-lg py-md max-w-[1600px] mx-auto">
+<div class="flex items-center gap-sm">
+<a href="index.html" class="text-[32px] leading-none font-bold text-on-surface tracking-tight" style="font-family:'Pretendard Variable',Pretendard,sans-serif">NEXT<span class="text-primary-container ml-1 relative top-[-0.3em] inline-block">EZ</span></a>
+</div>
+<nav class="hidden md:flex items-center gap-lg ml-auto"><a class="font-body-md text-body-md text-primary font-bold border-b-2 border-primary pb-1" href="index.html">Home</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors hover:bg-surface-container-highest px-sm py-xs rounded" href="services.html">Services</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors hover:bg-surface-container-highest px-sm py-xs rounded" href="capabilities.html">Capabilities</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors hover:bg-surface-container-highest px-sm py-xs rounded" href="portfolio.html">Project Portfolio</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors hover:bg-surface-container-highest px-sm py-xs rounded" href="about.html">About</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors hover:bg-surface-container-highest px-sm py-xs rounded" href="news.html">News &amp; Community</a></nav>
+</div>
+</header>
+
+<!-- HERO (single screen) -->
+<main class="relative h-[100dvh] w-full overflow-hidden">
+<!-- background visual (right) -->
+<div class="absolute inset-0">
+<img alt="AX Digital Transformation" class="w-full h-full object-cover hero-img opacity-60" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJgAwoZeNH-uvXwSXG-39COP-quT4rnVjMQhmlwgu243YZZX0jhO2DwRhnD1SHC5icCCBztmUNsXxOYUe2nJeByxkw7b0a_9SZbCTS4ql5NBIjWYTfeSsm6ZJbwdI04OEoyU8MLKhccvEBQu9w4H-qTaKTf_zxul3y3Li0nZ800dpR8ivvBaypUpDriKjnlOOUkQ2fdWiz0zdjtPgrPkY7IWlNgaLSgp2VcERZCb4gmcpWhoqdcDvLPZ9zy_SGAS-0DbLTclwqH1Vl">
+</div>
+<div class="absolute inset-0 bg-gradient-to-r from-background via-background/85 to-transparent"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
+
+<!-- AI orbital network animation (right) -->
+<div class="hidden lg:block absolute right-[4%] xl:right-[7%] top-1/2 -translate-y-1/2 z-0 w-[440px] h-[440px] floaty pointer-events-none opacity-70">
+<svg viewBox="0 0 400 400" class="w-full h-full" fill="none" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<radialGradient id="coreGlow" cx="50%" cy="50%" r="50%">
+<stop offset="0%" stop-color="#ff6600" stop-opacity="0.9"/>
+<stop offset="45%" stop-color="#ff6600" stop-opacity="0.25"/>
+<stop offset="100%" stop-color="#ff6600" stop-opacity="0"/>
+</radialGradient>
+</defs>
+<!-- glow -->
+<circle cx="200" cy="200" r="150" fill="url(#coreGlow)" class="core-pulse"/>
+<!-- outer dashed ring (CW) -->
+<g class="orbit-spin">
+<circle cx="200" cy="200" r="170" stroke="#ff6600" stroke-opacity="0.35" stroke-width="1" stroke-dasharray="3 9"/>
+<circle cx="200" cy="30" r="4" fill="#ff6600"/>
+<circle cx="370" cy="200" r="3" fill="#ffb596"/>
+</g>
+<!-- middle dashed ring (CCW) -->
+<g class="orbit-spin-r">
+<circle cx="200" cy="200" r="128" stroke="#ffb596" stroke-opacity="0.4" stroke-width="1" stroke-dasharray="2 7"/>
+<circle cx="200" cy="72" r="3.5" fill="#ffb596"/>
+<circle cx="72" cy="200" r="3" fill="#ff6600"/>
+<circle cx="328" cy="200" r="2.5" fill="#ffb596"/>
+</g>
+<!-- inner faint ring (slow CW) -->
+<g class="orbit-spin-s">
+<circle cx="200" cy="200" r="88" stroke="#aa8a7d" stroke-opacity="0.3" stroke-width="1"/>
+<circle cx="200" cy="112" r="3" fill="#ff6600"/>
+</g>
+<!-- network lines -->
+<g stroke="#ff6600" stroke-opacity="0.45" stroke-width="1">
+<line x1="200" y1="200" x2="110" y2="110" class="net-line"/>
+<line x1="200" y1="200" x2="300" y2="130" class="net-line"/>
+<line x1="200" y1="200" x2="280" y2="290" class="net-line"/>
+<line x1="200" y1="200" x2="120" y2="280" class="net-line"/>
+</g>
+<!-- network nodes -->
+<circle cx="110" cy="110" r="4" fill="#ffb596" class="node-pulse"/>
+<circle cx="300" cy="130" r="4" fill="#ff6600" class="node-pulse-2"/>
+<circle cx="280" cy="290" r="4" fill="#ffb596" class="node-pulse-3"/>
+<circle cx="120" cy="280" r="4" fill="#ff6600" class="node-pulse"/>
+<!-- central core -->
+<circle cx="200" cy="200" r="30" fill="#131313" stroke="#ff6600" stroke-width="1.5" stroke-opacity="0.8"/>
+<circle cx="200" cy="200" r="16" fill="#ff6600" fill-opacity="0.2"/>
+<text x="200" y="206" text-anchor="middle" font-family="Pretendard, sans-serif" font-size="15" font-weight="700" fill="#ffb596" letter-spacing="1">AX</text>
+</svg>
+</div>
+
+<!-- HERO content -->
+<div class="relative z-20 h-full max-w-[1600px] mx-auto px-lg lg:px-[88px] flex items-center pb-[72px]">
+<div class="flex flex-col lg:flex-row items-center gap-xl w-full">
+<!-- LEFT : main copy -->
+<div class="flex-1 min-w-0 w-full">
+<!-- eyebrow indicator (정적 — 화살표 넘김 없음) -->
+<div class="flex items-center gap-md mb-lg">
+<span id="copy-idx" class="font-label-bold text-label-bold text-primary-container">01</span>
+<div class="w-12 h-px bg-primary-container"></div>
+<div class="flex items-center gap-2 text-on-surface/40 text-sm font-semibold tracking-wide">
+<span class="text-on-surface">AX</span><span>·</span><span>DATA</span><span>·</span><span>AI</span>
+</div>
+</div>
+<!-- main copy (auto-rotating) -->
+<div class="copy-rotator min-h-[260px] md:min-h-[300px] mb-xl">
+<div class="copy-slide active" data-copy="0">
+<h1 id="hero-copy0" class="text-[40px] md:text-[64px] leading-[1.1] font-bold drop-shadow-2xl mb-md">25년의 <span class="text-primary-container">도메인 경험</span>과 <span class="text-primary-container emph">AI</span> 기술로,<br>산업 현장의 변화를 만듭니다.</h1>
+<p class="text-on-surface/60 text-base md:text-lg tracking-wide">25 years of domain expertise, powered by AI.</p>
+</div>
+<div class="copy-slide" data-copy="1">
+<h1 id="hero-copy1" class="text-[40px] md:text-[64px] leading-[1.1] font-bold drop-shadow-2xl mb-md">기술보다 먼저 <span class="text-primary-container emph">사람</span>을<br>생각하는 마음이,<br><span class="text-primary-container">25년</span> 넥스트이지를 만들었습니다.</h1>
+<p class="text-on-surface/60 text-base md:text-lg tracking-wide">A people-first mindset has built NEXTEZ for 25 years.</p>
+</div>
+</div>
+<div class="flex flex-wrap items-center gap-md">
+<a href="services.html" class="bg-primary-container text-black font-label-bold text-label-bold px-xl py-md rounded hover:bg-primary transition-all hover:scale-105 active:scale-95 shadow-lg inline-flex items-center gap-sm">서비스 알아보기<span class="material-symbols-outlined text-lg">arrow_forward</span></a>
+<a href="capabilities.html" class="bg-white/10 backdrop-blur-md border border-white/20 text-on-surface font-label-bold text-label-bold px-xl py-md rounded hover:bg-white/20 transition-all inline-flex items-center gap-sm shadow-lg">기술역량 알아보기<span class="material-symbols-outlined text-lg">arrow_forward</span></a>
+</div>
+</div>
+<!-- RIGHT : Project Portfolio 4개 분야 -->
+<div class="w-full lg:w-[320px] xl:w-[360px] shrink-0 flex flex-col gap-sm">
+<span class="font-label-bold text-label-bold text-primary-container uppercase tracking-widest mb-xs block">Project Portfolio</span>
+<a href="portfolio.html" class="group glass-card rounded-xl p-md flex items-center gap-md hover:border-primary-container transition-colors">
+<span class="material-symbols-outlined text-primary-container text-2xl shrink-0">smart_toy</span>
+<div class="min-w-0 flex-1"><div class="text-sm font-bold text-on-surface">AI · Data</div><div class="text-xs text-on-surface/50 mt-0.5">AI · 빅데이터 <span class="text-primary-container font-semibold">12+건</span></div></div>
+<span class="material-symbols-outlined text-on-surface/30 group-hover:text-primary transition-colors">chevron_right</span>
+</a>
+<a href="portfolio.html" class="group glass-card rounded-xl p-md flex items-center gap-md hover:border-primary-container transition-colors">
+<span class="material-symbols-outlined text-primary-container text-2xl shrink-0">hub</span>
+<div class="min-w-0 flex-1"><div class="text-sm font-bold text-on-surface">Platform · Solution</div><div class="text-xs text-on-surface/50 mt-0.5">플랫폼 · 솔루션 <span class="text-primary-container font-semibold">37+건</span></div></div>
+<span class="material-symbols-outlined text-on-surface/30 group-hover:text-primary transition-colors">chevron_right</span>
+</a>
+<a href="portfolio.html" class="group glass-card rounded-xl p-md flex items-center gap-md hover:border-primary-container transition-colors">
+<span class="material-symbols-outlined text-primary-container text-2xl shrink-0">dns</span>
+<div class="min-w-0 flex-1"><div class="text-sm font-bold text-on-surface">Web · System Integration</div><div class="text-xs text-on-surface/50 mt-0.5">웹 · 시스템 구축(SI) <span class="text-primary-container font-semibold">200+건</span></div></div>
+<span class="material-symbols-outlined text-on-surface/30 group-hover:text-primary transition-colors">chevron_right</span>
+</a>
+<a href="portfolio.html" class="group glass-card rounded-xl p-md flex items-center gap-md hover:border-primary-container transition-colors">
+<span class="material-symbols-outlined text-primary-container text-2xl shrink-0">sensors</span>
+<div class="min-w-0 flex-1"><div class="text-sm font-bold text-on-surface">IoT · Energy</div><div class="text-xs text-on-surface/50 mt-0.5">IoT · 에너지 <span class="text-primary-container font-semibold">7+건</span></div></div>
+<span class="material-symbols-outlined text-on-surface/30 group-hover:text-primary transition-colors">chevron_right</span>
+</a>
+</div>
+</div>
+</div>
+</main>
+<script>
+        (function () {
+            // split each copy into per-character spans (shimmer animation)
+            ['hero-copy0', 'hero-copy1'].forEach(function (id) {
+                const h = document.getElementById(id);
+                if (!h) return;
+                let idx = 0;
+                (function walk(node) {
+                    Array.from(node.childNodes).forEach(child => {
+                        if (child.nodeType === 3) {
+                            const frag = document.createDocumentFragment();
+                            for (const ch of child.textContent) {
+                                if (ch === ' ') { frag.appendChild(document.createTextNode(' ')); continue; }
+                                const s = document.createElement('span');
+                                s.className = 'char';
+                                s.textContent = ch;
+                                s.style.animationDelay = (idx * 0.05).toFixed(2) + 's';
+                                idx++;
+                                frag.appendChild(s);
+                            }
+                            node.replaceChild(frag, child);
+                        } else if (child.nodeType === 1 && child.tagName !== 'BR') {
+                            walk(child);
+                        }
+                    });
+                })(h);
+            });
+        })();
+        (function () {
+            const slides = Array.from(document.querySelectorAll('.copy-slide'));
+            const idxEl = document.getElementById('copy-idx');
+            if (slides.length < 2) return;
+            let i = 0;
+            setInterval(function () {
+                slides[i].classList.remove('active');
+                i = (i + 1) % slides.length;
+                slides[i].classList.add('active');
+                if (idxEl) idxEl.textContent = '0' + (i + 1);
+            }, 5000);
+        })();
+    </script>
+<!-- BOTTOM : 회사 정보 + 인증 (공통) -->
+<footer class="fixed bottom-0 left-0 w-full z-40 bg-surface-container-lowest/85 backdrop-blur-md border-t border-white/10">
+<div class="max-w-[1600px] mx-auto px-lg lg:px-[88px] py-sm flex flex-col md:flex-row md:items-center justify-between gap-2 text-xs">
+<div class="flex flex-wrap items-center gap-x-md gap-y-1 text-on-surface-variant">
+<span class="font-bold text-on-surface">㈜넥스트이지</span>
+<span class="text-on-surface/25">|</span><span>대표이사 강주경</span>
+<span class="text-on-surface/25">|</span><span>제주특별자치도 제주시 첨단로 213-3, 408·409호</span>
+<span class="text-on-surface/25">|</span><span class="text-primary-container font-semibold">064-721-8118</span>
+</div>
+<div class="flex flex-wrap items-center gap-1.5">
+<span class="px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-[11px] text-on-surface-variant">벤처기업</span>
+<span class="px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-[11px] text-on-surface-variant">기술혁신형(INNOBIZ)</span>
+<span class="px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-[11px] text-on-surface-variant">경영혁신형(MAINBIZ)</span>
+<span class="px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-[11px] text-on-surface-variant">가족친화 인증기업</span>
+<span class="px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-[11px] text-on-surface-variant">ISO 9001·14001</span>
+<span class="px-2 py-0.5 rounded-full bg-primary-container/15 border border-primary-container/30 text-[11px] text-primary font-semibold">외 인증 13건</span>
+</div>
+</div>
+</footer>
+</body></html>

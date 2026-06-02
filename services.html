@@ -1,0 +1,609 @@
+<!DOCTYPE html><html class="dark" lang="ko">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>NEXTEZ - Services</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link as="style" crossorigin="" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface-tint": "#ffb596", "surface": "#131313", "secondary-fixed-dim": "#c8c6c5",
+                        "secondary-container": "#474746", "outline-variant": "#5a4136", "on-secondary-fixed": "#1c1b1b",
+                        "primary-fixed": "#ffdbcd", "surface-bright": "#3a3939", "on-background": "#e5e2e1",
+                        "surface-container-lowest": "#0e0e0e", "outline": "#aa8a7d", "surface-variant": "#353534",
+                        "surface-container-low": "#1c1b1b", "surface-container": "#201f1f", "error-container": "#93000a",
+                        "tertiary": "#c8c6c6", "on-error-container": "#ffdad6", "secondary": "#c8c6c5",
+                        "inverse-primary": "#a33e00", "error": "#ffb4ab", "on-surface": "#e5e2e1", "on-secondary": "#313030",
+                        "tertiary-fixed-dim": "#c8c6c6", "tertiary-fixed": "#e4e2e1", "tertiary-container": "#989696",
+                        "surface-dim": "#131313", "on-error": "#690005", "on-tertiary-container": "#2f2f2f",
+                        "background": "#131313", "on-primary-fixed-variant": "#7c2e00", "surface-container-high": "#2a2a2a",
+                        "secondary-fixed": "#e5e2e1", "on-secondary-fixed-variant": "#474746", "on-surface-variant": "#e3bfb1",
+                        "inverse-on-surface": "#313030", "on-primary-fixed": "#360f00", "surface-container-highest": "#353534",
+                        "primary-container": "#ff6600", "on-primary": "#581e00", "inverse-surface": "#e5e2e1",
+                        "on-secondary-container": "#b7b5b4", "primary": "#ffb596", "on-tertiary-fixed": "#1b1c1c",
+                        "on-primary-container": "#561d00", "primary-fixed-dim": "#ffb596", "on-tertiary": "#303030",
+                        "on-tertiary-fixed-variant": "#474747"
+                    },
+                    borderRadius: { "DEFAULT": "0.5rem", "lg": "0.75rem", "xl": "1rem", "full": "9999px" },
+                    spacing: { "md": "16px", "xs": "4px", "xl": "40px", "container-max": "1280px", "gutter": "24px", "sm": "8px", "unit": "4px", "lg": "24px" },
+                    fontFamily: {
+                        "body-md": ["'Pretendard Variable'", "Pretendard", "sans-serif"], "label-md": ["'Pretendard Variable'", "Pretendard", "sans-serif"],
+                        "label-bold": ["'Pretendard Variable'", "Pretendard", "sans-serif"], "headline-xl": ["'Pretendard Variable'", "Pretendard", "sans-serif"],
+                        "body-sm": ["'Pretendard Variable'", "Pretendard", "sans-serif"], "headline-lg-mobile": ["'Pretendard Variable'", "Pretendard", "sans-serif"],
+                        "headline-lg": ["'Pretendard Variable'", "Pretendard", "sans-serif"]
+                    },
+                    fontSize: {
+                        "body-md": ["16px", { lineHeight: "24px", fontWeight: "400" }], "label-md": ["12px", { lineHeight: "16px", fontWeight: "500" }],
+                        "label-bold": ["12px", { lineHeight: "16px", letterSpacing: "0.05em", fontWeight: "700" }], "headline-xl": ["48px", { lineHeight: "56px", letterSpacing: "-0.02em", fontWeight: "700" }],
+                        "body-sm": ["14px", { lineHeight: "20px", fontWeight: "400" }], "headline-lg-mobile": ["24px", { lineHeight: "32px", fontWeight: "600" }],
+                        "headline-lg": ["32px", { lineHeight: "40px", letterSpacing: "-0.01em", fontWeight: "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Pretendard Variable', Pretendard, sans-serif; background-color: #131313; color: #e5e2e1; overflow: hidden; }
+        .glass-card { background: rgba(26, 26, 26, 0.4); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border: 1px solid rgba(90, 65, 54, 0.5); }
+        .slide-number { -webkit-text-stroke: 2px rgba(255, 102, 0, 0.25); color: transparent; }
+        /* Single-card fade (appear / disappear) */
+        .fade-slide {
+            position: absolute; inset: 0;
+            opacity: 0;
+            transition: opacity .7s ease; pointer-events: none;
+        }
+        .fade-slide.active { opacity: 1; pointer-events: auto; }
+        /* Modal */
+        #service-modal { transition: opacity .3s ease; }
+        #service-modal.modal-open { opacity: 1; pointer-events: auto; }
+        #service-modal .modal-panel { transition: transform .3s ease, opacity .3s ease; transform: translateY(16px) scale(0.98); }
+        #service-modal.modal-open .modal-panel { transform: translateY(0) scale(1); opacity: 1; }
+        #service-modal.modal-open .modal-panel { pointer-events: auto; }
+        /* main copy shimmer + 강조점 (index 동일) */
+        .char { display: inline-block; will-change: filter; filter: brightness(0.8); animation: charShine 5s ease-in-out infinite; }
+        @keyframes charShine { 0%,55%,100% { filter: brightness(0.8); } 26% { filter: brightness(1.55) drop-shadow(0 0 8px rgba(255,255,255,0.35)); } }
+        .emph .char { position: relative; }
+        .emph .char::before { content:''; position:absolute; top:-0.34em; left:50%; transform:translateX(-50%); width:0.16em; height:0.16em; border-radius:9999px; background:#ff6600; }
+    </style>
+</head>
+<body class="bg-background text-on-surface antialiased relative h-[100dvh] w-screen overflow-hidden">
+<!-- Background -->
+<div class="absolute inset-0 z-0">
+<img alt="NEXTEZ Services Background" class="w-full h-full object-cover object-center opacity-75" src="IMG/services.jpg">
+<div class="absolute inset-0 bg-gradient-to-r from-background via-background/55 to-background/15"></div>
+</div>
+<!-- TopNavBar -->
+<header class="fixed w-full top-0 border-b border-white/10 bg-background/50 backdrop-blur-md z-50">
+<div class="flex items-center w-full px-lg py-md max-w-[1600px] mx-auto">
+<div class="flex items-center gap-sm">
+<a href="index.html" class="text-[32px] leading-none font-bold text-on-surface tracking-tight" style="font-family:'Pretendard Variable',Pretendard,sans-serif">NEXT<span class="text-primary-container ml-1 relative top-[-0.3em] inline-block">EZ</span></a>
+</div>
+<nav class="hidden md:flex items-center gap-lg ml-auto"><a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors hover:bg-surface-container-highest px-sm py-xs rounded" href="index.html">Home</a>
+<a class="font-body-md text-body-md text-primary font-bold border-b-2 border-primary pb-1" href="services.html">Services</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors hover:bg-surface-container-highest px-sm py-xs rounded" href="capabilities.html">Capabilities</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors hover:bg-surface-container-highest px-sm py-xs rounded" href="portfolio.html">Project Portfolio</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors hover:bg-surface-container-highest px-sm py-xs rounded" href="about.html">About</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors hover:bg-surface-container-highest px-sm py-xs rounded" href="news.html">News &amp; Community</a></nav>
+</div>
+</header>
+<!-- Right Social Sidebar -->
+<div class="hidden xl:flex fixed right-2 top-1/2 -translate-y-1/2 z-40 flex-col items-center gap-lg">
+<div class="w-px h-20 bg-white/20"></div>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined">share</span></a>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined">mail</span></a>
+<p class="text-label-md text-on-surface-variant tracking-widest uppercase rotate-180" style="writing-mode: vertical-rl;">Follow Us</p>
+</div>
+<!-- Main Area -->
+<main class="relative z-20 h-full w-full flex items-center pt-[72px]">
+<div class="w-full max-w-[1600px] mx-auto px-lg h-full flex items-center justify-between gap-lg">
+<!-- LEFT: main copy + controls -->
+<div class="shrink-0 w-[56%] max-w-4xl flex flex-col gap-xl">
+<div>
+<span class="font-bold text-[12px] tracking-widest text-primary uppercase mb-sm block">Services</span>
+<h1 id="main-copy" class="text-[34px] md:text-[64px] leading-[1.1] font-bold drop-shadow-2xl md:whitespace-nowrap">산업 현장의 <span class="text-primary-container emph">데이터</span>로 AI를 만들고,<br>AI로 <span class="text-primary-container">산업 현장</span>을 지휘합니다.</h1>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-lg text-lg mt-md leading-relaxed">㈜넥스트이지는 산업 현장의 실전 데이터로 최적화된 AI 솔루션을 구축하며, 지능화된 운영을 통해 대한민국 산업의 AX를 이끌고 있습니다.</p>
+</div>
+<!-- Controls -->
+<div class="flex items-center gap-md">
+<button id="prevBtn" aria-label="이전" class="w-11 h-11 rounded-full bg-surface-container/70 backdrop-blur-md border border-white/10 flex items-center justify-center hover:bg-primary-container hover:text-black transition-colors">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button id="nextBtn" aria-label="다음" class="w-11 h-11 rounded-full bg-surface-container/70 backdrop-blur-md border border-white/10 flex items-center justify-center hover:bg-primary-container hover:text-black transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+<div class="flex gap-sm ml-md">
+<button class="carousel-dot w-3 h-3 rounded-full bg-primary-container transition-colors" data-index="0" aria-label="농업"></button>
+<button class="carousel-dot w-3 h-3 rounded-full bg-outline-variant hover:bg-primary transition-colors" data-index="1" aria-label="관광"></button>
+<button class="carousel-dot w-3 h-3 rounded-full bg-outline-variant hover:bg-primary transition-colors" data-index="2" aria-label="에너지"></button>
+<button class="carousel-dot w-3 h-3 rounded-full bg-outline-variant hover:bg-primary transition-colors" data-index="3" aria-label="스마트시티"></button>
+</div>
+</div>
+</div>
+<!-- RIGHT: single-card fade stage (right-aligned to About menu) -->
+<div id="carousel" class="shrink-0 w-[42%] max-w-[560px] h-[56vh] md:h-[60vh] relative">
+<!-- 고정 배경 박스 (전환되지 않음) -->
+<div class="absolute inset-0 glass-card rounded-xl pointer-events-none"></div>
+<!-- 1. Agriculture -->
+<article class="fade-slide active" data-service="agriculture">
+<div class="rounded-xl p-lg w-full h-full flex flex-col relative overflow-hidden">
+<div class="absolute top-0 right-0 p-lg opacity-20"><span class="text-[120px] md:text-[160px] font-bold slide-number leading-none select-none">01</span></div>
+<div class="shrink-0 inline-flex items-center gap-sm bg-neutral-100 px-md py-xs rounded-full border border-neutral-300 w-fit">
+<span class="material-symbols-outlined text-primary-container text-sm">eco</span>
+<span class="font-label-bold text-label-bold text-neutral-900 uppercase">Agriculture</span>
+</div>
+<div class="z-10 flex flex-col flex-grow min-h-0 mt-md">
+<h2 class="font-headline-lg text-headline-lg text-on-surface font-bold shrink-0">농업 AI/AX 서비스</h2>
+<div class="card-detail flex-grow min-h-0 overflow-y-auto pr-2 my-sm" data-detail="agriculture"></div>
+</div>
+</div>
+</article>
+<!-- 2. Tourism -->
+<article class="fade-slide" data-service="tourism">
+<div class="rounded-xl p-lg w-full h-full flex flex-col relative overflow-hidden">
+<div class="absolute top-0 right-0 p-lg opacity-20"><span class="text-[120px] md:text-[160px] font-bold slide-number leading-none select-none">02</span></div>
+<div class="shrink-0 inline-flex items-center gap-sm bg-neutral-100 px-md py-xs rounded-full border border-neutral-300 w-fit">
+<span class="material-symbols-outlined text-primary-container text-sm">flight_takeoff</span>
+<span class="font-label-bold text-label-bold text-neutral-900 uppercase">Tourism</span>
+</div>
+<div class="z-10 flex flex-col flex-grow min-h-0 mt-md">
+<h2 class="font-headline-lg text-headline-lg text-on-surface font-bold shrink-0">스마트 관광</h2>
+<div class="card-detail flex-grow min-h-0 overflow-y-auto pr-2 my-sm" data-detail="tourism"></div>
+</div>
+</div>
+</article>
+<!-- 3. Energy -->
+<article class="fade-slide" data-service="energy">
+<div class="rounded-xl p-lg w-full h-full flex flex-col relative overflow-hidden">
+<div class="absolute top-0 right-0 p-lg opacity-20"><span class="text-[120px] md:text-[160px] font-bold slide-number leading-none select-none">03</span></div>
+<div class="shrink-0 inline-flex items-center gap-sm bg-neutral-100 px-md py-xs rounded-full border border-neutral-300 w-fit">
+<span class="material-symbols-outlined text-primary-container text-sm">bolt</span>
+<span class="font-label-bold text-label-bold text-neutral-900 uppercase">Energy</span>
+</div>
+<div class="z-10 flex flex-col flex-grow min-h-0 mt-md">
+<h2 class="font-headline-lg text-headline-lg text-on-surface font-bold shrink-0">스마트 에너지</h2>
+<div class="card-detail flex-grow min-h-0 overflow-y-auto pr-2 my-sm" data-detail="energy"></div>
+</div>
+</div>
+</article>
+<!-- 4. Platform -->
+<article class="fade-slide" data-service="smartcity">
+<div class="rounded-xl p-lg w-full h-full flex flex-col relative overflow-hidden">
+<div class="absolute top-0 right-0 p-lg opacity-20"><span class="text-[120px] md:text-[160px] font-bold slide-number leading-none select-none">04</span></div>
+<div class="shrink-0 inline-flex items-center gap-sm bg-neutral-100 px-md py-xs rounded-full border border-neutral-300 w-fit">
+<span class="material-symbols-outlined text-primary-container text-sm">dashboard</span>
+<span class="font-label-bold text-label-bold text-neutral-900 uppercase">Platform</span>
+</div>
+<div class="z-10 flex flex-col flex-grow min-h-0 mt-md">
+<h2 class="font-headline-lg text-headline-lg text-on-surface font-bold shrink-0">스마트 플랫폼</h2>
+<div class="card-detail flex-grow min-h-0 overflow-y-auto pr-2 my-sm" data-detail="smartcity"></div>
+</div>
+</div>
+</article>
+</div>
+</div>
+</main>
+<!-- Detail Modal (content TBD) -->
+<div id="service-modal" class="fixed inset-0 z-[100] opacity-0 pointer-events-none">
+<div id="modal-backdrop" class="absolute inset-0 bg-black/55 backdrop-blur-sm"></div>
+<div class="absolute inset-0 w-full max-w-[1600px] mx-auto px-lg pt-[72px] pb-8 flex items-center justify-end pointer-events-none">
+<div class="modal-panel relative w-[42%] max-w-[560px] h-[56vh] md:h-[60vh] overflow-y-auto rounded-xl p-lg opacity-0 text-neutral-800" style="background: rgba(255,255,255,0.7); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border: 1px solid rgba(0,0,0,0.12);">
+<button id="modal-close" aria-label="닫기" class="absolute top-md right-md w-10 h-10 rounded-full bg-surface-container-high/80 flex items-center justify-center hover:bg-primary-container hover:text-black transition-colors z-10">
+<span class="material-symbols-outlined">close</span>
+</button>
+<div class="inline-flex items-center gap-sm bg-neutral-100 px-md py-xs rounded-full border border-neutral-300 w-fit mb-md">
+<span class="material-symbols-outlined text-primary-container text-sm" id="modal-icon">eco</span>
+<span class="font-label-bold text-label-bold text-neutral-900 uppercase" id="modal-label">Agriculture</span>
+</div>
+<h2 id="modal-title" class="text-xl md:text-2xl font-bold mb-md pr-10">농업 AI/AX 서비스</h2>
+<div id="modal-body" class="font-body-md text-body-md text-neutral-700 leading-relaxed"></div>
+</div>
+</div>
+</div>
+<!-- ===== Service detail templates (injected into modal: SVG icon + 서비스 개요 + 솔루션) ===== -->
+<div id="tpl-agriculture" class="hidden">
+<section class="mb-md">
+<ul class="space-y-sm">
+<li class="flex items-start gap-md"><span class="shrink-0 w-6 h-6 rounded-full bg-primary-container/20 text-primary-container font-bold text-body-sm flex items-center justify-center">1</span><div><strong class="text-on-surface font-semibold">데이터 허브 &amp; 데이터 거버넌스</strong><ul class="mt-1 space-y-0.5 text-body-sm text-on-surface-variant"><li>· 데이터 표준·정제·품질 검증 파이프라인</li><li>· AI 데이터 결합, 데이터 개발</li></ul></div></li>
+<li class="flex items-start gap-md"><span class="shrink-0 w-6 h-6 rounded-full bg-primary-container/20 text-primary-container font-bold text-body-sm flex items-center justify-center">2</span><div><strong class="text-on-surface font-semibold">AI 활용 서비스</strong><ul class="mt-1 space-y-0.5 text-body-sm text-on-surface-variant"><li>· 생산량·가격·병해충·피해규모 예측</li><li>· 병해충 식별 및 3D 관측 조사 자동화, RPA</li></ul></div></li>
+<li class="flex items-start gap-md"><span class="shrink-0 w-6 h-6 rounded-full bg-primary-container/20 text-primary-container font-bold text-body-sm flex items-center justify-center">3</span><div><strong class="text-on-surface font-semibold">농정업무 DX 전환</strong><ul class="mt-1 space-y-0.5 text-body-sm text-on-surface-variant"><li>· 생육·병해충 예찰·관측·경영정보조사·소득조사</li><li>· AI 디지털 영농일지 및 경영 효율 분석</li></ul></div></li>
+<li class="flex items-start gap-md"><span class="shrink-0 w-6 h-6 rounded-full bg-primary-container/20 text-primary-container font-bold text-body-sm flex items-center justify-center">4</span><div><strong class="text-on-surface font-semibold">IoT 장비 설치 및 운영</strong><ul class="mt-1 space-y-0.5 text-body-sm text-on-surface-variant"><li>· 기상·토양·서리·디지털 트랩 등</li><li>· IoT 데이터 수집·정제, 장비 모니터링</li></ul></div></li>
+</ul>
+</section>
+<section>
+<h4 class="text-primary font-label-bold text-label-bold uppercase tracking-widest mb-md">Solution</h4>
+<div class="grid grid-cols-1 gap-sm">
+<div class="flex items-center gap-sm bg-surface-container/80 border border-outline-variant rounded-lg px-md py-sm hover:border-primary transition-colors">
+<span class="material-symbols-outlined text-primary-container">database</span>
+<span class="font-semibold text-on-surface">데이터 수집·정제·표준화 솔루션</span>
+<a href="#" data-sol="data-pipeline" class="ml-auto shrink-0 text-body-sm text-primary hover:text-primary-container whitespace-nowrap inline-flex items-center gap-0.5">···자세히 보기<span class="material-symbols-outlined text-sm">chevron_right</span></a>
+</div>
+<div class="flex items-center gap-sm bg-surface-container/80 border border-outline-variant rounded-lg px-md py-sm hover:border-primary transition-colors">
+<span class="material-symbols-outlined text-primary-container">hub</span>
+<span class="font-semibold text-on-surface">농업 DX 전환 플랫폼</span>
+<a href="#" data-sol="agri-dx" class="ml-auto shrink-0 text-body-sm text-primary hover:text-primary-container whitespace-nowrap inline-flex items-center gap-0.5">···자세히 보기<span class="material-symbols-outlined text-sm">chevron_right</span></a>
+</div>
+<div class="flex items-center gap-sm bg-surface-container/80 border border-outline-variant rounded-lg px-md py-sm hover:border-primary transition-colors">
+<span class="material-symbols-outlined text-primary-container">smart_toy</span>
+<span class="font-semibold text-on-surface">AI 활용 솔루션</span>
+<a href="#" data-sol="ai-applied" class="ml-auto shrink-0 text-body-sm text-primary hover:text-primary-container whitespace-nowrap inline-flex items-center gap-0.5">···자세히 보기<span class="material-symbols-outlined text-sm">chevron_right</span></a>
+</div>
+</div>
+</section>
+</div>
+<div id="tpl-sol-datapipeline" class="hidden">
+<div class="flex items-center justify-center gap-2 mb-md text-body-sm font-semibold text-on-surface flex-wrap">
+<span>수집</span><svg viewBox="0 0 24 24" fill="none" stroke="#ff6600" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 shrink-0 opacity-80"><path d="M5 12h13"/><path d="M12 6l6 6-6 6"/></svg><span>정제</span><svg viewBox="0 0 24 24" fill="none" stroke="#ff6600" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 shrink-0 opacity-80"><path d="M5 12h13"/><path d="M12 6l6 6-6 6"/></svg><span>표준화</span><svg viewBox="0 0 24 24" fill="none" stroke="#ff6600" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 shrink-0 opacity-80"><path d="M5 12h13"/><path d="M12 6l6 6-6 6"/></svg><span>품질검증</span>
+</div>
+<div class="grid grid-cols-2 gap-md">
+<div class="bg-white/[0.04] border border-white/10 rounded-lg p-md"><div class="flex items-center gap-sm mb-sm"><span class="w-9 h-9 rounded-lg bg-primary-container/15 border border-primary-container/30 flex items-center justify-center shrink-0"><svg viewBox="0 0 24 24" fill="none" stroke="#ff6600" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><path d="M12 3v10"/><path d="M8 11l4 4 4-4"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg></span><div><strong class="text-on-surface font-semibold block leading-none">수집</strong><span class="text-[11px] text-on-surface-variant uppercase tracking-wide">Collect</span></div></div><ul class="space-y-0.5 text-body-sm text-on-surface-variant leading-snug"><li>· 공공 API·DB·파일·웹·IoT 자동 수집</li><li>· 정형·비정형 통합, 주기 스케줄링</li><li>· RPA 수작업 자동 연계</li></ul></div>
+<div class="bg-white/[0.04] border border-white/10 rounded-lg p-md"><div class="flex items-center gap-sm mb-sm"><span class="w-9 h-9 rounded-lg bg-primary-container/15 border border-primary-container/30 flex items-center justify-center shrink-0"><svg viewBox="0 0 24 24" fill="none" stroke="#ff6600" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><path d="M3 4h18l-7 8v6l-4 2v-8z"/></svg></span><div><strong class="text-on-surface font-semibold block leading-none">정제</strong><span class="text-[11px] text-on-surface-variant uppercase tracking-wide">Cleanse</span></div></div><ul class="space-y-0.5 text-body-sm text-on-surface-variant leading-snug"><li>· 결측·이상치·중복 처리, 키 결합</li><li>· 표기 불일치·오류값 보정</li><li>· 자동화로 지연·오류 최소화</li></ul></div>
+<div class="bg-white/[0.04] border border-white/10 rounded-lg p-md"><div class="flex items-center gap-sm mb-sm"><span class="w-9 h-9 rounded-lg bg-primary-container/15 border border-primary-container/30 flex items-center justify-center shrink-0"><svg viewBox="0 0 24 24" fill="none" stroke="#ff6600" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><rect x="3" y="4" width="7" height="7" rx="1"/><rect x="14" y="4" width="7" height="7" rx="1"/><rect x="3" y="13" width="7" height="7" rx="1"/><rect x="14" y="13" width="7" height="7" rx="1"/></svg></span><div><strong class="text-on-surface font-semibold block leading-none">표준화</strong><span class="text-[11px] text-on-surface-variant uppercase tracking-wide">Standardize</span></div></div><ul class="space-y-0.5 text-body-sm text-on-surface-variant leading-snug"><li>· 표준 스키마·수집 모듈</li><li>· 코드·단위·포맷 규격화</li><li>· 이종 데이터 공통 기준 정렬</li></ul></div>
+<div class="bg-white/[0.04] border border-white/10 rounded-lg p-md"><div class="flex items-center gap-sm mb-sm"><span class="w-9 h-9 rounded-lg bg-primary-container/15 border border-primary-container/30 flex items-center justify-center shrink-0"><svg viewBox="0 0 24 24" fill="none" stroke="#ff6600" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><path d="M12 3l7 3v6c0 4-3 7-7 9-4-2-7-5-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg></span><div><strong class="text-on-surface font-semibold block leading-none">품질검증</strong><span class="text-[11px] text-on-surface-variant uppercase tracking-wide">Validate</span></div></div><ul class="space-y-0.5 text-body-sm text-on-surface-variant leading-snug"><li>· 룰셋 — 필수·정규식·허용범위</li><li>· 행 단위 결과 조회·시각화</li><li>· 신뢰성·일관성 확보 후 전달</li></ul></div>
+</div>
+<div class="mt-md">
+<div class="text-[11px] text-on-surface-variant mb-1.5 flex items-center gap-1"><span class="material-symbols-outlined text-sm text-primary-container">desktop_windows</span>솔루션 대시보드 (예시 화면)</div>
+<div class="grid grid-cols-2 gap-md">
+<img src="IMG/board01.jpg" alt="데이터 파이프라인 대시보드 1" class="w-full h-auto rounded-lg border border-white/10 shadow-lg">
+<img src="IMG/board02.jpg" alt="데이터 파이프라인 대시보드 2" class="w-full h-auto rounded-lg border border-white/10 shadow-lg">
+</div>
+</div>
+</div>
+<div id="tpl-sol-agridx" class="hidden">
+<div class="bg-white/[0.04] border border-white/10 rounded-xl p-md"><div class="text-center text-body-sm font-bold mb-sm text-primary-container">① 서비스 계층 — 7개 분야 디지털 농정 서비스 + 농업인 서비스</div><div class="grid grid-cols-4 gap-2"><div class="rounded-lg p-2 text-center bg-white/[0.04] border border-white/10"><div class="text-lg leading-none mb-1">📊</div><div class="text-[11px] font-bold leading-tight text-on-surface">통계 시각화</div><div class="text-[9px] leading-tight mt-0.5 text-on-surface-variant">일반·특화 통계, 범용 GIS</div></div><div class="rounded-lg p-2 text-center bg-white/[0.04] border border-white/10"><div class="text-lg leading-none mb-1">👁️</div><div class="text-[11px] font-bold leading-tight text-on-surface">농업 관측</div><div class="text-[9px] leading-tight mt-0.5 text-on-surface-variant">생산량·가격 예측</div></div><div class="rounded-lg p-2 text-center bg-white/[0.04] border border-white/10"><div class="text-lg leading-none mb-1">🌱</div><div class="text-[11px] font-bold leading-tight text-on-surface">토양 환경</div><div class="text-[9px] leading-tight mt-0.5 text-on-surface-variant">토양분류·시비처방</div></div><div class="rounded-lg p-2 text-center bg-white/[0.04] border border-white/10"><div class="text-lg leading-none mb-1">🐛</div><div class="text-[11px] font-bold leading-tight text-on-surface">병해충 예측</div><div class="text-[9px] leading-tight mt-0.5 text-on-surface-variant">예찰·예보 디지털맵</div></div><div class="rounded-lg p-2 text-center bg-white/[0.04] border border-white/10"><div class="text-lg leading-none mb-1">💰</div><div class="text-[11px] font-bold leading-tight text-on-surface">농업정책</div><div class="text-[9px] leading-tight mt-0.5 text-on-surface-variant">맞춤보조금</div></div><div class="rounded-lg p-2 text-center bg-white/[0.04] border border-white/10"><div class="text-lg leading-none mb-1">🖼️</div><div class="text-[11px] font-bold leading-tight text-on-surface">연구·기술지도</div><div class="text-[9px] leading-tight mt-0.5 text-on-surface-variant">농가기술지도</div></div><div class="rounded-lg p-2 text-center bg-white/[0.04] border border-white/10"><div class="text-lg leading-none mb-1">⚙️</div><div class="text-[11px] font-bold leading-tight text-on-surface">통합운영</div><div class="text-[9px] leading-tight mt-0.5 text-on-surface-variant">플랫폼 통합 운영관리</div></div><div class="rounded-lg p-2 text-center bg-primary-container/[0.08] border border-primary-container/40"><div class="text-lg leading-none mb-1">👤</div><div class="text-[11px] font-bold leading-tight text-primary">농업인 서비스</div><div class="text-[9px] leading-tight mt-0.5 text-on-surface-variant">필지별 맞춤정보</div></div></div></div>
+<div class="flex justify-center" style="margin:3px 0"><svg viewBox="0 0 40 16" class="w-10 h-4"><path d="M20 1l15 14H5z" fill="#5a4136"/></svg></div>
+<div class="bg-white/[0.04] border border-white/10 rounded-xl p-md"><div class="text-center text-body-sm font-bold mb-sm text-primary-container">② 플랫폼 계층 — 제주농업 JADx 플랫폼</div><div class="grid grid-cols-4 gap-2"><div class="rounded-full py-1.5 text-center text-[11px] font-bold bg-primary-container/15 border border-primary-container/40 text-primary">운영·관리</div><div class="rounded-full py-1.5 text-center text-[11px] font-bold bg-white/[0.04] border border-white/10 text-on-surface-variant">콘텐츠·CMS</div><div class="rounded-full py-1.5 text-center text-[11px] font-bold bg-white/[0.04] border border-white/10 text-on-surface-variant">데이터 관리</div><div class="rounded-full py-1.5 text-center text-[11px] font-bold bg-white/[0.04] border border-white/10 text-on-surface-variant">정책·서비스</div><div class="rounded-full py-1.5 text-center text-[11px] font-bold bg-white/[0.04] border border-white/10 text-on-surface-variant">외부 연계·통합</div><div class="rounded-full py-1.5 text-center text-[11px] font-bold bg-white/[0.04] border border-white/10 text-on-surface-variant">보안·인프라</div><div class="rounded-full py-1.5 text-center text-[11px] font-bold bg-white/[0.04] border border-white/10 text-on-surface-variant">검색·시각화</div><div class="rounded-full py-1.5 text-center text-[11px] font-bold bg-white/[0.04] border border-white/10 text-on-surface-variant">사용자 UI</div></div></div>
+<div class="flex justify-center" style="margin:3px 0"><svg viewBox="0 0 40 16" class="w-10 h-4"><path d="M20 1l15 14H5z" fill="#5a4136"/></svg></div>
+<div class="bg-white/[0.04] border border-white/10 rounded-xl p-md"><div class="text-center text-body-sm font-bold mb-sm text-primary-container">③ 데이터 계층 — 데이터 허브 (34종)</div><div class="flex items-center justify-center gap-2 flex-wrap">
+<div class="flex gap-1.5"><div class="rounded-lg px-2 py-2 text-center shrink-0 bg-white/[0.04] border border-white/10" style="min-width:52px"><div class="text-base leading-none">🏛️</div><div class="text-[9px] font-bold leading-tight mt-1 text-on-surface-variant">외부<br>연계 기관</div></div><div class="rounded-lg px-2 py-2 text-center shrink-0 bg-white/[0.04] border border-white/10" style="min-width:52px"><div class="text-base leading-none">📡</div><div class="text-[9px] font-bold leading-tight mt-1 text-on-surface-variant">IoT<br>장비</div></div><div class="rounded-lg px-2 py-2 text-center shrink-0 bg-white/[0.04] border border-white/10" style="min-width:52px"><div class="text-base leading-none">🌾</div><div class="text-[9px] font-bold leading-tight mt-1 text-on-surface-variant">내부<br>조사</div></div></div>
+<div class="text-center shrink-0"><div class="text-[9px] text-on-surface-variant">제주농업 관련 데이터</div><div class="text-lg leading-none font-bold text-primary-container">&rarr;</div><div class="text-[12px] font-bold text-on-surface">34종</div></div>
+<div class="rounded-xl px-3 py-2 text-center shrink-0 bg-primary-container/15 border border-primary-container/40"><div class="text-lg leading-none">💾</div><div class="text-[11px] font-bold mt-0.5 text-primary">데이터 허브</div></div>
+<div class="grid grid-cols-2 gap-1.5"><div class="rounded-lg px-2 py-1.5 text-center text-[10px] font-bold bg-white/[0.04] border border-white/10 text-on-surface-variant">원시데이터</div><div class="rounded-lg px-2 py-1.5 text-center text-[10px] font-bold bg-white/[0.04] border border-white/10 text-on-surface-variant">규격화·표준화</div><div class="rounded-lg px-2 py-1.5 text-center text-[10px] font-bold bg-white/[0.04] border border-white/10 text-on-surface-variant">농지·필지 정제</div><div class="rounded-lg px-2 py-1.5 text-center text-[10px] font-bold bg-white/[0.04] border border-white/10 text-on-surface-variant">LLM 기반 AI 검색</div></div>
+</div></div>
+</div>
+<div id="tpl-sol-aiapplied" class="hidden">
+<p class="text-body-sm text-on-surface-variant mb-md leading-snug">현장 영상·센서·이력 데이터를 학습해 <span class="text-on-surface font-semibold">식별·예측·진단·자동화</span>를 수행하는, 농업 현장에 바로 쓰이는 <span class="text-primary-container font-semibold">실전 AI</span>.</p>
+<div class="grid grid-cols-2 gap-md">
+<div class="bg-white/[0.04] border border-white/10 rounded-lg p-md"><div class="flex items-center gap-sm mb-sm"><span class="w-9 h-9 rounded-lg bg-primary-container/15 border border-primary-container/30 flex items-center justify-center shrink-0"><svg viewBox="0 0 24 24" fill="none" stroke="#ff6600" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></span><div><strong class="text-on-surface font-semibold block leading-none">컴퓨터비전</strong><span class="text-[11px] text-on-surface-variant uppercase tracking-wide">Computer Vision</span></div></div><ul class="space-y-0.5 text-body-sm text-on-surface-variant leading-snug"><li>· 병해충 AI 식별모델 12종 (YOLO)</li><li>· 감귤 3D 과실측정 (2h→30분)</li><li>· 채소 영상 생육조사 자동화</li><li>· 재식주수·폐원·하우스 변화 분석</li></ul></div>
+<div class="bg-white/[0.04] border border-white/10 rounded-lg p-md"><div class="flex items-center gap-sm mb-sm"><span class="w-9 h-9 rounded-lg bg-primary-container/15 border border-primary-container/30 flex items-center justify-center shrink-0"><svg viewBox="0 0 24 24" fill="none" stroke="#ff6600" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><path d="M3 17l6-6 4 4 7-7"/><path d="M17 7h4v4"/></svg></span><div><strong class="text-on-surface font-semibold block leading-none">예측</strong><span class="text-[11px] text-on-surface-variant uppercase tracking-wide">Forecasting</span></div></div><ul class="space-y-0.5 text-body-sm text-on-surface-variant leading-snug"><li>· 감귤·당근 생산량·가격 (Ensemble)</li><li>· 태풍 피해규모 예측·경로 시뮬</li><li>· 토양 유효수분(가뭄지수) 도출</li></ul></div>
+<div class="bg-white/[0.04] border border-white/10 rounded-lg p-md"><div class="flex items-center gap-sm mb-sm"><span class="w-9 h-9 rounded-lg bg-primary-container/15 border border-primary-container/30 flex items-center justify-center shrink-0"><svg viewBox="0 0 24 24" fill="none" stroke="#ff6600" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><path d="M12 2.5l3.5 6h-7z"/><circle cx="6" cy="17" r="3"/><rect x="13.5" y="14" width="6.5" height="6.5" rx="1"/></svg></span><div><strong class="text-on-surface font-semibold block leading-none">AI 진단·분류</strong><span class="text-[11px] text-on-surface-variant uppercase tracking-wide">Classification</span></div></div><ul class="space-y-0.5 text-body-sm text-on-surface-variant leading-snug"><li>· 토양 분류 (화산/비화산, 889점)</li><li>· 보조금·뉴스 AI 자동 분류</li></ul></div>
+<div class="bg-white/[0.04] border border-white/10 rounded-lg p-md"><div class="flex items-center gap-sm mb-sm"><span class="w-9 h-9 rounded-lg bg-primary-container/15 border border-primary-container/30 flex items-center justify-center shrink-0"><svg viewBox="0 0 24 24" fill="none" stroke="#ff6600" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><path d="M21 11.5a8.5 8.5 0 0 1-12.3 7.6L3 21l1.9-5.7A8.5 8.5 0 1 1 21 11.5z"/></svg></span><div><strong class="text-on-surface font-semibold block leading-none">LLM·생성형 AI</strong><span class="text-[11px] text-on-surface-variant uppercase tracking-wide">Generative AI</span></div></div><ul class="space-y-0.5 text-body-sm text-on-surface-variant leading-snug"><li>· 임베딩 통합검색 + 멀티턴 대화</li><li>· 질의응답·관련 자료 자동 추천</li></ul></div>
+<div class="bg-white/[0.04] border border-white/10 rounded-lg p-md col-span-2"><div class="flex items-center gap-sm mb-sm"><span class="w-9 h-9 rounded-lg bg-primary-container/15 border border-primary-container/30 flex items-center justify-center shrink-0"><svg viewBox="0 0 24 24" fill="none" stroke="#ff6600" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><rect x="4" y="8" width="16" height="11" rx="2"/><path d="M12 8V5"/><circle cx="12" cy="4" r="1" fill="#ff6600"/><path d="M9 13v.01"/><path d="M15 13v.01"/></svg></span><div><strong class="text-on-surface font-semibold block leading-none">RPA·업무 자동화</strong><span class="text-[11px] text-on-surface-variant uppercase tracking-wide">Automation</span></div></div><ul class="grid grid-cols-2 gap-x-md space-y-0.5 text-body-sm text-on-surface-variant leading-snug"><li>· 액비 검사결과 자동 연계·살포 모니터링</li><li>· 보조금·뉴스 스크래핑 → AI 분류 → 맞춤 알림</li></ul></div>
+</div>
+</div>
+<div id="tpl-sol-smarttour" class="hidden">
+<p class="text-body-sm text-on-surface-variant mb-md leading-snug">지역 관광요소 + <span class="text-on-surface font-semibold">데이터·AI·ICT</span> 융복합으로, 앱 하나로 도시 여행을 <span class="text-primary-container font-semibold">원스톱 통합</span>하는 스마트 관광 솔루션. <span class="text-on-surface/50">(적용 사례: 여수여행 통합플랫폼 「여수엔」)</span></p>
+<div class="grid grid-cols-2 gap-md">
+<div class="bg-white/[0.04] border border-white/10 rounded-lg p-md"><div class="flex items-center gap-sm mb-sm"><span class="w-9 h-9 rounded-lg bg-primary-container/15 border border-primary-container/30 flex items-center justify-center shrink-0"><svg viewBox="0 0 24 24" fill="none" stroke="#ff6600" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><path d="M6 8h12l-1 12H7z"/><path d="M9 8a3 3 0 0 1 6 0"/></svg></span><div><strong class="text-on-surface font-semibold block leading-none">스마트 편의</strong><span class="text-[11px] text-on-surface-variant uppercase tracking-wide">Convenience</span></div></div><ul class="space-y-0.5 text-body-sm text-on-surface-variant leading-snug"><li>· 음식점 사전예약·오더&amp;페이</li><li>· 숙소·관광지 사전예약·QR체크인</li><li>· 특산물 온라인 쇼핑·통합 예약·결제</li><li>· MICE 행사 정보·사전등록</li><li>· 실시간 항공·KTX 예약</li></ul></div>
+<div class="bg-white/[0.04] border border-white/10 rounded-lg p-md"><div class="flex items-center gap-sm mb-sm"><span class="w-9 h-9 rounded-lg bg-primary-container/15 border border-primary-container/30 flex items-center justify-center shrink-0"><svg viewBox="0 0 24 24" fill="none" stroke="#ff6600" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><path d="M12 21s-7-6-7-11a7 7 0 0 1 14 0c0 5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></span><div><strong class="text-on-surface font-semibold block leading-none">스마트 투어</strong><span class="text-[11px] text-on-surface-variant uppercase tracking-wide">Tour</span></div></div><ul class="space-y-0.5 text-body-sm text-on-surface-variant leading-snug"><li>· 나만의 여행일정·플래닝·공유</li><li>· 짐배송·짐보관 서비스</li><li>· 다국어(한·영·중) 지원</li></ul></div>
+<div class="bg-white/[0.04] border border-white/10 rounded-lg p-md"><div class="flex items-center gap-sm mb-sm"><span class="w-9 h-9 rounded-lg bg-primary-container/15 border border-primary-container/30 flex items-center justify-center shrink-0"><svg viewBox="0 0 24 24" fill="none" stroke="#ff6600" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><path d="M5 16l1.5-5h11L19 16"/><rect x="3" y="16" width="18" height="3" rx="1"/><circle cx="7.5" cy="19.5" r="1.3"/><circle cx="16.5" cy="19.5" r="1.3"/></svg></span><div><strong class="text-on-surface font-semibold block leading-none">스마트 모빌리티</strong><span class="text-[11px] text-on-surface-variant uppercase tracking-wide">Mobility</span></div></div><ul class="space-y-0.5 text-body-sm text-on-surface-variant leading-snug"><li>· 시내버스·BIS 정보</li><li>· 주차장 실시간 정보·결제</li><li>· 택시 호출·렌터카 예약</li><li>· 공유 킥보드·자전거 대여</li></ul></div>
+<div class="bg-white/[0.04] border border-white/10 rounded-lg p-md"><div class="flex items-center gap-sm mb-sm"><span class="w-9 h-9 rounded-lg bg-primary-container/15 border border-primary-container/30 flex items-center justify-center shrink-0"><svg viewBox="0 0 24 24" fill="none" stroke="#ff6600" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><circle cx="12" cy="12" r="2.5"/><circle cx="5" cy="6" r="1.5"/><circle cx="19" cy="6" r="1.5"/><circle cx="5" cy="18" r="1.5"/><circle cx="19" cy="18" r="1.5"/><path d="M6.4 7l3.8 3.4M17.6 7l-3.8 3.4M6.4 17l3.8-3.4M17.6 17l-3.8-3.4"/></svg></span><div><strong class="text-on-surface font-semibold block leading-none">스마트 플랫폼</strong><span class="text-[11px] text-on-surface-variant uppercase tracking-wide">Platform</span></div></div><ul class="space-y-0.5 text-body-sm text-on-surface-variant leading-snug"><li>· 빅데이터 플랫폼·관제·연동</li><li>· 전남 J-Tass 연동</li></ul></div>
+</div>
+</div>
+<div id="tpl-sol-liveota" class="hidden">
+<p class="text-body-sm text-on-surface-variant mb-md leading-snug">관광상품 <span class="text-on-surface font-semibold">라이브 방송</span> + Real Time 채팅 상담·예약을 결합한 <span class="text-primary-container font-semibold">라이브 커머스 연계형 관광 실시간 예약 OTA</span>. <span class="text-on-surface/50">(적용: 제주관광 라이브커머스)</span></p>
+<div class="grid grid-cols-2 gap-md">
+<div class="bg-white/[0.04] border border-white/10 rounded-lg p-md"><div class="flex items-center gap-sm mb-sm"><span class="w-9 h-9 rounded-lg bg-primary-container/15 border border-primary-container/30 flex items-center justify-center shrink-0"><svg viewBox="0 0 24 24" fill="none" stroke="#ff6600" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><rect x="2" y="6" width="14" height="12" rx="2"/><path d="M16 10l6-3v10l-6-3z"/><circle cx="7" cy="12" r="2"/></svg></span><div><strong class="text-on-surface font-semibold block leading-none">현장 라이브 방송</strong><span class="text-[11px] text-on-surface-variant uppercase tracking-wide">Live Broadcast</span></div></div><ul class="space-y-0.5 text-body-sm text-on-surface-variant leading-snug"><li>· 스튜디오 촬영의 이질감·신뢰도/재방문율 저하 보완</li><li>· 현장 라이브 촬영으로 고퀄리티 콘텐츠 생산</li><li>· 쇼호스트 섭외·생동감 있는 소개</li><li>· 숙소·관광지·음식점·항공·골프 등</li></ul></div>
+<div class="bg-white/[0.04] border border-white/10 rounded-lg p-md"><div class="flex items-center gap-sm mb-sm"><span class="w-9 h-9 rounded-lg bg-primary-container/15 border border-primary-container/30 flex items-center justify-center shrink-0"><svg viewBox="0 0 24 24" fill="none" stroke="#ff6600" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><path d="M21 11.5a8.5 8.5 0 0 1-12.3 7.6L3 21l1.9-5.7A8.5 8.5 0 1 1 21 11.5z"/><path d="M13 4l1.5 2.5L17 8l-2.5 1.5L13 12l-1.5-2.5L9 8l2.5-1.5z" fill="#ff6600" stroke="none"/></svg></span><div><strong class="text-on-surface font-semibold block leading-none">실시간 채팅·예약</strong><span class="text-[11px] text-on-surface-variant uppercase tracking-wide">Live Commerce</span></div></div><ul class="space-y-0.5 text-body-sm text-on-surface-variant leading-snug"><li>· 관광지 구석구석 소개·대리만족</li><li>· 실시간 채팅 상담</li><li>· 방송 보며 즉시 예약·결제</li><li>· 사용자 편의성 증대</li></ul></div>
+<div class="bg-white/[0.04] border border-white/10 rounded-lg p-md col-span-2"><div class="flex items-center gap-sm mb-sm"><span class="w-9 h-9 rounded-lg bg-primary-container/15 border border-primary-container/30 flex items-center justify-center shrink-0"><svg viewBox="0 0 24 24" fill="none" stroke="#ff6600" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><path d="M7 18a4 4 0 0 1 0-8 5 5 0 0 1 9.6-1.3A3.5 3.5 0 0 1 18 18z"/></svg></span><div><strong class="text-on-surface font-semibold block leading-none">SaaS 시스템 연계</strong><span class="text-[11px] text-on-surface-variant uppercase tracking-wide">Cloud SaaS</span></div></div><ul class="grid grid-cols-2 gap-x-md space-y-0.5 text-body-sm text-on-surface-variant leading-snug"><li>· 라이브서비스 운영콘솔 (설정·모니터링·통계)</li><li>· 통합운영관리시스템 (데이터연동·예약·정산)</li><li>· B2B 운영지원시스템 (여행업체)</li><li>· 외부 B2B용 API Center 제공</li></ul></div>
+</div>
+<div class="flex flex-wrap gap-1.5 mt-md"><span class="text-[10px] px-2 py-0.5 rounded-full bg-primary-container/15 text-primary border border-primary-container/30">특허출원 · 라이브 방송 기반 관광 OTA 플랫폼 (2024)</span><span class="text-[10px] px-2 py-0.5 rounded-full bg-white/5 text-on-surface-variant border border-white/10">저작권등록 · 운영콘솔·통합운영관리시스템 (2024)</span></div>
+</div>
+<div id="tpl-sol-solarai" class="hidden">
+<p class="text-body-sm text-on-surface-variant mb-md leading-snug">과거 <span class="text-on-surface font-semibold">발전량 + 기상 데이터</span>를 학습해 미래 발전량을 예측하고, <span class="text-primary-container font-semibold">발전량 예측 AI알고리즘</span> 탑재 통합 모니터링으로 발전소를 운영·관리하는 솔루션.</p>
+<div class="grid grid-cols-2 gap-md">
+<div class="bg-white/[0.04] border border-white/10 rounded-lg p-md"><div class="flex items-center gap-sm mb-sm"><span class="w-9 h-9 rounded-lg bg-primary-container/15 border border-primary-container/30 flex items-center justify-center shrink-0"><svg viewBox="0 0 24 24" fill="none" stroke="#ff6600" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><rect x="3" y="4" width="18" height="13" rx="2"/><circle cx="8" cy="10" r="1" fill="#ff6600"/><circle cx="13" cy="12" r="1" fill="#ff6600"/><circle cx="16" cy="9" r="1" fill="#ff6600"/><path d="M9 21h6M12 17v4"/></svg></span><div><strong class="text-on-surface font-semibold block leading-none">통합 모니터링</strong><span class="text-[11px] text-on-surface-variant uppercase tracking-wide">Monitoring</span></div></div><ul class="space-y-0.5 text-body-sm text-on-surface-variant leading-snug"><li>· Image Map 기반 발전소 위치·실시간 이상현황</li><li>· 정상/주의/고장/AI알람 감지</li><li>· 예측 vs 실제 데이터 비교 시각화</li></ul></div>
+<div class="bg-white/[0.04] border border-white/10 rounded-lg p-md"><div class="flex items-center gap-sm mb-sm"><span class="w-9 h-9 rounded-lg bg-primary-container/15 border border-primary-container/30 flex items-center justify-center shrink-0"><svg viewBox="0 0 24 24" fill="none" stroke="#ff6600" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 8h10M7 12h10M7 16h6"/></svg></span><div><strong class="text-on-surface font-semibold block leading-none">통합 관리자</strong><span class="text-[11px] text-on-surface-variant uppercase tracking-wide">Admin</span></div></div><ul class="space-y-0.5 text-body-sm text-on-surface-variant leading-snug"><li>· 발전소 신규 등록·기본정보 관리</li><li>· 인버터/모듈 재고관리</li><li>· 점검이력 연계로 업무 효율 증대</li></ul></div>
+<div class="bg-white/[0.04] border border-white/10 rounded-lg p-md"><div class="flex items-center gap-sm mb-sm"><span class="w-9 h-9 rounded-lg bg-primary-container/15 border border-primary-container/30 flex items-center justify-center shrink-0"><svg viewBox="0 0 24 24" fill="none" stroke="#ff6600" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M10 6h4"/><path d="M9 13l1.5 1.5L14 11"/></svg></span><div><strong class="text-on-surface font-semibold block leading-none">모바일 점검이력</strong><span class="text-[11px] text-on-surface-variant uppercase tracking-wide">Mobile Inspection</span></div></div><ul class="space-y-0.5 text-body-sm text-on-surface-variant leading-snug"><li>· 수기·현장출동 관리 → 모바일 전환</li><li>· 실시간 업로드·즉시 수정·관리</li></ul></div>
+<div class="bg-white/[0.04] border border-white/10 rounded-lg p-md"><div class="flex items-center gap-sm mb-sm"><span class="w-9 h-9 rounded-lg bg-primary-container/15 border border-primary-container/30 flex items-center justify-center shrink-0"><svg viewBox="0 0 24 24" fill="none" stroke="#ff6600" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><rect x="6" y="2" width="12" height="20" rx="2"/><circle cx="12" cy="9" r="2"/><path d="M8.5 16a3.5 3.5 0 0 1 7 0"/></svg></span><div><strong class="text-on-surface font-semibold block leading-none">사업주 모바일 모니터링</strong><span class="text-[11px] text-on-surface-variant uppercase tracking-wide">Owner App</span></div></div><ul class="space-y-0.5 text-body-sm text-on-surface-variant leading-snug"><li>· 개별 사업주 모바일 현황 확인</li><li>· 발전량 예측정보 실시간 수신</li></ul></div>
+</div>
+<div class="grid grid-cols-3 gap-sm mt-md mb-2"><div class="rounded-lg p-2 text-center bg-primary-container/[0.08] border border-primary-container/30"><div class="text-base font-bold text-primary-container leading-none">95%+</div><div class="text-[10px] text-on-surface-variant mt-1">예측 정확도 (TTA)</div></div><div class="rounded-lg p-2 text-center bg-primary-container/[0.08] border border-primary-container/30"><div class="text-base font-bold text-primary-container leading-none">20MW</div><div class="text-[10px] text-on-surface-variant mt-1">KPX 집합자원</div></div><div class="rounded-lg p-2 text-center bg-primary-container/[0.08] border border-primary-container/30"><div class="text-base font-bold text-primary-container leading-none">93.9%</div><div class="text-[10px] text-on-surface-variant mt-1">KPX 시험 통과</div></div></div>
+<div class="flex flex-wrap gap-1.5"><span class="text-[10px] px-2 py-0.5 rounded-full bg-white/5 text-on-surface-variant border border-white/10">TTA 시험성적 (23.8)</span><span class="text-[10px] px-2 py-0.5 rounded-full bg-white/5 text-on-surface-variant border border-white/10">KPX 소규모전력중개 예측정산금 참여</span><span class="text-[10px] px-2 py-0.5 rounded-full bg-white/5 text-on-surface-variant border border-white/10">특허출원 (진행중)</span><span class="text-[10px] px-2 py-0.5 rounded-full bg-white/5 text-on-surface-variant border border-white/10">언론보도 · 동아일보·전자신문 등</span></div>
+</div>
+<div id="tpl-sol-mice" class="hidden">
+<p class="text-body-sm text-on-surface-variant mb-md leading-snug">전시·컨퍼런스·비즈니스관광 등 다양한 MICE 행사를, <span class="text-on-surface font-semibold">웹사이트 구축 → 사전등록 → DB·현장등록 → 매표</span>까지 <span class="text-primary-container font-semibold">한번에 통합 관리</span>하는 원스톱 솔루션 (MICE-NICE).</p>
+<div class="grid grid-cols-2 gap-md">
+<div class="bg-white/[0.04] border border-white/10 rounded-lg p-md"><div class="flex items-center gap-sm mb-sm"><span class="w-9 h-9 rounded-lg bg-primary-container/15 border border-primary-container/30 flex items-center justify-center shrink-0"><svg viewBox="0 0 24 24" fill="none" stroke="#ff6600" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/><circle cx="6" cy="6.5" r="0.7" fill="#ff6600" stroke="none"/><circle cx="8.5" cy="6.5" r="0.7" fill="#ff6600" stroke="none"/></svg></span><div><strong class="text-on-surface font-semibold block leading-none">홈페이지 자동 구축</strong><span class="text-[11px] text-on-surface-variant uppercase tracking-wide">Site Builder</span></div></div><ul class="space-y-0.5 text-body-sm text-on-surface-variant leading-snug"><li>· 3일에 완성하는 행사 홈페이지</li><li>· 다양한 디바이스 반응형 웹</li><li>· CMS 관리자 + 자유도 높은 등록 폼</li></ul></div>
+<div class="bg-white/[0.04] border border-white/10 rounded-lg p-md"><div class="flex items-center gap-sm mb-sm"><span class="w-9 h-9 rounded-lg bg-primary-container/15 border border-primary-container/30 flex items-center justify-center shrink-0"><svg viewBox="0 0 24 24" fill="none" stroke="#ff6600" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><circle cx="8" cy="8" r="3"/><circle cx="16" cy="8" r="3"/><path d="M2 20a5 5 0 0 1 9-3"/><path d="M13 17a5 5 0 0 1 9 3"/></svg></span><div><strong class="text-on-surface font-semibold block leading-none">비즈니스 미팅 관리</strong><span class="text-[11px] text-on-surface-variant uppercase tracking-wide">PSA System</span></div></div><ul class="space-y-0.5 text-body-sm text-on-surface-variant leading-snug"><li>· Buyer–Seller 비즈니스 미팅 지원</li><li>· 셀프 미팅·최적 미팅 관리</li></ul></div>
+<div class="bg-white/[0.04] border border-white/10 rounded-lg p-md"><div class="flex items-center gap-sm mb-sm"><span class="w-9 h-9 rounded-lg bg-primary-container/15 border border-primary-container/30 flex items-center justify-center shrink-0"><svg viewBox="0 0 24 24" fill="none" stroke="#ff6600" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><path d="M16 11a4 4 0 1 0-8 0"/><circle cx="12" cy="7" r="3"/><path d="M4 21a8 8 0 0 1 11-7.4"/><path d="M16 18l2 2 4-4"/></svg></span><div><strong class="text-on-surface font-semibold block leading-none">사전등록·사전결제</strong><span class="text-[11px] text-on-surface-variant uppercase tracking-wide">Pre-Registration</span></div></div><ul class="space-y-0.5 text-body-sm text-on-surface-variant leading-snug"><li>· 회원가입 없이 간편 본인인증 사전등록</li><li>· 다양한 온라인 결제방식 지원</li></ul></div>
+<div class="bg-white/[0.04] border border-white/10 rounded-lg p-md"><div class="flex items-center gap-sm mb-sm"><span class="w-9 h-9 rounded-lg bg-primary-container/15 border border-primary-container/30 flex items-center justify-center shrink-0"><svg viewBox="0 0 24 24" fill="none" stroke="#ff6600" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3M20.5 14v6.5M14 20.5h3"/></svg></span><div><strong class="text-on-surface font-semibold block leading-none">현장관리·실시간 통계</strong><span class="text-[11px] text-on-surface-variant uppercase tracking-wide">On-site</span></div></div><ul class="space-y-0.5 text-body-sm text-on-surface-variant leading-snug"><li>· 네임택·QR 사전등록/결제 확인</li><li>· 참가·매출 실시간 모니터링</li><li>· DB연동·오프라인 결제·PC캠 출입확인</li></ul></div>
+</div>
+<div class="flex flex-wrap gap-1.5 mt-md"><span class="text-[10px] px-2 py-0.5 rounded-full bg-primary-container/15 text-primary border border-primary-container/30">GS인증 · MICE-NICE v1.0 (2014)</span><span class="text-[10px] px-2 py-0.5 rounded-full bg-white/5 text-on-surface-variant border border-white/10">제주 대표 MICE — 국제전기자동차엑스포·국제크루즈포럼 등</span></div>
+</div>
+<div id="tpl-sol-cms" class="hidden">
+<p class="text-body-sm text-on-surface-variant mb-md leading-snug">표준 프레임워크 기반으로 콘텐츠 <span class="text-on-surface font-semibold">생산 → 출판 → 배포 → 평가</span> 라이프사이클을 체계적으로 관리해, <span class="text-primary-container font-semibold">수작업 오류를 방지하고 생산성</span>을 높이는 CMS 솔루션 (나이스 CMS).</p>
+<div class="grid grid-cols-2 gap-md">
+<div class="bg-white/[0.04] border border-white/10 rounded-lg p-md"><div class="flex items-center gap-sm mb-sm"><span class="w-9 h-9 rounded-lg bg-primary-container/15 border border-primary-container/30 flex items-center justify-center shrink-0"><svg viewBox="0 0 24 24" fill="none" stroke="#ff6600" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 8h10M7 12h10M7 16h6"/></svg></span><div><strong class="text-on-surface font-semibold block leading-none">유연한 콘텐츠 관리</strong><span class="text-[11px] text-on-surface-variant uppercase tracking-wide">Content</span></div></div><ul class="space-y-0.5 text-body-sm text-on-surface-variant leading-snug"><li>· 페이지 제작·관리, 유형별 유동적 관리</li><li>· 콘텐츠 생성·수정·삭제 기능 탑재</li></ul></div>
+<div class="bg-white/[0.04] border border-white/10 rounded-lg p-md"><div class="flex items-center gap-sm mb-sm"><span class="w-9 h-9 rounded-lg bg-primary-container/15 border border-primary-container/30 flex items-center justify-center shrink-0"><svg viewBox="0 0 24 24" fill="none" stroke="#ff6600" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><rect x="3" y="3" width="18" height="6" rx="1"/><rect x="3" y="11" width="8" height="10" rx="1"/><rect x="13" y="11" width="8" height="10" rx="1"/></svg></span><div><strong class="text-on-surface font-semibold block leading-none">템플릿 관리</strong><span class="text-[11px] text-on-surface-variant uppercase tracking-wide">Template</span></div></div><ul class="space-y-0.5 text-body-sm text-on-surface-variant leading-snug"><li>· 일반게시물·카드뉴스·사진게시물 CSS 템플릿</li><li>· 페이지 레이아웃 템플릿 제작·관리</li></ul></div>
+<div class="bg-white/[0.04] border border-white/10 rounded-lg p-md col-span-2"><div class="flex items-center gap-sm mb-sm"><span class="w-9 h-9 rounded-lg bg-primary-container/15 border border-primary-container/30 flex items-center justify-center shrink-0"><svg viewBox="0 0 24 24" fill="none" stroke="#ff6600" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><circle cx="9" cy="8" r="3"/><path d="M3 20a6 6 0 0 1 12 0"/><circle cx="18" cy="9" r="2"/><path d="M18 11v4M16.5 13.5l3 0"/></svg></span><div><strong class="text-on-surface font-semibold block leading-none">관리자 권한 관리</strong><span class="text-[11px] text-on-surface-variant uppercase tracking-wide">Authority</span></div></div><ul class="grid grid-cols-2 gap-x-md space-y-0.5 text-body-sm text-on-surface-variant leading-snug"><li>· 관리자 등록·그룹 생성·권한 관리</li><li>· 콘텐츠 유형별 담당자 지정·권한 부여</li><li>· 권한별 차등기능 부여 (마이콘텐츠 연계)</li></ul></div>
+</div>
+<div class="flex flex-wrap gap-1.5 mt-md"><span class="text-[10px] px-2 py-0.5 rounded-full bg-primary-container/15 text-primary border border-primary-container/30">GS인증 1등급 · 나이스 CMS v1.1 (2017)</span><span class="text-[10px] px-2 py-0.5 rounded-full bg-white/5 text-on-surface-variant border border-white/10">제주 공공기관 다수 — 제주도청·제주시청·유관기관 등</span></div>
+</div>
+<div id="tpl-sol-gallery" class="hidden">
+<p class="text-body-sm text-on-surface-variant mb-md leading-snug">사진·작품만 올리면 템플릿 기반으로 <span class="text-on-surface font-semibold">나만의 갤러리형 홈페이지가 자동 완성</span>되는, <span class="text-primary-container font-semibold">코딩 없는 개인 포트폴리오</span> 솔루션 (포토비).</p>
+<div class="grid grid-cols-2 gap-md">
+<div class="bg-white/[0.04] border border-white/10 rounded-lg p-md"><div class="flex items-center gap-sm mb-sm"><span class="w-9 h-9 rounded-lg bg-primary-container/15 border border-primary-container/30 flex items-center justify-center shrink-0"><svg viewBox="0 0 24 24" fill="none" stroke="#ff6600" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><path d="M13 2L4 14h6l-1 8 9-12h-6z" fill="#ff6600" stroke="none"/></svg></span><div><strong class="text-on-surface font-semibold block leading-none">노코드 자동 구축</strong><span class="text-[11px] text-on-surface-variant uppercase tracking-wide">Auto Build</span></div></div><ul class="space-y-0.5 text-body-sm text-on-surface-variant leading-snug"><li>· 템플릿 선택 → 즉시 사이트 생성</li><li>· 코딩 없이 누구나 제작</li><li>· 개인 도메인·주소 연결</li></ul></div>
+<div class="bg-white/[0.04] border border-white/10 rounded-lg p-md"><div class="flex items-center gap-sm mb-sm"><span class="w-9 h-9 rounded-lg bg-primary-container/15 border border-primary-container/30 flex items-center justify-center shrink-0"><svg viewBox="0 0 24 24" fill="none" stroke="#ff6600" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="9" r="1.6"/><path d="M21 16l-5-5L5 21"/></svg></span><div><strong class="text-on-surface font-semibold block leading-none">갤러리·포트폴리오</strong><span class="text-[11px] text-on-surface-variant uppercase tracking-wide">Gallery</span></div></div><ul class="space-y-0.5 text-body-sm text-on-surface-variant leading-snug"><li>· 앨범·카테고리별 사진 정리</li><li>· 그리드·슬라이드 등 다양한 레이아웃</li><li>· 고해상도 이미지 뷰어</li></ul></div>
+<div class="bg-white/[0.04] border border-white/10 rounded-lg p-md"><div class="flex items-center gap-sm mb-sm"><span class="w-9 h-9 rounded-lg bg-primary-container/15 border border-primary-container/30 flex items-center justify-center shrink-0"><svg viewBox="0 0 24 24" fill="none" stroke="#ff6600" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><circle cx="18" cy="5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="19" r="2.5"/><path d="M8.2 10.8l7.6-4.6M8.2 13.2l7.6 4.6"/></svg></span><div><strong class="text-on-surface font-semibold block leading-none">반응형·공유</strong><span class="text-[11px] text-on-surface-variant uppercase tracking-wide">Responsive & Share</span></div></div><ul class="space-y-0.5 text-body-sm text-on-surface-variant leading-snug"><li>· PC·모바일 반응형 자동 대응</li><li>· SNS·링크 공유, 방명록·댓글</li></ul></div>
+<div class="bg-white/[0.04] border border-white/10 rounded-lg p-md"><div class="flex items-center gap-sm mb-sm"><span class="w-9 h-9 rounded-lg bg-primary-container/15 border border-primary-container/30 flex items-center justify-center shrink-0"><svg viewBox="0 0 24 24" fill="none" stroke="#ff6600" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></span><div><strong class="text-on-surface font-semibold block leading-none">손쉬운 관리</strong><span class="text-[11px] text-on-surface-variant uppercase tracking-wide">Manage</span></div></div><ul class="space-y-0.5 text-body-sm text-on-surface-variant leading-snug"><li>· 드래그&드롭 업로드·정렬</li><li>· 테마·색상 커스터마이징</li><li>· 공개/비공개 접근권한 설정</li></ul></div>
+</div>
+<div class="flex flex-wrap gap-1.5 mt-md"><span class="text-[10px] px-2 py-0.5 rounded-full bg-primary-container/15 text-primary border border-primary-container/30">자체 서비스 · 포토비(photoBee)</span><span class="text-[10px] px-2 py-0.5 rounded-full bg-white/5 text-on-surface-variant border border-white/10">노코드 · 개인 갤러리 특화</span></div>
+</div>
+<div id="tpl-tourism" class="hidden">
+<section class="mb-md">
+<ul class="space-y-sm">
+<li class="flex items-start gap-md"><span class="shrink-0 w-6 h-6 rounded-full bg-primary-container/20 text-primary-container font-bold text-body-sm flex items-center justify-center">1</span><div><strong class="text-on-surface font-semibold">스마트 편의 서비스</strong><span class="block text-body-sm text-on-surface-variant mt-0.5">음식점 사전예약 및 오더&amp;페이, 숙소·관광지 사전예약 및 QR체크인, 특산물 온라인 쇼핑 및 통합 예약·결제, MICE 행사 정보 및 사전등록 신청, 실시간 항공 및 KTX 예약</span></div></li>
+<li class="flex items-start gap-md"><span class="shrink-0 w-6 h-6 rounded-full bg-primary-container/20 text-primary-container font-bold text-body-sm flex items-center justify-center">2</span><div><strong class="text-on-surface font-semibold">스마트 투어 서비스</strong><span class="block text-body-sm text-on-surface-variant mt-0.5">나만의 여행일정 짜기 및 플래닝·공유 기능, 짐배송 및 짐보관 서비스, 다국어(한·영·중) 서비스</span></div></li>
+<li class="flex items-start gap-md"><span class="shrink-0 w-6 h-6 rounded-full bg-primary-container/20 text-primary-container font-bold text-body-sm flex items-center justify-center">3</span><div><strong class="text-on-surface font-semibold">스마트 모빌리티 서비스</strong><span class="block text-body-sm text-on-surface-variant mt-0.5">시내버스 및 BIS 정보, 지역 내 주차장 실시간 정보 및 결제, 택시호출·렌터카 예약, 공유 킥보드·자전거 대여</span></div></li>
+<li class="flex items-start gap-md"><span class="shrink-0 w-6 h-6 rounded-full bg-primary-container/20 text-primary-container font-bold text-body-sm flex items-center justify-center">4</span><div><strong class="text-on-surface font-semibold">스마트 플랫폼 서비스</strong><span class="block text-body-sm text-on-surface-variant mt-0.5">빅데이터 플랫폼·관제 및 연동, 전남 J-Tass 연동 기능 등</span></div></li>
+</ul>
+</section>
+<section>
+<h4 class="text-primary font-label-bold text-label-bold uppercase tracking-widest mb-md">Solution</h4>
+<div class="grid grid-cols-1 gap-sm">
+<div class="flex items-center gap-sm bg-surface-container/80 border border-outline-variant rounded-lg px-md py-sm hover:border-primary transition-colors">
+<span class="material-symbols-outlined text-primary-container">travel_explore</span>
+<span class="font-semibold text-on-surface">스마트관광 솔루션</span>
+<a href="#" data-sol="smart-tour" class="ml-auto shrink-0 text-body-sm text-primary hover:text-primary-container whitespace-nowrap inline-flex items-center gap-0.5">···자세히 보기<span class="material-symbols-outlined text-sm">chevron_right</span></a>
+</div>
+<div class="flex items-center gap-sm bg-surface-container/80 border border-outline-variant rounded-lg px-md py-sm hover:border-primary transition-colors">
+<span class="material-symbols-outlined text-primary-container">live_tv</span>
+<span class="font-semibold text-on-surface">라이브 커머스 관광 OTA 솔루션</span>
+<a href="#" data-sol="live-ota" class="ml-auto shrink-0 text-body-sm text-primary hover:text-primary-container whitespace-nowrap inline-flex items-center gap-0.5">···자세히 보기<span class="material-symbols-outlined text-sm">chevron_right</span></a>
+</div>
+<div class="flex items-center gap-sm bg-surface-container/80 border border-outline-variant rounded-lg px-md py-sm hover:border-primary transition-colors">
+<span class="material-symbols-outlined text-primary-container">event</span>
+<span class="font-semibold text-on-surface">MICE 행사 통합운영 지원 솔루션</span>
+<a href="#" data-sol="mice" class="ml-auto shrink-0 text-body-sm text-primary hover:text-primary-container whitespace-nowrap inline-flex items-center gap-0.5">···자세히 보기<span class="material-symbols-outlined text-sm">chevron_right</span></a>
+</div>
+</div>
+</section>
+<!-- What We Do -->
+<div class="mt-md">
+<span class="font-label-bold text-label-bold text-primary uppercase tracking-widest block mb-sm">What We Do</span>
+<ul class="space-y-1">
+<li class="flex items-center gap-sm"><strong class="text-on-surface font-semibold shrink-0">제주114</strong><span class="text-body-sm text-on-surface-variant">— 제주여행 OTA 서비스</span><a href="#" aria-label="제주114 바로가기" class="ml-auto shrink-0 w-7 h-7 rounded-full border border-outline-variant flex items-center justify-center text-primary hover:bg-primary-container hover:text-black transition-colors"><span class="material-symbols-outlined text-base">arrow_outward</span></a></li>
+<li class="flex items-center gap-sm"><strong class="text-on-surface font-semibold shrink-0">섬프로</strong><span class="text-body-sm text-on-surface-variant">— 제주골프 여행 OTA 서비스</span><a href="#" aria-label="섬프로 바로가기" class="ml-auto shrink-0 w-7 h-7 rounded-full border border-outline-variant flex items-center justify-center text-primary hover:bg-primary-container hover:text-black transition-colors"><span class="material-symbols-outlined text-base">arrow_outward</span></a></li>
+</ul>
+</div>
+</div>
+<div id="tpl-energy" class="hidden">
+<section class="mb-md">
+<ul class="space-y-sm">
+<li class="flex items-start gap-md"><span class="shrink-0 w-6 h-6 rounded-full bg-primary-container/20 text-primary-container font-bold text-body-sm flex items-center justify-center">1</span><div><strong class="text-on-surface font-semibold">태양광 발전량 예측 서비스</strong><span class="block text-body-sm text-on-surface-variant mt-0.5">기상·발전 데이터 학습 예측 모델, TTA 인증 정확도 95%+, KPX 소규모전력중개 시범참여 93.9%, 다수 발전소 통합 예측 및 입찰 운영</span></div></li>
+<li class="flex items-start gap-md"><span class="shrink-0 w-6 h-6 rounded-full bg-primary-container/20 text-primary-container font-bold text-body-sm flex items-center justify-center">2</span><div><strong class="text-on-surface font-semibold">발전량예측 기반 고장예지 서비스</strong><span class="block text-body-sm text-on-surface-variant mt-0.5">예측값과 실측 발전량 편차 분석, 이상 패턴 탐지 및 조기 경보, 발전 효율 저하·설비 고장 사전 예지</span></div></li>
+<li class="flex items-start gap-md"><span class="shrink-0 w-6 h-6 rounded-full bg-primary-container/20 text-primary-container font-bold text-body-sm flex items-center justify-center">3</span><div><strong class="text-on-surface font-semibold">전기차 차량 스케줄링 서비스</strong><span class="block text-body-sm text-on-surface-variant mt-0.5">충전·운행 스케줄 최적화, 전기차 예약 시스템(특허 보유), 전력 수요·요금·발전량 연계 배차</span></div></li>
+<li class="flex items-start gap-md"><span class="shrink-0 w-6 h-6 rounded-full bg-primary-container/20 text-primary-container font-bold text-body-sm flex items-center justify-center">4</span><div><strong class="text-on-surface font-semibold">ESS기반 풍력발전량 운영 지원 서비스</strong><span class="block text-body-sm text-on-surface-variant mt-0.5">ESS 연계 풍력 발전량 평활화·운영 지원, 출력 변동(간헐성) 대응, 안전 클라우드(eWEMS) 기반 운영</span></div></li>
+</ul>
+</section>
+<section>
+<h4 class="text-primary font-label-bold text-label-bold uppercase tracking-widest mb-md">Solution</h4>
+<div class="grid grid-cols-1 gap-sm">
+<div class="flex items-center gap-sm bg-surface-container/80 border border-outline-variant rounded-lg px-md py-sm hover:border-primary transition-colors">
+<span class="material-symbols-outlined text-primary-container">solar_power</span>
+<span class="font-semibold text-on-surface">태양광 발전량 AI예측 및 모니터링 솔루션</span>
+<a href="#" data-sol="solar-ai" class="ml-auto shrink-0 text-body-sm text-primary hover:text-primary-container whitespace-nowrap inline-flex items-center gap-0.5">···자세히 보기<span class="material-symbols-outlined text-sm">chevron_right</span></a>
+</div>
+</div>
+</section>
+</div>
+<div id="tpl-smartcity" class="hidden">
+<section class="mb-md">
+<ul class="space-y-sm">
+<li class="flex items-start gap-md"><span class="shrink-0 w-6 h-6 rounded-full bg-primary-container/20 text-primary-container font-bold text-body-sm flex items-center justify-center">1</span><div><strong class="text-on-surface font-semibold">CMS 웹사이트 저작툴</strong><span class="block text-body-sm text-on-surface-variant mt-0.5">나이스 CMS(GS 1등급), 템플릿·노코드 기반 웹사이트 제작·운영, 권한 관리·다채널 응답형, 공공·관광 홈페이지 71여 곳 운영</span></div></li>
+<li class="flex items-start gap-md"><span class="shrink-0 w-6 h-6 rounded-full bg-primary-container/20 text-primary-container font-bold text-body-sm flex items-center justify-center">2</span><div><strong class="text-on-surface font-semibold">플랫폼 구축</strong><span class="block text-body-sm text-on-surface-variant mt-0.5">분석·설계·구축·운영 풀스택, 통합 포털·플랫폼, OpenAPI·외부 시스템 연동</span></div></li>
+<li class="flex items-start gap-md"><span class="shrink-0 w-6 h-6 rounded-full bg-primary-container/20 text-primary-container font-bold text-body-sm flex items-center justify-center">3</span><div><strong class="text-on-surface font-semibold">모바일 서비스 구축</strong><span class="block text-body-sm text-on-surface-variant mt-0.5">앱·반응형 모바일 웹, 현장형 모바일 서비스(점검·운영용) 등</span></div></li>
+<li class="flex items-start gap-md"><span class="shrink-0 w-6 h-6 rounded-full bg-primary-container/20 text-primary-container font-bold text-body-sm flex items-center justify-center">4</span><div><strong class="text-on-surface font-semibold">빅데이터·관제 구축</strong><span class="block text-body-sm text-on-surface-variant mt-0.5">분산 데이터 수집·정합·품질관리·시각화, 통합 모니터링·관제</span></div></li>
+</ul>
+</section>
+<section>
+<h4 class="text-primary font-label-bold text-label-bold uppercase tracking-widest mb-md">Solution</h4>
+<div class="grid grid-cols-1 gap-sm">
+<div class="flex items-center gap-sm bg-surface-container/80 border border-outline-variant rounded-lg px-md py-sm hover:border-primary transition-colors">
+<span class="material-symbols-outlined text-primary-container">web</span>
+<span class="font-semibold text-on-surface">CMS 웹사이트 콘텐츠 관리 솔루션</span>
+<a href="#" data-sol="cms" class="ml-auto shrink-0 text-body-sm text-primary hover:text-primary-container whitespace-nowrap inline-flex items-center gap-0.5">···자세히 보기<span class="material-symbols-outlined text-sm">chevron_right</span></a>
+</div>
+<div class="flex items-center gap-sm bg-surface-container/80 border border-outline-variant rounded-lg px-md py-sm hover:border-primary transition-colors">
+<span class="material-symbols-outlined text-primary-container">photo_library</span>
+<span class="font-semibold text-on-surface">개인 갤러리형 홈페이지 자동 구축 솔루션</span>
+<a href="#" data-sol="gallery" class="ml-auto shrink-0 text-body-sm text-primary hover:text-primary-container whitespace-nowrap inline-flex items-center gap-0.5">···자세히 보기<span class="material-symbols-outlined text-sm">chevron_right</span></a>
+</div>
+</div>
+</section>
+<!-- What We Do -->
+<div class="mt-md">
+<span class="font-label-bold text-label-bold text-primary uppercase tracking-widest block mb-sm">What We Do</span>
+<ul class="space-y-1">
+<li class="flex items-center gap-sm"><strong class="text-on-surface font-semibold shrink-0">포토비</strong><span class="text-body-sm text-on-surface-variant">— 개인 갤러리형 사진 서비스</span><a href="#" aria-label="포토비 바로가기" class="ml-auto shrink-0 w-7 h-7 rounded-full border border-outline-variant flex items-center justify-center text-primary hover:bg-primary-container hover:text-black transition-colors"><span class="material-symbols-outlined text-base">arrow_outward</span></a></li>
+</ul>
+</div>
+</div>
+<script>
+        (function () {
+            const carousel = document.getElementById('carousel');
+            const slides = Array.from(document.querySelectorAll('.fade-slide'));
+            const dots = Array.from(document.querySelectorAll('.carousel-dot'));
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const AUTO_MS = 9000;            // 현재 시간 간격 유지
+            let current = 0, timer = null, paused = false;
+
+            function render() {
+                slides.forEach((s, i) => s.classList.toggle('active', i === current));
+                dots.forEach((d, i) => {
+                    const on = i === current;
+                    d.classList.toggle('bg-primary-container', on);
+                    d.classList.toggle('bg-outline-variant', !on);
+                });
+            }
+            function go(i) { current = (i + slides.length) % slides.length; render(); }
+            function next() { go(current + 1); }
+            function prev() { go(current - 1); }
+            function startAuto() { stopAuto(); if (!paused) timer = setInterval(next, AUTO_MS); }
+            function stopAuto() { if (timer) { clearInterval(timer); timer = null; } }
+            function restart() { stopAuto(); startAuto(); }
+
+            nextBtn.addEventListener('click', () => { next(); restart(); });
+            prevBtn.addEventListener('click', () => { prev(); restart(); });
+            dots.forEach(d => d.addEventListener('click', () => { go(parseInt(d.dataset.index, 10)); restart(); }));
+
+            carousel.addEventListener('mouseenter', stopAuto);
+            carousel.addEventListener('mouseleave', () => { if (!paused) startAuto(); });
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowRight') { next(); restart(); }
+                else if (e.key === 'ArrowLeft') { prev(); restart(); }
+                else if (e.key === 'Escape') { closeModal(); }
+            });
+
+            // ---- Modal ----
+            const SERVICES = {
+                agriculture: { icon: 'eco',            label: 'Agriculture', title: '농업 AI/AX 서비스' },
+                tourism:     { icon: 'flight_takeoff', label: 'Tourism',     title: '스마트 관광' },
+                energy:      { icon: 'bolt',           label: 'Energy',      title: '스마트 에너지' },
+                smartcity:   { icon: 'dashboard',  label: 'Platform',  title: '스마트 플랫폼' }
+            };
+            const modal = document.getElementById('service-modal');
+            const modalIcon = document.getElementById('modal-icon');
+            const modalLabel = document.getElementById('modal-label');
+            const modalTitle = document.getElementById('modal-title');
+
+            function openModal(key) {
+                const s = SERVICES[key];
+                if (!s) return;
+                modalIcon.textContent = s.icon;
+                modalLabel.textContent = s.label;
+                modalTitle.textContent = s.title;
+                const tpl = document.getElementById('tpl-' + key);
+                document.getElementById('modal-body').innerHTML = tpl ? tpl.innerHTML : '';
+                paused = true; stopAuto();
+                modal.classList.add('modal-open');
+            }
+            function closeModal() {
+                modal.classList.remove('modal-open');
+                paused = false; startAuto();
+            }
+            document.querySelectorAll('.detail-btn').forEach(btn => {
+                btn.addEventListener('click', () => openModal(btn.dataset.service));
+            });
+            document.getElementById('modal-close').addEventListener('click', closeModal);
+            document.getElementById('modal-backdrop').addEventListener('click', closeModal);
+
+            // Expose each service's detail (icon + 개요 + 솔루션) directly on its card
+            document.querySelectorAll('.card-detail').forEach(el => {
+                const tpl = document.getElementById('tpl-' + el.dataset.detail);
+                if (tpl) el.innerHTML = tpl.innerHTML;
+            });
+
+            // ---- 개별 솔루션 자세히 보기 (카드 내부 전환) ----
+            const SOLUTIONS = {
+                'data-pipeline': { icon: 'database', title: '데이터 수집·정제·표준화 솔루션', tpl: 'tpl-sol-datapipeline' },
+                'agri-dx': { icon: 'hub', title: '농업 DX 전환 플랫폼', tpl: 'tpl-sol-agridx' },
+                'ai-applied': { icon: 'smart_toy', title: 'AI 활용 솔루션', tpl: 'tpl-sol-aiapplied' },
+                'smart-tour': { icon: 'travel_explore', title: '스마트 관광 솔루션', tpl: 'tpl-sol-smarttour' },
+                'live-ota': { icon: 'live_tv', title: '라이브 커머스 관광 OTA 솔루션', tpl: 'tpl-sol-liveota' },
+                'solar-ai': { icon: 'solar_power', title: '태양광 발전량 AI예측 및 모니터링 솔루션', tpl: 'tpl-sol-solarai' },
+                'mice': { icon: 'event', title: 'MICE 행사 통합운영 지원 솔루션', tpl: 'tpl-sol-mice' },
+                'cms': { icon: 'web', title: 'CMS 웹사이트 콘텐츠 관리 솔루션', tpl: 'tpl-sol-cms' },
+                'gallery': { icon: 'photo_library', title: '개인 갤러리형 홈페이지 자동 구축 솔루션', tpl: 'tpl-sol-gallery' }
+            };
+            const _solSaved = new WeakMap();
+            function _cardInner(cd){ const a=cd.closest('.fade-slide'); return a?a.firstElementChild:null; }
+            function showSolution(trigger, key) {
+                const s = SOLUTIONS[key]; if (!s) return;
+                const cd = trigger.closest('.card-detail'); if (!cd) return;
+                const titleEl = cd.previousElementSibling;
+                const inner = _cardInner(cd);
+                if (!_solSaved.has(cd)) _solSaved.set(cd, { body: cd.innerHTML, titleText: titleEl ? titleEl.textContent : '', titleClass: titleEl ? titleEl.className : '' });
+                if (titleEl) { titleEl.classList.remove('text-on-surface'); titleEl.classList.add('text-primary-container'); titleEl.textContent = s.title; }
+                if (inner && !inner.querySelector('.sol-close')) {
+                    const b = document.createElement('button');
+                    b.type = 'button';
+                    b.className = 'sol-close absolute top-md right-md w-9 h-9 rounded-full bg-white/10 hover:bg-primary-container hover:text-black flex items-center justify-center transition-colors z-30';
+                    b.setAttribute('aria-label', '닫기');
+                    b.innerHTML = '<span class="material-symbols-outlined">close</span>';
+                    inner.appendChild(b);
+                }
+                const tpl = document.getElementById(s.tpl);
+                cd.innerHTML =
+                    '<div class="text-on-surface">' +
+                    (tpl ? tpl.innerHTML : '') +
+                    '<div class="text-right mt-md"><button type="button" class="sol-back inline-flex items-center gap-1 text-sm font-semibold text-primary-container hover:underline"><span class="material-symbols-outlined text-base">arrow_back</span>BACK</button></div>' +
+                    '</div>';
+                cd.scrollTop = 0; paused = true; stopAuto();
+            }
+            function backSolution(cd) {
+                if (_solSaved.has(cd)) {
+                    const sv = _solSaved.get(cd);
+                    const inner = _cardInner(cd);
+                    if (inner) { const x = inner.querySelector('.sol-close'); if (x) x.remove(); }
+                    cd.innerHTML = sv.body;
+                    const t = cd.previousElementSibling;
+                    if (t) { t.textContent = sv.titleText; t.className = sv.titleClass; }
+                    _solSaved.delete(cd);
+                }
+                paused = false; startAuto();
+            }
+            document.addEventListener('click', function (e) {
+                const sol = e.target.closest('[data-sol]');
+                if (sol) { e.preventDefault(); showSolution(sol, sol.dataset.sol); return; }
+                const back = e.target.closest('.sol-back, .sol-close');
+                if (back) {
+                    e.preventDefault();
+                    let cd = back.closest('.card-detail');
+                    if (!cd) { const a = back.closest('.fade-slide'); if (a) cd = a.querySelector('.card-detail'); }
+                    if (cd) backSolution(cd);
+                }
+            });
+
+            render();
+            startAuto();
+        })();
+    </script>
+<!-- BOTTOM : 회사 정보 + 인증 (공통) -->
+<footer class="fixed bottom-0 left-0 w-full z-40 bg-surface-container-lowest/85 backdrop-blur-md border-t border-white/10">
+<div class="max-w-[1600px] mx-auto px-lg lg:px-[88px] py-sm flex flex-col md:flex-row md:items-center justify-between gap-2 text-xs">
+<div class="flex flex-wrap items-center gap-x-md gap-y-1 text-on-surface-variant">
+<span class="font-bold text-on-surface">㈜넥스트이지</span>
+<span class="text-on-surface/25">|</span><span>대표이사 강주경</span>
+<span class="text-on-surface/25">|</span><span>제주특별자치도 제주시 첨단로 213-3, 408·409호</span>
+<span class="text-on-surface/25">|</span><span class="text-primary-container font-semibold">064-721-8118</span>
+</div>
+<div class="flex flex-wrap items-center gap-1.5">
+<span class="px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-[11px] text-on-surface-variant">벤처기업</span>
+<span class="px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-[11px] text-on-surface-variant">기술혁신형(INNOBIZ)</span>
+<span class="px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-[11px] text-on-surface-variant">경영혁신형(MAINBIZ)</span>
+<span class="px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-[11px] text-on-surface-variant">가족친화 인증기업</span>
+<span class="px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-[11px] text-on-surface-variant">ISO 9001·14001</span>
+<span class="px-2 py-0.5 rounded-full bg-primary-container/15 border border-primary-container/30 text-[11px] text-primary font-semibold">외 인증 13건</span>
+</div>
+</div>
+</footer>
+<script>
+(function(){
+  var h=document.getElementById('main-copy'); if(!h) return;
+  var idx=0;
+  (function walk(node){
+    Array.prototype.slice.call(node.childNodes).forEach(function(child){
+      if(child.nodeType===3){
+        var frag=document.createDocumentFragment();
+        Array.from(child.textContent).forEach(function(ch){
+          if(ch===' '){frag.appendChild(document.createTextNode(' '));return;}
+          var s=document.createElement('span'); s.className='char'; s.textContent=ch;
+          s.style.animationDelay=(idx*0.05).toFixed(2)+'s'; idx++;
+          frag.appendChild(s);
+        });
+        node.replaceChild(frag,child);
+      } else if(child.nodeType===1 && child.tagName!=='BR' && !child.classList.contains('kinetic-gradient')){
+        walk(child);
+      }
+    });
+  })(h);
+})();
+</script>
+</body></html>
