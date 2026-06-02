@@ -1,0 +1,276 @@
+<!DOCTYPE html><html class="dark" lang="ko">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>NEXTEZ - Newsroom 관리자</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link as="style" crossorigin="" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: { extend: { colors: {
+      "surface": "#131313", "background": "#131313", "on-surface": "#e5e2e1",
+      "on-surface-variant": "#e3bfb1", "outline-variant": "#5a4136",
+      "surface-container-lowest": "#0e0e0e", "surface-container-low": "#1c1b1b",
+      "surface-container": "#201f1f", "surface-container-high": "#2a2a2a",
+      "primary-container": "#ff6600", "primary": "#ffb596", "on-primary": "#581e00",
+      "error": "#ffb4ab"
+    }, borderRadius: { "DEFAULT": "0.5rem", "lg": "0.75rem", "xl": "1rem", "full": "9999px" },
+    spacing: { "md": "16px", "xs": "4px", "xl": "40px", "sm": "8px", "lg": "24px" } } }
+  }
+</script>
+<style>
+  body { font-family: 'Pretendard Variable', Pretendard, sans-serif; background-color: #131313; color: #e5e2e1; }
+  /* 입력박스: 흰 배경 + 검정 글자 (입력 텍스트가 잘 보이도록) */
+  .field { width:100%; background:#ffffff; border:1px solid rgba(0,0,0,0.15); border-radius:0.5rem; padding:10px 12px; color:#111111; font-size:14px; }
+  .field::placeholder { color:#9a9a9a; }
+  .field:focus { outline:none; border-color:#ff6600; box-shadow:0 0 0 2px rgba(255,102,0,0.2); }
+  /* 브라우저 자동완성(아이디/비번)도 검정 글자 + 흰 배경 유지 */
+  .field:-webkit-autofill,
+  .field:-webkit-autofill:focus {
+    -webkit-text-fill-color:#111111;
+    -webkit-box-shadow:0 0 0 1000px #ffffff inset;
+    caret-color:#111111;
+  }
+</style>
+</head>
+<body class="bg-background text-on-surface antialiased min-h-[100dvh]">
+
+<!-- 상단바 -->
+<header class="border-b border-white/10 bg-background/70 backdrop-blur-md">
+  <div class="max-w-[900px] mx-auto px-lg py-md flex items-center">
+    <a href="index.html" class="text-[28px] leading-none font-bold tracking-tight">NEXT<span class="text-primary-container ml-1 relative top-[-0.3em] inline-block">EZ</span></a>
+    <span class="ml-3 text-sm text-on-surface-variant">Newsroom 관리자</span>
+    <button id="logout-btn" class="hidden ml-auto text-sm text-on-surface-variant hover:text-primary flex items-center gap-1">
+      <span class="material-symbols-outlined text-base">logout</span>로그아웃
+    </button>
+  </div>
+</header>
+
+<main class="max-w-[900px] mx-auto px-lg py-xl">
+
+  <!-- ===== 로그인 화면 ===== -->
+  <section id="login-view" class="hidden max-w-sm mx-auto mt-10">
+    <h1 class="text-2xl font-bold mb-1">관리자 로그인</h1>
+    <p class="text-sm text-on-surface-variant mb-lg">소식을 등록하려면 로그인하세요.</p>
+    <form id="login-form" class="space-y-3">
+      <input id="login-email" type="email" class="field" placeholder="이메일" required autocomplete="username">
+      <input id="login-pw" type="password" class="field" placeholder="비밀번호" required autocomplete="current-password">
+      <button type="submit" class="w-full bg-primary-container text-black font-bold rounded-lg py-2.5 hover:brightness-110 transition">로그인</button>
+      <p id="login-error" class="hidden text-error text-sm pt-1"></p>
+    </form>
+  </section>
+
+  <!-- ===== 관리 화면 ===== -->
+  <section id="admin-view" class="hidden">
+
+    <!-- 등록/수정 폼 -->
+    <div class="bg-surface-container/60 border border-white/10 rounded-xl p-lg mb-xl">
+      <h2 id="form-title" class="text-lg font-bold mb-md flex items-center gap-2">
+        <span class="material-symbols-outlined text-primary-container">add_circle</span>새 소식 등록
+      </h2>
+      <form id="news-form" class="space-y-3">
+        <div>
+          <label class="block text-xs text-on-surface-variant mb-1">제목 *</label>
+          <input id="f-title" type="text" class="field" placeholder="예) 넥스트이지, 제주 농업 디지털영농시스템 2단계 착수" required>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs text-on-surface-variant mb-1">언론사 *</label>
+            <input id="f-outlet" type="text" class="field" placeholder="예) 한라일보" required>
+          </div>
+          <div>
+            <label class="block text-xs text-on-surface-variant mb-1">보도일 *</label>
+            <input id="f-date" type="date" class="field" required>
+          </div>
+        </div>
+        <div>
+          <label class="block text-xs text-on-surface-variant mb-1">기사 원문 링크 (선택)</label>
+          <input id="f-url" type="url" class="field" placeholder="https://...">
+        </div>
+        <div class="flex items-center gap-2 pt-1">
+          <button type="submit" id="save-btn" class="bg-primary-container text-black font-bold rounded-lg px-5 py-2.5 hover:brightness-110 transition">등록</button>
+          <button type="button" id="cancel-btn" class="hidden text-sm text-on-surface-variant hover:text-primary px-3 py-2.5">취소</button>
+          <span id="save-msg" class="text-sm text-primary"></span>
+        </div>
+      </form>
+    </div>
+
+    <!-- 등록된 소식 목록 -->
+    <h2 class="text-lg font-bold mb-md flex items-center gap-2">
+      <span class="material-symbols-outlined text-on-surface-variant">list</span>등록된 소식
+      <span id="news-count" class="text-sm font-normal text-on-surface-variant"></span>
+    </h2>
+    <div id="news-list" class="space-y-2"></div>
+  </section>
+
+</main>
+
+<script type="module">
+import { auth, db } from './firebase-init.js';
+import { signInWithEmailAndPassword, signOut, onAuthStateChanged }
+  from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
+import { collection, addDoc, getDocs, deleteDoc, updateDoc, doc, query, orderBy, serverTimestamp }
+  from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+
+// ---- 화면 요소 ----
+const loginView = document.getElementById('login-view');
+const adminView = document.getElementById('admin-view');
+const logoutBtn = document.getElementById('logout-btn');
+
+// ---- 로그인 상태 감지 ----
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    loginView.classList.add('hidden');
+    adminView.classList.remove('hidden');
+    logoutBtn.classList.remove('hidden');
+    loadNews();
+  } else {
+    loginView.classList.remove('hidden');
+    adminView.classList.add('hidden');
+    logoutBtn.classList.add('hidden');
+  }
+});
+
+// ---- 로그인 ----
+const loginForm = document.getElementById('login-form');
+const loginError = document.getElementById('login-error');
+loginForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  loginError.classList.add('hidden');
+  try {
+    await signInWithEmailAndPassword(
+      auth,
+      document.getElementById('login-email').value.trim(),
+      document.getElementById('login-pw').value
+    );
+  } catch (err) {
+    loginError.textContent = '로그인 실패: 이메일 또는 비밀번호를 확인하세요.';
+    loginError.classList.remove('hidden');
+  }
+});
+
+// ---- 로그아웃 ----
+logoutBtn.addEventListener('click', () => signOut(auth));
+
+// ---- 소식 등록 / 수정 ----
+const newsForm = document.getElementById('news-form');
+const formTitle = document.getElementById('form-title');
+const saveBtn = document.getElementById('save-btn');
+const cancelBtn = document.getElementById('cancel-btn');
+const saveMsg = document.getElementById('save-msg');
+let editingId = null; // null 이면 신규 등록, 값이 있으면 수정
+
+function resetForm() {
+  editingId = null;
+  newsForm.reset();
+  formTitle.innerHTML = '<span class="material-symbols-outlined text-primary-container">add_circle</span>새 소식 등록';
+  saveBtn.textContent = '등록';
+  cancelBtn.classList.add('hidden');
+}
+
+cancelBtn.addEventListener('click', resetForm);
+
+newsForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  saveMsg.textContent = '';
+  const data = {
+    title:  document.getElementById('f-title').value.trim(),
+    outlet: document.getElementById('f-outlet').value.trim(),
+    date:   document.getElementById('f-date').value.replaceAll('-', '.'), // 2026-05-20 → 2026.05.20
+    url:    document.getElementById('f-url').value.trim() || '#'
+  };
+  try {
+    saveBtn.disabled = true;
+    if (editingId) {
+      await updateDoc(doc(db, 'news', editingId), data);
+      saveMsg.textContent = '수정되었습니다 ✓';
+    } else {
+      data.createdAt = serverTimestamp();
+      await addDoc(collection(db, 'news'), data);
+      saveMsg.textContent = '등록되었습니다 ✓';
+    }
+    resetForm();
+    loadNews();
+  } catch (err) {
+    console.error(err);
+    saveMsg.textContent = '저장 실패: ' + err.message;
+  } finally {
+    saveBtn.disabled = false;
+    setTimeout(() => { saveMsg.textContent = ''; }, 3000);
+  }
+});
+
+// ---- 소식 목록 불러오기 ----
+const newsList = document.getElementById('news-list');
+const newsCount = document.getElementById('news-count');
+
+function esc(s) {
+  return String(s).replace(/[&<>"]/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;' }[c]));
+}
+
+async function loadNews() {
+  newsList.innerHTML = '<p class="text-sm text-on-surface-variant">불러오는 중...</p>';
+  try {
+    const snap = await getDocs(query(collection(db, 'news'), orderBy('date', 'desc')));
+    newsCount.textContent = '(' + snap.size + '건)';
+    if (snap.empty) {
+      newsList.innerHTML = '<p class="text-sm text-on-surface-variant py-4">아직 등록된 소식이 없습니다. 위에서 첫 소식을 등록해 보세요!</p>';
+      return;
+    }
+    newsList.innerHTML = '';
+    snap.forEach((d) => {
+      const a = d.data();
+      const row = document.createElement('div');
+      row.className = 'bg-surface-container-low border border-white/10 rounded-lg p-md flex items-start gap-3';
+      row.innerHTML =
+        '<div class="flex-1 min-w-0">' +
+          '<div class="text-xs text-on-surface-variant mb-1">' + esc(a.date || '') + ' · ' + esc(a.outlet || '') + '</div>' +
+          '<div class="font-semibold leading-snug">' + esc(a.title || '') + '</div>' +
+        '</div>' +
+        '<div class="flex items-center gap-1 shrink-0">' +
+          '<button data-edit="' + d.id + '" class="w-8 h-8 rounded hover:bg-white/10 text-on-surface-variant hover:text-primary flex items-center justify-center" title="수정"><span class="material-symbols-outlined text-lg">edit</span></button>' +
+          '<button data-del="' + d.id + '" class="w-8 h-8 rounded hover:bg-white/10 text-on-surface-variant hover:text-error flex items-center justify-center" title="삭제"><span class="material-symbols-outlined text-lg">delete</span></button>' +
+        '</div>';
+      newsList.appendChild(row);
+    });
+  } catch (err) {
+    console.error(err);
+    newsList.innerHTML = '<p class="text-error text-sm">목록을 불러오지 못했습니다: ' + esc(err.message) + '</p>';
+  }
+}
+
+// ---- 수정/삭제 버튼 (목록 클릭) ----
+newsList.addEventListener('click', async (e) => {
+  const editBtn = e.target.closest('button[data-edit]');
+  const delBtn = e.target.closest('button[data-del]');
+
+  if (editBtn) {
+    const snap = await getDocs(query(collection(db, 'news')));
+    const found = snap.docs.find(x => x.id === editBtn.getAttribute('data-edit'));
+    if (!found) return;
+    const a = found.data();
+    editingId = found.id;
+    document.getElementById('f-title').value = a.title || '';
+    document.getElementById('f-outlet').value = a.outlet || '';
+    document.getElementById('f-date').value = (a.date || '').replaceAll('.', '-'); // 2026.05.20 → 2026-05-20
+    document.getElementById('f-url').value = (a.url && a.url !== '#') ? a.url : '';
+    formTitle.innerHTML = '<span class="material-symbols-outlined text-primary">edit</span>소식 수정';
+    saveBtn.textContent = '수정 저장';
+    cancelBtn.classList.remove('hidden');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  if (delBtn) {
+    if (!confirm('이 소식을 삭제할까요? 되돌릴 수 없습니다.')) return;
+    try {
+      await deleteDoc(doc(db, 'news', delBtn.getAttribute('data-del')));
+      loadNews();
+    } catch (err) {
+      alert('삭제 실패: ' + err.message);
+    }
+  }
+});
+</script>
+</body></html>

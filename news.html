@@ -110,31 +110,18 @@
 </div>
 </div>
 </main>
-<script>
-(function () {
-  /* ⚠️ 예시(placeholder) 데이터 — 추후 실제 언론보도 데이터로 교체 예정 (url 은 기사 원문 링크로 연결) */
-  var ARTICLES = [
-    { date: '2026.05.20', outlet: '한라일보',     title: '넥스트이지, 제주 농업 디지털영농시스템 2단계 고도화 사업 본격 착수', url: '#' },
-    { date: '2026.04.15', outlet: '제주일보',     title: '넥스트이지 태양광 발전량 예측 AI, TTA 정확도 95% 인증 획득', url: '#' },
-    { date: '2026.03.10', outlet: '전자신문',     title: '넥스트이지, 제주DA·JADX 농업 데이터 플랫폼으로 디지털 농정 선도', url: '#' },
-    { date: '2026.02.18', outlet: '제민일보',     title: '병해충 12종 식별 AI…넥스트이지, 현장형 컴퓨터비전 기술 고도화', url: '#' },
-    { date: '2026.01.22', outlet: '디지털타임스', title: '넥스트이지, KPX 소규모전력중개 예측정산 시범참여 정확도 93.9%', url: '#' },
-    { date: '2025.12.05', outlet: '헤드라인제주', title: '넥스트이지, 라이브커머스 기반 관광 OTA 플랫폼 특허 출원', url: '#' },
-    { date: '2025.11.12', outlet: '제주의소리',   title: '넥스트이지, 농업기술원과 드론 기반 관측체계 ISP 컨설팅 추진', url: '#' },
-    { date: '2025.10.08', outlet: '아이뉴스24',   title: '넥스트이지 감귤 3D 측정 AI, 나무당 분석시간 2시간→30분 단축', url: '#' },
-    { date: '2025.09.16', outlet: 'ZDNet Korea',  title: '넥스트이지, LLM·RAG 기반 제주농업 통합 검색 서비스 실증', url: '#' },
-    { date: '2025.08.20', outlet: '연합뉴스',     title: '넥스트이지 강주경 대표, 제주ICT협회 11대 회장 선임', url: '#' },
-    { date: '2025.07.03', outlet: '머니투데이',   title: '넥스트이지, 베트남 법인 NC9…AMNOTE 회계 SaaS 글로벌 확장', url: '#' },
-    { date: '2025.06.11', outlet: '제주일보',     title: '넥스트이지, MICE NICE로 제주 마이스 산업 디지털 전환 가속', url: '#' },
-    { date: '2025.05.02', outlet: '한라일보',     title: '넥스트이지, GS인증 CMS로 제주 공공기관 71곳 홈페이지 운영', url: '#' }
-  ];
+<script type="module">
+import { db } from './firebase-init.js';
+import { collection, getDocs, query, orderBy }
+  from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
 
+  var ARTICLES = [];           // Firestore 에서 불러온 소식이 채워짐
   var PER = 5;
   var page = 1;
   var listEl = document.getElementById('press-list');
   var pagerEl = document.getElementById('press-pager');
-  if (!listEl || !pagerEl) return;
-  var totalPages = Math.max(1, Math.ceil(ARTICLES.length / PER));
+  if (!listEl || !pagerEl) { /* 요소 없음 */ }
+  var totalPages = 1;
 
   function esc(s) {
     return String(s).replace(/[&<>"]/g, function (c) {
@@ -143,17 +130,28 @@
   }
 
   function renderList() {
+    if (ARTICLES.length === 0) {
+      listEl.innerHTML = '<div class="py-xl px-sm text-center text-on-surface-variant text-sm">등록된 소식이 없습니다.</div>';
+      return;
+    }
     var start = (page - 1) * PER;
     listEl.innerHTML = ARTICLES.slice(start, start + PER).map(function (a) {
+      var hasUrl = a.url && a.url !== '#';
+      var titleTag = hasUrl
+        ? '<a href="' + esc(a.url) + '" target="_blank" rel="noopener" class="block text-on-surface font-semibold leading-snug group-hover:text-primary transition-colors mb-1.5">' + esc(a.title) + '</a>'
+        : '<div class="text-on-surface font-semibold leading-snug mb-1.5">' + esc(a.title) + '</div>';
+      var link = hasUrl
+        ? '<a href="' + esc(a.url) + '" target="_blank" rel="noopener" class="text-primary text-xs font-semibold inline-flex items-center gap-0.5 hover:text-primary-container">기사원문보기<span class="material-symbols-outlined text-sm">north_east</span></a>'
+        : '';
       return '<div class="py-md px-sm group">' +
         '<div class="text-xs text-on-surface-variant mb-1">' + esc(a.date) + ' · ' + esc(a.outlet) + '</div>' +
-        '<a href="' + esc(a.url) + '" target="_blank" rel="noopener" class="block text-on-surface font-semibold leading-snug group-hover:text-primary transition-colors mb-1.5">' + esc(a.title) + '</a>' +
-        '<a href="' + esc(a.url) + '" target="_blank" rel="noopener" class="text-primary text-xs font-semibold inline-flex items-center gap-0.5 hover:text-primary-container">기사원문보기<span class="material-symbols-outlined text-sm">north_east</span></a>' +
+        titleTag + link +
       '</div>';
     }).join('');
   }
 
   function renderPager() {
+    if (ARTICLES.length === 0) { pagerEl.innerHTML = ''; return; }
     var html = '<button data-page="prev" class="w-8 h-8 rounded flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined text-base">chevron_left</span></button>';
     for (var i = 1; i <= totalPages; i++) {
       html += '<button data-page="' + i + '" class="w-8 h-8 rounded transition-colors ' +
@@ -179,9 +177,24 @@
     go(v === 'prev' || v === 'next' ? v : parseInt(v, 10));
   });
 
-  renderList();
-  renderPager();
-})();
+  // Firestore 에서 소식 불러오기 (최신 보도일 순)
+  (async function load() {
+    listEl.innerHTML = '<div class="py-xl px-sm text-center text-on-surface-variant text-sm">불러오는 중...</div>';
+    try {
+      var snap = await getDocs(query(collection(db, 'news'), orderBy('date', 'desc')));
+      ARTICLES = snap.docs.map(function (d) {
+        var x = d.data();
+        return { date: x.date || '', outlet: x.outlet || '', title: x.title || '', url: x.url || '#' };
+      });
+      totalPages = Math.max(1, Math.ceil(ARTICLES.length / PER));
+      page = 1;
+      renderList();
+      renderPager();
+    } catch (e) {
+      console.error(e);
+      listEl.innerHTML = '<div class="py-xl px-sm text-center text-error text-sm">소식을 불러오지 못했습니다.</div>';
+    }
+  })();
 </script>
 <!-- BOTTOM : 회사 정보 + 인증 (공통) -->
 <footer class="fixed bottom-0 left-0 w-full z-40 bg-surface-container-lowest/85 backdrop-blur-md border-t border-white/10">

@@ -1,0 +1,7 @@
+# Firebase 배포 캐시 / 로그 (GitHub에 올리지 않음)
+.firebase/
+firebase-debug.log
+*.log
+
+# 의존성
+node_modules/
