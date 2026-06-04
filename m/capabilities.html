@@ -1,37 +1,8 @@
 <!DOCTYPE html><html class="dark" lang="ko">
 <head>
 <meta charset="utf-8">
-<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport">
 <title>NEXTEZ | Capabilities Overview</title>
-<!-- ===== 모바일 자동 감지 → m/ 리다이렉트 (PC는 그대로) ===== -->
-<style id="preCloak">html{visibility:hidden}</style>
-<noscript><style>html{visibility:visible!important}</style></noscript>
-<script>
-(function () {
-  function reveal(){ var s=document.getElementById('preCloak'); if(s&&s.parentNode){ s.parentNode.removeChild(s); } }
-  try {
-    var qs = new URLSearchParams(location.search);
-    var force = qs.get('view');
-    if (force) { try { localStorage.setItem('viewMode', force); } catch (e) {} }
-    var mode = force || (function(){ try { return localStorage.getItem('viewMode'); } catch (e) { return null; } })();
-    if (mode === 'pc') { reveal(); return; }
-    var isMobile = (mode === 'mobile');
-    if (!mode) {
-      var ua = navigator.userAgent || '';
-      var uaMobile = /Android|iPhone|iPod|Windows Phone|BlackBerry|Mobile/i.test(ua);
-      var iPadOS = /iPad/i.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-      var smallSide = Math.min(screen.width, screen.height) <= 820;
-      isMobile = (uaMobile || iPadOS) && smallSide;
-    }
-    if (isMobile) {
-      var page = location.pathname.split('/').pop() || 'index.html';
-      location.replace('m/' + page + location.search + location.hash);
-      return;
-    }
-    reveal();
-  } catch (e) { reveal(); }
-})();
-</script>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link as="style" crossorigin="" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
@@ -65,56 +36,62 @@
         }
     </script>
 <style>
-        body { font-family: 'Pretendard Variable', Pretendard, sans-serif; background-color: #131313; color: #e5e2e1; overflow: hidden; }
+        /* 모바일 반응형: 화면잠금 해제 → 세로 스크롤 허용 */
+        html { -webkit-text-size-adjust: 100%; }
+        body { font-family: 'Pretendard Variable', Pretendard, sans-serif; background-color: #131313; color: #e5e2e1; overflow-x: hidden; }
         .slide-number { -webkit-text-stroke: 1.5px rgba(255, 102, 0, 0.4); color: transparent; }
-        .glass-panel { background: rgba(26, 26, 26, 0.35); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(46, 46, 46, 0.5); }
+        .glass-panel { background: rgba(26, 26, 26, 0.55); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(46, 46, 46, 0.6); }
         .kinetic-gradient { background: linear-gradient(135deg, #ff6600 0%, #ffb596 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
         .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
-        /* main copy shimmer + 강조점 (index 동일) */
         .char { display: inline-block; will-change: filter; filter: brightness(0.8); animation: charShine 5s ease-in-out infinite; }
         @keyframes charShine { 0%,55%,100% { filter: brightness(0.8); } 26% { filter: brightness(1.55) drop-shadow(0 0 8px rgba(255,255,255,0.35)); } }
         .emph .char { position: relative; }
         .emph .char::before { content:''; position:absolute; top:-0.34em; left:50%; transform:translateX(-50%); width:0.16em; height:0.16em; border-radius:9999px; background:#ff6600; }
     </style>
 </head>
-<body class="bg-background text-on-surface antialiased h-[100dvh] overflow-hidden selection:bg-primary-container selection:text-on-primary-container">
-<!-- Background -->
+<body class="bg-background text-on-surface antialiased min-h-[100dvh] selection:bg-primary-container selection:text-on-primary-container">
+<!-- 배경 -->
 <div class="fixed inset-0 z-0">
-<img class="w-full h-full object-cover opacity-60" alt="" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJgAwoZeNH-uvXwSXG-39COP-quT4rnVjMQhmlwgu243YZZX0jhO2DwRhnD1SHC5icCCBztmUNsXxOYUe2nJeByxkw7b0a_9SZbCTS4ql5NBIjWYTfeSsm6ZJbwdI04OEoyU8MLKhccvEBQu9w4H-qTaKTf_zxul3y3Li0nZ800dpR8ivvBaypUpDriKjnlOOUkQ2fdWiz0zdjtPgrPkY7IWlNgaLSgp2VcERZCb4gmcpWhoqdcDvLPZ9zy_SGAS-0DbLTclwqH1Vl">
-<div class="absolute inset-0 bg-gradient-to-b from-background/80 via-background/40 to-background/75"></div>
+<img class="w-full h-full object-cover opacity-40" alt="" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJgAwoZeNH-uvXwSXG-39COP-quT4rnVjMQhmlwgu243YZZX0jhO2DwRhnD1SHC5icCCBztmUNsXxOYUe2nJeByxkw7b0a_9SZbCTS4ql5NBIjWYTfeSsm6ZJbwdI04OEoyU8MLKhccvEBQu9w4H-qTaKTf_zxul3y3Li0nZ800dpR8ivvBaypUpDriKjnlOOUkQ2fdWiz0zdjtPgrPkY7IWlNgaLSgp2VcERZCb4gmcpWhoqdcDvLPZ9zy_SGAS-0DbLTclwqH1Vl">
+<div class="absolute inset-0 bg-gradient-to-b from-background/85 via-background/70 to-background/95"></div>
 </div>
-<!-- TopNavBar (Fixed) -->
-<header class="fixed w-full top-0 border-b border-white/10 bg-background/50 backdrop-blur-md z-50">
+<!-- ===== Header (모바일 햄버거) ===== -->
+<header class="fixed w-full top-0 border-b border-white/10 bg-background/85 backdrop-blur-md z-50">
 <div class="flex items-center w-full px-lg py-md max-w-[1600px] mx-auto">
-<div class="flex items-center gap-sm">
-<a href="index.html" class="text-[32px] leading-none font-bold text-on-surface tracking-tight" style="font-family:'Pretendard Variable',Pretendard,sans-serif">NEXT<span class="text-primary-container ml-1 relative top-[-0.3em] inline-block">EZ</span></a>
-</div>
-<nav class="hidden md:flex items-center gap-lg ml-auto"><a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors hover:bg-surface-container-highest px-sm py-xs rounded" href="index.html">Home</a>
-<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors hover:bg-surface-container-highest px-sm py-xs rounded" href="services.html">Services</a>
+<a href="index.html" class="text-[26px] sm:text-[32px] leading-none font-bold text-on-surface tracking-tight" style="font-family:'Pretendard Variable',Pretendard,sans-serif">NEXT<span class="text-primary-container ml-1 relative top-[-0.3em] inline-block">EZ</span></a>
+<nav class="hidden md:flex items-center gap-lg ml-auto">
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors px-sm py-xs rounded" href="index.html">Home</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors px-sm py-xs rounded" href="services.html">Services</a>
 <a class="font-body-md text-body-md text-primary font-bold border-b-2 border-primary pb-1" href="capabilities.html">Capabilities</a>
-<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors hover:bg-surface-container-highest px-sm py-xs rounded" href="portfolio.html">Project Portfolio</a>
-<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors hover:bg-surface-container-highest px-sm py-xs rounded" href="about.html">About</a>
-<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors hover:bg-surface-container-highest px-sm py-xs rounded" href="news.html">Newsroom</a></nav>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors px-sm py-xs rounded" href="../portfolio.html">Project Portfolio</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors px-sm py-xs rounded" href="../about.html">About</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors px-sm py-xs rounded" href="../news.html">Newsroom</a>
+</nav>
+<button id="navToggle" type="button" class="md:hidden ml-auto inline-flex items-center justify-center w-11 h-11 -mr-2 rounded-lg text-on-surface hover:bg-white/10 active:scale-95 transition" aria-label="메뉴 열기" aria-expanded="false" aria-controls="mobileMenu">
+<span id="navIcon" class="material-symbols-outlined text-[28px]">menu</span>
+</button>
+</div>
+<div id="mobileMenu" class="md:hidden hidden border-t border-white/10 bg-background/97 backdrop-blur-md">
+<nav class="flex flex-col px-lg py-xs max-w-[1600px] mx-auto">
+<a class="py-4 text-base text-on-surface hover:text-primary border-b border-white/5" href="index.html">Home</a>
+<a class="py-4 text-base text-on-surface hover:text-primary border-b border-white/5" href="services.html">Services</a>
+<a class="py-4 text-base font-bold text-primary border-b border-white/5" href="capabilities.html">Capabilities</a>
+<a class="py-4 text-base text-on-surface hover:text-primary border-b border-white/5" href="../portfolio.html">Project Portfolio</a>
+<a class="py-4 text-base text-on-surface hover:text-primary border-b border-white/5" href="../about.html">About</a>
+<a class="py-4 text-base text-on-surface hover:text-primary" href="../news.html">Newsroom</a>
+</nav>
 </div>
 </header>
-<!-- Right Social Sidebar -->
-<div class="hidden xl:flex fixed right-2 top-1/2 -translate-y-1/2 z-40 flex-col items-center gap-lg">
-<div class="w-px h-20 bg-white/20"></div>
-<a class="text-on-surface-variant hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined">share</span></a>
-<a class="text-on-surface-variant hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined">mail</span></a>
-<p class="text-[12px] text-on-surface-variant tracking-widest uppercase rotate-180" style="writing-mode: vertical-rl;">Follow Us</p>
-</div>
-<!-- Single-screen layout: all 4 capabilities -->
-<main class="relative z-10 h-[100dvh] flex flex-col justify-center pt-[80px] pb-8 px-lg md:px-12">
-<div class="w-full max-w-[1600px] mx-auto">
-<!-- Header -->
-<div class="mb-lg lg:mb-xl max-w-4xl">
+<!-- ===== Main ===== -->
+<main class="relative z-10 pt-[96px] pb-12 px-lg max-w-[1100px] mx-auto">
+<!-- Hero -->
+<div class="mb-xl">
 <span class="font-bold text-[12px] tracking-widest text-primary uppercase mb-sm block">Capabilities</span>
-<h1 id="main-copy" class="text-[40px] md:text-[64px] leading-[1.1] font-bold tracking-tight mb-md drop-shadow-2xl">산업의 본질을 꿰뚫는 <span class="text-primary-container emph">넥스트이지</span><span class="kinetic-gradient">의 독보적 역량</span></h1>
-<p class="text-on-surface text-lg drop-shadow-md">현장 데이터로 AI를 만들고, AI로 다시 현장을 운영합니다 — <span class="text-primary-container font-semibold">데이터 → AI → 구축 → 운영</span> 전 과정을 직접 수행하는 4대 역량.</p>
+<h1 id="main-copy" class="text-[28px] sm:text-[40px] md:text-[56px] leading-[1.2] font-bold tracking-tight mb-md drop-shadow-2xl">산업의 본질을 꿰뚫는 <span class="text-primary-container emph">넥스트이지</span><span class="kinetic-gradient">의 독보적 역량</span></h1>
+<p class="text-on-surface text-[15px] sm:text-base md:text-lg drop-shadow-md leading-relaxed">현장 데이터로 AI를 만들고, AI로 다시 현장을 운영합니다 — <span class="text-primary-container font-semibold">데이터 → AI → 구축 → 운영</span> 전 과정을 직접 수행하는 4대 역량.</p>
 </div>
-<!-- 4 capability cards -->
-<div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-md lg:gap-lg">
+<!-- 4 capability cards (세로 스택 / sm 이상 2열) -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-md">
 <!-- 01 AI · Data -->
 <div class="glass-panel rounded-xl p-lg flex flex-col border-t-2 border-t-primary hover:border-primary transition-colors group">
 <div class="flex items-start justify-between mb-md">
@@ -196,18 +173,17 @@
 </div>
 </div>
 </div>
-</div>
 </main>
-<!-- BOTTOM : 회사 정보 + 인증 (공통) -->
-<footer class="fixed bottom-0 left-0 w-full z-40 bg-surface-container-lowest/85 backdrop-blur-md border-t border-white/10">
-<div class="max-w-[1600px] mx-auto px-lg lg:px-[88px] py-sm flex flex-col md:flex-row md:items-center justify-between gap-2 text-xs">
-<div class="flex flex-wrap items-center gap-x-md gap-y-1 text-on-surface-variant">
-<span class="font-bold text-on-surface">㈜넥스트이지</span>
-<span class="text-on-surface/25">|</span><span>대표이사 강주경</span>
-<span class="text-on-surface/25">|</span><span>제주특별자치도 제주시 첨단로 213-3, 408·409호</span>
-<span class="text-on-surface/25">|</span><span class="text-primary-container font-semibold">064-721-8118</span>
+<!-- ===== Footer ===== -->
+<footer class="relative z-10 w-full bg-surface-container-lowest border-t border-white/10">
+<div class="max-w-[1600px] mx-auto px-lg py-lg flex flex-col gap-3 text-xs">
+<div class="flex flex-col gap-1.5 text-on-surface-variant">
+<span class="font-bold text-on-surface text-sm">㈜넥스트이지</span>
+<span>대표이사 강주경</span>
+<span>제주특별자치도 제주시 첨단로 213-3, 408·409호</span>
+<span class="text-primary-container font-semibold">064-721-8118</span>
 </div>
-<div class="flex flex-wrap items-center gap-1.5">
+<div class="flex flex-wrap items-center gap-1.5 pt-2 border-t border-white/5">
 <span class="px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-[11px] text-on-surface-variant">벤처기업</span>
 <span class="px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-[11px] text-on-surface-variant">기술혁신형(INNOBIZ)</span>
 <span class="px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-[11px] text-on-surface-variant">경영혁신형(MAINBIZ)</span>
@@ -215,39 +191,20 @@
 <span class="px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-[11px] text-on-surface-variant">ISO 9001·14001</span>
 <span class="px-2 py-0.5 rounded-full bg-primary-container/15 border border-primary-container/30 text-[11px] text-primary font-semibold">외 인증 13건</span>
 </div>
+<div class="pt-2 border-t border-white/5">
+<a href="../capabilities.html?view=pc" class="inline-flex items-center gap-1 text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined text-sm">desktop_windows</span>PC 버전으로 보기</a>
+</div>
 </div>
 </footer>
-<script>
-(function(){
-  var h=document.getElementById('main-copy'); if(!h) return;
-  var idx=0;
-  (function walk(node){
-    Array.prototype.slice.call(node.childNodes).forEach(function(child){
-      if(child.nodeType===3){
-        var frag=document.createDocumentFragment();
-        Array.from(child.textContent).forEach(function(ch){
-          if(ch===' '){frag.appendChild(document.createTextNode(' '));return;}
-          var s=document.createElement('span'); s.className='char'; s.textContent=ch;
-          s.style.animationDelay=(idx*0.05).toFixed(2)+'s'; idx++;
-          frag.appendChild(s);
-        });
-        node.replaceChild(frag,child);
-      } else if(child.nodeType===1 && child.tagName!=='BR' && !child.classList.contains('kinetic-gradient')){
-        walk(child);
-      }
-    });
-  })(h);
-})();
-</script>
-<!-- KEY PROJECT 상세 모달 (Project Portfolio 4대 영역 상세를 그대로 표시) -->
+<!-- ===== KEY PROJECT 상세 모달 (모바일: 스크롤 가능) ===== -->
 <div id="cap-modal" class="fixed inset-0 z-[100] hidden">
 <div class="absolute inset-0 bg-black/70 backdrop-blur-sm" data-close></div>
-<div class="relative z-10 min-h-full flex items-center justify-center p-4 md:p-8">
-<div id="cap-modal-panel" class="rounded-2xl p-lg md:p-xl w-full max-w-4xl" style="background:rgba(18,18,20,0.97);border:1px solid rgba(255,102,0,0.35);box-shadow:0 8px 40px rgba(0,0,0,0.5)">
+<div class="relative z-10 min-h-full flex items-start sm:items-center justify-center p-3 sm:p-6">
+<div id="cap-modal-panel" class="rounded-2xl p-lg w-full max-w-4xl max-h-[90dvh] overflow-y-auto my-auto" style="background:rgba(18,18,20,0.98);border:1px solid rgba(255,102,0,0.35);box-shadow:0 8px 40px rgba(0,0,0,0.5)">
 <div class="flex items-start justify-between mb-lg">
 <div>
 <span class="text-[11px] font-bold text-primary uppercase tracking-widest block">Project Portfolio</span>
-<h2 id="cap-modal-title" class="text-2xl font-bold text-on-surface"></h2>
+<h2 id="cap-modal-title" class="text-xl sm:text-2xl font-bold text-on-surface"></h2>
 </div>
 <button type="button" data-close class="text-on-surface-variant hover:text-primary transition-colors shrink-0 -mt-1" aria-label="닫기"><span class="material-symbols-outlined">close</span></button>
 </div>
@@ -258,6 +215,33 @@
 </div>
 </div>
 </div>
-<script src="capabilities-detail.js"></script>
-<script src="contact-modal.js"></script>
+<script>
+        /* 메인카피 글자 셔머 (kinetic-gradient 제외) */
+        (function () {
+            var h = document.getElementById('main-copy'); if (!h) return; var idx = 0;
+            (function walk(node) {
+                Array.prototype.slice.call(node.childNodes).forEach(function (child) {
+                    if (child.nodeType === 3) {
+                        var frag = document.createDocumentFragment();
+                        Array.from(child.textContent).forEach(function (ch) {
+                            if (ch === ' ') { frag.appendChild(document.createTextNode(' ')); return; }
+                            var s = document.createElement('span'); s.className = 'char'; s.textContent = ch;
+                            s.style.animationDelay = (idx * 0.05).toFixed(2) + 's'; idx++; frag.appendChild(s);
+                        });
+                        node.replaceChild(frag, child);
+                    } else if (child.nodeType === 1 && child.tagName !== 'BR' && !child.classList.contains('kinetic-gradient')) { walk(child); }
+                });
+            })(h);
+        })();
+        /* 모바일 햄버거 메뉴 */
+        (function () {
+            var btn = document.getElementById('navToggle'), menu = document.getElementById('mobileMenu'), icon = document.getElementById('navIcon');
+            if (!btn || !menu) return;
+            function setOpen(o) { menu.classList.toggle('hidden', !o); btn.setAttribute('aria-expanded', o ? 'true' : 'false'); if (icon) icon.textContent = o ? 'close' : 'menu'; }
+            btn.addEventListener('click', function () { setOpen(menu.classList.contains('hidden')); });
+            menu.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', function () { setOpen(false); }); });
+            window.addEventListener('resize', function () { if (window.innerWidth >= 768) setOpen(false); });
+        })();
+    </script>
+<script src="../capabilities-detail.js"></script>
 </body></html>
