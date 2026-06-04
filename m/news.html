@@ -1,0 +1,261 @@
+<!DOCTYPE html><html class="dark" lang="ko">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport">
+<title>NEXTEZ - Newsroom</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link as="style" crossorigin="" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface-tint": "#ffb596", "surface": "#131313", "secondary-fixed-dim": "#c8c6c5",
+                        "secondary-container": "#474746", "outline-variant": "#5a4136", "on-secondary-fixed": "#1c1b1b",
+                        "primary-fixed": "#ffdbcd", "surface-bright": "#3a3939", "on-background": "#e5e2e1",
+                        "surface-container-lowest": "#0e0e0e", "outline": "#aa8a7d", "surface-variant": "#353534",
+                        "surface-container-low": "#1c1b1b", "surface-container": "#201f1f", "error-container": "#93000a",
+                        "tertiary": "#c8c6c6", "on-error-container": "#ffdad6", "secondary": "#c8c6c5",
+                        "inverse-primary": "#a33e00", "error": "#ffb4ab", "on-surface": "#e5e2e1", "on-secondary": "#313030",
+                        "tertiary-fixed-dim": "#c8c6c6", "tertiary-fixed": "#e4e2e1", "tertiary-container": "#989696",
+                        "surface-dim": "#131313", "on-error": "#690005", "on-tertiary-container": "#2f2f2f",
+                        "background": "#131313", "on-primary-fixed-variant": "#7c2e00", "surface-container-high": "#2a2a2a",
+                        "secondary-fixed": "#e5e2e1", "on-secondary-fixed-variant": "#474746", "on-surface-variant": "#e3bfb1",
+                        "inverse-on-surface": "#313030", "on-primary-fixed": "#360f00", "surface-container-highest": "#353534",
+                        "primary-container": "#ff6600", "on-primary": "#581e00", "inverse-surface": "#e5e2e1",
+                        "on-secondary-container": "#b7b5b4", "primary": "#ffb596", "on-tertiary-fixed": "#1b1c1c",
+                        "on-primary-container": "#561d00", "primary-fixed-dim": "#ffb596", "on-tertiary": "#303030",
+                        "on-tertiary-fixed-variant": "#474747"
+                    },
+                    borderRadius: { "DEFAULT": "0.5rem", "lg": "0.75rem", "xl": "1rem", "full": "9999px" },
+                    spacing: { "md": "16px", "xs": "4px", "xl": "40px", "container-max": "1280px", "gutter": "24px", "sm": "8px", "unit": "4px", "lg": "24px" },
+                    fontFamily: {
+                        "body-md": ["'Pretendard Variable'", "Pretendard", "sans-serif"], "label-md": ["'Pretendard Variable'", "Pretendard", "sans-serif"],
+                        "label-bold": ["'Pretendard Variable'", "Pretendard", "sans-serif"], "body-sm": ["'Pretendard Variable'", "Pretendard", "sans-serif"]
+                    },
+                    fontSize: {
+                        "body-md": ["16px", { lineHeight: "24px", fontWeight: "400" }], "label-md": ["12px", { lineHeight: "16px", fontWeight: "500" }],
+                        "label-bold": ["12px", { lineHeight: "16px", letterSpacing: "0.05em", fontWeight: "700" }], "body-sm": ["14px", { lineHeight: "20px", fontWeight: "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        /* 모바일 반응형: 화면잠금 해제 → 세로 스크롤 허용 */
+        html { -webkit-text-size-adjust: 100%; }
+        body { font-family: 'Pretendard Variable', Pretendard, sans-serif; background-color: #131313; color: #e5e2e1; overflow-x: hidden; }
+        .hero-fallback { background: linear-gradient(180deg, #2b6fd6 0%, #5aa0e6 45%, #4a7a2e 100%); }
+        .char { display: inline-block; will-change: filter; filter: brightness(0.8); animation: charShine 5s ease-in-out infinite; }
+        @keyframes charShine { 0%,55%,100% { filter: brightness(0.8); } 26% { filter: brightness(1.55) drop-shadow(0 0 8px rgba(255,255,255,0.35)); } }
+        .emph .char { position: relative; }
+        .emph .char::before { content:''; position:absolute; top:-0.34em; left:50%; transform:translateX(-50%); width:0.16em; height:0.16em; border-radius:9999px; background:#ff6600; }
+    </style>
+</head>
+<body class="bg-background text-on-surface antialiased min-h-[100dvh] selection:bg-primary-container selection:text-on-primary-container">
+<!-- 배경 -->
+<div class="fixed inset-0 z-0 hero-fallback pointer-events-none">
+<img alt="넥스트이지 창립 8주년" class="w-full h-full object-cover opacity-30" src="../IMG/nextez-anniversary01.jpg">
+<div class="absolute inset-0 bg-gradient-to-b from-background/88 via-background/82 to-background/96"></div>
+</div>
+<!-- ===== Header (모바일 햄버거) ===== -->
+<header class="fixed w-full top-0 border-b border-white/10 bg-background/85 backdrop-blur-md z-50">
+<div class="flex items-center w-full px-lg py-md max-w-[1600px] mx-auto">
+<a href="index.html" class="text-[26px] sm:text-[32px] leading-none font-bold text-on-surface tracking-tight" style="font-family:'Pretendard Variable',Pretendard,sans-serif">NEXT<span class="text-primary-container ml-1 relative top-[-0.3em] inline-block">EZ</span></a>
+<nav class="hidden md:flex items-center gap-lg ml-auto">
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors px-sm py-xs rounded" href="index.html">Home</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors px-sm py-xs rounded" href="services.html">Services</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors px-sm py-xs rounded" href="capabilities.html">Capabilities</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors px-sm py-xs rounded" href="portfolio.html">Project Portfolio</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors px-sm py-xs rounded" href="about.html">About</a>
+<a class="font-body-md text-body-md text-primary font-bold border-b-2 border-primary pb-1" href="news.html">Newsroom</a>
+</nav>
+<button id="navToggle" type="button" class="md:hidden ml-auto inline-flex items-center justify-center w-11 h-11 -mr-2 rounded-lg text-on-surface hover:bg-white/10 active:scale-95 transition" aria-label="메뉴 열기" aria-expanded="false" aria-controls="mobileMenu">
+<span id="navIcon" class="material-symbols-outlined text-[28px]">menu</span>
+</button>
+</div>
+<div id="mobileMenu" class="md:hidden hidden border-t border-white/10 bg-background/97 backdrop-blur-md">
+<nav class="flex flex-col px-lg py-xs max-w-[1600px] mx-auto">
+<a class="py-4 text-base text-on-surface hover:text-primary border-b border-white/5" href="index.html">Home</a>
+<a class="py-4 text-base text-on-surface hover:text-primary border-b border-white/5" href="services.html">Services</a>
+<a class="py-4 text-base text-on-surface hover:text-primary border-b border-white/5" href="capabilities.html">Capabilities</a>
+<a class="py-4 text-base text-on-surface hover:text-primary border-b border-white/5" href="portfolio.html">Project Portfolio</a>
+<a class="py-4 text-base text-on-surface hover:text-primary border-b border-white/5" href="about.html">About</a>
+<a class="py-4 text-base font-bold text-primary" href="news.html">Newsroom</a>
+</nav>
+</div>
+</header>
+<!-- ===== Main ===== -->
+<main class="relative z-10 pt-[96px] pb-12 px-lg max-w-[820px] mx-auto">
+<!-- Hero -->
+<div class="mb-xl">
+<div class="inline-flex items-center gap-sm bg-surface-container/50 backdrop-blur-md border border-outline-variant/30 rounded-full px-md py-xs mb-lg">
+<span class="w-2 h-2 rounded-full bg-primary-container animate-pulse"></span>
+<span class="font-label-bold text-label-bold text-primary">Newsroom</span>
+</div>
+<h1 id="main-copy" class="text-[28px] sm:text-[36px] md:text-[44px] leading-[1.7] mb-md drop-shadow-2xl font-bold">언론에 비친 넥스트이지<br><span class="text-primary-container"><span class="emph">언론의 시선</span></span>으로<br>그 여정을 만나보세요</h1>
+<p class="text-on-surface-variant text-[15px] sm:text-base leading-relaxed">데이터와 기술로 산업의 내일을 설계하는 넥스트이지, 그 행보에 쏟아진 언론의 관심을 한자리에 모았습니다.</p>
+</div>
+<!-- Newsroom 기사 리스트 -->
+<h2 class="text-2xl font-bold mb-lg px-sm">News<span class="text-primary-container">room</span></h2>
+<div id="press-list" class="border-y border-white/10 divide-y divide-white/10"></div>
+<div id="press-pager" class="flex items-center justify-center gap-1 mt-lg flex-wrap"></div>
+</main>
+<!-- ===== Footer ===== -->
+<footer class="relative z-10 w-full bg-surface-container-lowest border-t border-white/10">
+<div class="max-w-[1600px] mx-auto px-lg py-lg flex flex-col gap-3 text-xs">
+<div class="flex flex-col gap-1.5 text-on-surface-variant">
+<span class="font-bold text-on-surface text-sm">㈜넥스트이지</span>
+<span>대표이사 강주경</span>
+<span>제주특별자치도 제주시 첨단로 213-3, 408·409호</span>
+<span class="text-primary-container font-semibold">064-721-8118</span>
+</div>
+<div class="flex flex-wrap items-center gap-1.5 pt-2 border-t border-white/5">
+<span class="px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-[11px] text-on-surface-variant">벤처기업</span>
+<span class="px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-[11px] text-on-surface-variant">기술혁신형(INNOBIZ)</span>
+<span class="px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-[11px] text-on-surface-variant">경영혁신형(MAINBIZ)</span>
+<span class="px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-[11px] text-on-surface-variant">가족친화 인증기업</span>
+<span class="px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-[11px] text-on-surface-variant">ISO 9001·14001</span>
+<span class="px-2 py-0.5 rounded-full bg-primary-container/15 border border-primary-container/30 text-[11px] text-primary font-semibold">외 인증 13건</span>
+</div>
+<div class="pt-2 border-t border-white/5">
+<a href="../news.html?view=pc" class="inline-flex items-center gap-1 text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined text-sm">desktop_windows</span>PC 버전으로 보기</a>
+</div>
+</div>
+</footer>
+<!-- 메인카피 셔머 + 햄버거 메뉴 -->
+<script>
+        (function () {
+            var h = document.getElementById('main-copy'); if (!h) return; var idx = 0;
+            (function walk(node) {
+                Array.prototype.slice.call(node.childNodes).forEach(function (child) {
+                    if (child.nodeType === 3) {
+                        var frag = document.createDocumentFragment();
+                        Array.from(child.textContent).forEach(function (ch) {
+                            if (ch === ' ') { frag.appendChild(document.createTextNode(' ')); return; }
+                            var s = document.createElement('span'); s.className = 'char'; s.textContent = ch;
+                            s.style.animationDelay = (idx * 0.05).toFixed(2) + 's'; idx++; frag.appendChild(s);
+                        });
+                        node.replaceChild(frag, child);
+                    } else if (child.nodeType === 1 && child.tagName !== 'BR') { walk(child); }
+                });
+            })(h);
+        })();
+        (function () {
+            var btn = document.getElementById('navToggle'), menu = document.getElementById('mobileMenu'), icon = document.getElementById('navIcon');
+            if (!btn || !menu) return;
+            function setOpen(o) { menu.classList.toggle('hidden', !o); btn.setAttribute('aria-expanded', o ? 'true' : 'false'); if (icon) icon.textContent = o ? 'close' : 'menu'; }
+            btn.addEventListener('click', function () { setOpen(menu.classList.contains('hidden')); });
+            menu.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', function () { setOpen(false); }); });
+            window.addEventListener('resize', function () { if (window.innerWidth >= 768) setOpen(false); });
+        })();
+</script>
+<!-- 기사 데이터: Firestore 에서 불러오기 (PC와 동일 DB) -->
+<script type="module">
+import { db } from '../firebase-init.js';
+import { collection, getDocs, query, orderBy }
+  from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+
+  var ARTICLES = [];
+  var PER = 5;
+  var page = 1;
+  var listEl = document.getElementById('press-list');
+  var pagerEl = document.getElementById('press-pager');
+  var totalPages = 1;
+
+  function esc(s) {
+    return String(s).replace(/[&<>"]/g, function (c) {
+      return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c];
+    });
+  }
+
+  function renderList() {
+    if (ARTICLES.length === 0) {
+      listEl.innerHTML = '<div class="py-xl px-sm text-center text-on-surface-variant text-sm">등록된 소식이 없습니다.</div>';
+      return;
+    }
+    var start = (page - 1) * PER;
+    var total = ARTICLES.length;
+    listEl.innerHTML = ARTICLES.slice(start, start + PER).map(function (a, i) {
+      var no = total - (start + i);
+      var hasUrl = a.url && a.url !== '#';
+      var titleTag = hasUrl
+        ? '<a href="' + esc(a.url) + '" target="_blank" rel="noopener" class="block text-on-surface font-semibold leading-snug group-hover:text-primary transition-colors mb-1.5">' + esc(a.title) + '</a>'
+        : '<div class="text-on-surface font-semibold leading-snug mb-1.5">' + esc(a.title) + '</div>';
+      var link = hasUrl
+        ? '<a href="' + esc(a.url) + '" target="_blank" rel="noopener" class="text-primary text-xs font-semibold inline-flex items-center gap-0.5 hover:text-primary-container">기사원문보기<span class="material-symbols-outlined text-sm">north_east</span></a>'
+        : '';
+      return '<div class="py-md px-sm group flex gap-3">' +
+        '<div class="shrink-0 pt-0.5">' +
+          '<span class="inline-flex items-center justify-center w-7 h-7 rounded-full border border-primary-container/40 bg-primary-container/10 text-primary-container text-xs font-bold tabular-nums">' + no + '</span>' +
+        '</div>' +
+        '<div class="flex-1 min-w-0">' +
+          '<div class="text-xs text-on-surface-variant mb-1">' + esc(a.date) + ' · ' + esc(a.outlet) + '</div>' +
+          titleTag + link +
+        '</div>' +
+      '</div>';
+    }).join('');
+  }
+
+  var PAGE_GROUP = 10;
+
+  function renderPager() {
+    if (ARTICLES.length === 0) { pagerEl.innerHTML = ''; return; }
+    var group = Math.ceil(page / PAGE_GROUP);
+    var startPage = (group - 1) * PAGE_GROUP + 1;
+    var endPage = Math.min(totalPages, group * PAGE_GROUP);
+    var html = '';
+    if (startPage > 1) {
+      html += '<button data-page="prevg" class="w-8 h-8 rounded flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors" title="이전 10개"><span class="material-symbols-outlined text-base">keyboard_double_arrow_left</span></button>';
+    }
+    for (var i = startPage; i <= endPage; i++) {
+      html += '<button data-page="' + i + '" class="w-8 h-8 rounded transition-colors ' +
+        (i === page ? 'bg-primary-container text-black font-bold' : 'text-on-surface-variant hover:text-primary') +
+        '">' + i + '</button>';
+    }
+    if (endPage < totalPages) {
+      html += '<button data-page="nextg" class="w-8 h-8 rounded flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors" title="다음 10개"><span class="material-symbols-outlined text-base">keyboard_double_arrow_right</span></button>';
+    }
+    pagerEl.innerHTML = html;
+  }
+
+  function go(p) {
+    if (p === 'prevg') {
+      p = Math.max(1, (Math.ceil(page / PAGE_GROUP) - 2) * PAGE_GROUP + 1);
+    } else if (p === 'nextg') {
+      p = Math.min(totalPages, Math.ceil(page / PAGE_GROUP) * PAGE_GROUP + 1);
+    }
+    p = Math.min(totalPages, Math.max(1, p));
+    if (p === page) return;
+    page = p; renderList(); renderPager();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  pagerEl.addEventListener('click', function (e) {
+    var b = e.target.closest('button[data-page]');
+    if (!b) return;
+    var v = b.getAttribute('data-page');
+    go((v === 'prevg' || v === 'nextg') ? v : parseInt(v, 10));
+  });
+
+  (async function load() {
+    listEl.innerHTML = '<div class="py-xl px-sm text-center text-on-surface-variant text-sm">불러오는 중...</div>';
+    try {
+      var snap = await getDocs(query(collection(db, 'news'), orderBy('date', 'desc')));
+      ARTICLES = snap.docs.map(function (d) {
+        var x = d.data();
+        return { date: x.date || '', outlet: x.outlet || '', title: x.title || '', url: x.url || '#' };
+      });
+      totalPages = Math.max(1, Math.ceil(ARTICLES.length / PER));
+      page = 1;
+      renderList();
+      renderPager();
+    } catch (e) {
+      console.error(e);
+      listEl.innerHTML = '<div class="py-xl px-sm text-center text-error text-sm">소식을 불러오지 못했습니다.</div>';
+    }
+  })();
+</script>
+</body></html>
