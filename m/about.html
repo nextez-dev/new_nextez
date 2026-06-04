@@ -1,0 +1,404 @@
+<!DOCTYPE html><html class="dark" lang="ko">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport">
+<title>NEXTEZ - About</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link as="style" crossorigin="" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface-tint": "#ffb596", "surface": "#131313", "secondary-fixed-dim": "#c8c6c5",
+                        "secondary-container": "#474746", "outline-variant": "#5a4136", "on-secondary-fixed": "#1c1b1b",
+                        "primary-fixed": "#ffdbcd", "surface-bright": "#3a3939", "on-background": "#e5e2e1",
+                        "surface-container-lowest": "#0e0e0e", "outline": "#aa8a7d", "surface-variant": "#353534",
+                        "surface-container-low": "#1c1b1b", "surface-container": "#201f1f", "error-container": "#93000a",
+                        "tertiary": "#c8c6c6", "on-error-container": "#ffdad6", "secondary": "#c8c6c5",
+                        "inverse-primary": "#a33e00", "error": "#ffb4ab", "on-surface": "#e5e2e1", "on-secondary": "#313030",
+                        "tertiary-fixed-dim": "#c8c6c6", "tertiary-fixed": "#e4e2e1", "tertiary-container": "#989696",
+                        "surface-dim": "#131313", "on-error": "#690005", "on-tertiary-container": "#2f2f2f",
+                        "background": "#131313", "on-primary-fixed-variant": "#7c2e00", "surface-container-high": "#2a2a2a",
+                        "secondary-fixed": "#e5e2e1", "on-secondary-fixed-variant": "#474746", "on-surface-variant": "#e3bfb1",
+                        "inverse-on-surface": "#313030", "on-primary-fixed": "#360f00", "surface-container-highest": "#353534",
+                        "primary-container": "#ff6600", "on-primary": "#581e00", "inverse-surface": "#e5e2e1",
+                        "on-secondary-container": "#b7b5b4", "primary": "#ffb596", "on-tertiary-fixed": "#1b1c1c",
+                        "on-primary-container": "#561d00", "primary-fixed-dim": "#ffb596", "on-tertiary": "#303030",
+                        "on-tertiary-fixed-variant": "#474747"
+                    },
+                    borderRadius: { "DEFAULT": "0.5rem", "lg": "0.75rem", "xl": "1rem", "full": "9999px" },
+                    spacing: { "md": "16px", "xs": "4px", "xl": "40px", "container-max": "1280px", "gutter": "24px", "sm": "8px", "unit": "4px", "lg": "24px" },
+                    fontFamily: {
+                        "body-md": ["'Pretendard Variable'", "Pretendard", "sans-serif"], "label-md": ["'Pretendard Variable'", "Pretendard", "sans-serif"],
+                        "label-bold": ["'Pretendard Variable'", "Pretendard", "sans-serif"]
+                    },
+                    fontSize: {
+                        "body-md": ["16px", { lineHeight: "24px", fontWeight: "400" }], "label-md": ["12px", { lineHeight: "16px", fontWeight: "500" }],
+                        "label-bold": ["12px", { lineHeight: "16px", letterSpacing: "0.05em", fontWeight: "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        /* 모바일 반응형: 화면잠금 해제 → 세로 스크롤 허용 */
+        html { -webkit-text-size-adjust: 100%; }
+        body { font-family: 'Pretendard Variable', Pretendard, sans-serif; background-color: #131313; color: #e5e2e1; overflow-x: hidden; }
+        .glass-panel { background: rgba(26, 26, 26, 0.55); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(70, 70, 70, 0.5); }
+        .kinetic-accent { color: #ff6600; }
+        .char { display: inline-block; will-change: filter; filter: brightness(0.8); animation: charShine 5s ease-in-out infinite; }
+        @keyframes charShine { 0%,55%,100% { filter: brightness(0.8); } 26% { filter: brightness(1.55) drop-shadow(0 0 8px rgba(255,255,255,0.35)); } }
+        .emph .char { position: relative; }
+        .emph .char::before { content:''; position:absolute; top:-0.34em; left:50%; transform:translateX(-50%); width:0.16em; height:0.16em; border-radius:9999px; background:#ff6600; }
+    </style>
+</head>
+<body class="bg-background text-on-surface antialiased min-h-[100dvh] selection:bg-primary-container">
+<!-- 배경 -->
+<div class="fixed inset-0 z-0 pointer-events-none">
+<img class="w-full h-full object-cover opacity-25" alt="" src="../IMG/about02.jpg">
+<div class="absolute inset-0 bg-gradient-to-b from-background/90 via-background/80 to-background/96"></div>
+</div>
+<!-- ===== Header (모바일 햄버거) ===== -->
+<header class="fixed w-full top-0 border-b border-white/10 bg-background/85 backdrop-blur-md z-50">
+<div class="flex items-center w-full px-lg py-md max-w-[1600px] mx-auto">
+<a href="index.html" class="text-[26px] sm:text-[32px] leading-none font-bold text-on-surface tracking-tight" style="font-family:'Pretendard Variable',Pretendard,sans-serif">NEXT<span class="text-primary-container ml-1 relative top-[-0.3em] inline-block">EZ</span></a>
+<nav class="hidden md:flex items-center gap-lg ml-auto">
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors px-sm py-xs rounded" href="index.html">Home</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors px-sm py-xs rounded" href="services.html">Services</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors px-sm py-xs rounded" href="capabilities.html">Capabilities</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors px-sm py-xs rounded" href="portfolio.html">Project Portfolio</a>
+<a class="font-body-md text-body-md text-primary font-bold border-b-2 border-primary pb-1" href="about.html">About</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors px-sm py-xs rounded" href="../news.html">Newsroom</a>
+</nav>
+<button id="navToggle" type="button" class="md:hidden ml-auto inline-flex items-center justify-center w-11 h-11 -mr-2 rounded-lg text-on-surface hover:bg-white/10 active:scale-95 transition" aria-label="메뉴 열기" aria-expanded="false" aria-controls="mobileMenu">
+<span id="navIcon" class="material-symbols-outlined text-[28px]">menu</span>
+</button>
+</div>
+<div id="mobileMenu" class="md:hidden hidden border-t border-white/10 bg-background/97 backdrop-blur-md">
+<nav class="flex flex-col px-lg py-xs max-w-[1600px] mx-auto">
+<a class="py-4 text-base text-on-surface hover:text-primary border-b border-white/5" href="index.html">Home</a>
+<a class="py-4 text-base text-on-surface hover:text-primary border-b border-white/5" href="services.html">Services</a>
+<a class="py-4 text-base text-on-surface hover:text-primary border-b border-white/5" href="capabilities.html">Capabilities</a>
+<a class="py-4 text-base text-on-surface hover:text-primary border-b border-white/5" href="portfolio.html">Project Portfolio</a>
+<a class="py-4 text-base font-bold text-primary border-b border-white/5" href="about.html">About</a>
+<a class="py-4 text-base text-on-surface hover:text-primary" href="../news.html">Newsroom</a>
+</nav>
+</div>
+</header>
+<!-- ===== Main ===== -->
+<main class="relative z-10 pt-[96px] pb-12 px-lg max-w-[1100px] mx-auto flex flex-col gap-12">
+<!-- 1. Hero -->
+<section>
+<span class="kinetic-accent font-label-bold text-label-bold uppercase tracking-widest mb-sm block">About</span>
+<h1 id="main-copy" class="text-[30px] sm:text-[40px] md:text-[56px] mb-md leading-[1.25] font-bold">“<span class="emph">사람</span>의 따뜻함을<br><span class="kinetic-accent">소중히 여기는 회사</span>”</h1>
+<p class="text-[15px] sm:text-base text-on-surface/80 leading-relaxed mb-lg">25년 동안 한자리에서, 우리는 기술보다 사람을 먼저 배웠습니다. 현장을 깊이 이해하는 노하우도 결국 사람과 사람 사이에서 쌓였습니다. ㈜넥스트이지는 사람의 따뜻함을 소중히 여기는 회사입니다.</p>
+<div class="border-t border-white/10 pt-lg">
+<span class="kinetic-accent font-label-bold text-label-bold uppercase tracking-widest mb-md block">Company Info</span>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-x-xl gap-y-md text-left">
+<div class="flex gap-md"><span class="w-24 shrink-0 text-on-surface/50 text-sm">업체명</span><span class="font-semibold">주식회사 넥스트이지</span></div>
+<div class="flex gap-md"><span class="w-24 shrink-0 text-on-surface/50 text-sm">대표자</span><span class="font-semibold">강주경</span></div>
+<div class="flex gap-md md:col-span-2"><span class="w-24 shrink-0 text-on-surface/50 text-sm">사업분야</span><span class="text-on-surface/90">AI·데이터 기반 플랫폼 구축, 디지털 전환(DX) 컨설팅, 관광·농업·에너지 산업 서비스, AX(AI Transformation), 웹/모바일 솔루션 개발</span></div>
+<div class="flex gap-md md:col-span-2"><span class="w-24 shrink-0 text-on-surface/50 text-sm">주소</span><span class="text-on-surface/90">제주시 첨단로 213-3, 408, 409호</span></div>
+<div class="flex gap-md"><span class="w-24 shrink-0 text-on-surface/50 text-sm">전화</span><span class="text-on-surface/90">064-721-8118</span></div>
+<div class="flex gap-md"><span class="w-24 shrink-0 text-on-surface/50 text-sm">설립연도</span><span class="text-on-surface/90">2000. 10. 24</span></div>
+<div class="flex gap-md"><span class="w-24 shrink-0 text-on-surface/50 text-sm">임직원수</span><span class="text-on-surface/90">27명</span></div>
+</div>
+</div>
+</section>
+<!-- 2. CEO 메세지 -->
+<section>
+<div class="mb-lg">
+<span class="kinetic-accent font-label-bold text-label-bold uppercase tracking-widest block">CEO 메세지</span>
+<span class="text-on-surface/40 text-sm">CEO Message</span>
+</div>
+<!-- highlight -->
+<div class="glass-panel rounded-xl p-xl mb-lg border-l-4 border-primary-container">
+<span class="material-symbols-outlined text-5xl kinetic-accent">format_quote</span>
+<h2 class="text-2xl md:text-3xl font-bold kinetic-accent mt-sm mb-md">사람의 따뜻함을 소중히 여기는 회사</h2>
+<p class="text-on-surface/80 leading-relaxed">기능 중심을 넘어 AI와 인공지능 기술을 더해, 사람의 가치를 중심에 둔 따뜻한 서비스로 최상의 IT 솔루션을 제공합니다.</p>
+</div>
+<!-- message body -->
+<div class="glass-panel rounded-xl p-xl mb-xl space-y-md text-on-surface/80 leading-relaxed">
+<p>넥스트이지는 빠르게 변화하는 시대 속에서도 기술의 본질은 사람이라는 생각으로, 고객의 일상과 비즈니스에 실질적인 도움이 되는 서비스를 만들어가고 있습니다.</p>
+<p>우리는 AI와 데이터를 통해 더 똑똑한 서비스를 만들지만, 그 안에는 언제나 사람을 이해하고 배려하는 마음을 담고자 합니다.</p>
+<p>특히 관광, 농업, 에너지 등 다양한 산업에서 현장의 목소리를 반영한 서비스로 새로운 가치를 만들어가고 있습니다.</p>
+<p>데이터와 기술이 연결될 때 더 큰 가능성이 열린다고 믿으며, 이를 통해 고객의 지속적인 성장과 변화를 함께 만들어가고 있습니다.</p>
+<p>또한 단순한 시스템 구축을 넘어, 실제로 활용되고 성과로 이어지는 플랫폼을 구현하는 데 집중하고 있습니다.</p>
+<p class="font-bold text-on-surface">앞으로도 사람과 기술이 조화를 이루는 혁신을 통해, 더 나은 미래를 만들어가는 동반자가 되겠습니다.</p>
+<div class="text-right pt-lg border-t border-white/5 mt-lg">
+<div class="text-on-surface/60 text-sm mb-xs">(주)넥스트이지</div>
+<div><span class="text-on-surface/60 text-sm mr-sm">대표이사</span><span class="text-xl font-bold tracking-[0.4em]">강 주 경</span></div>
+</div>
+</div>
+<!-- 경영 철학 -->
+<div>
+<span class="kinetic-accent font-label-bold text-label-bold uppercase tracking-widest block mb-md">경영 철학</span>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-md">
+<div class="glass-panel rounded-xl p-lg border-t-2 border-primary-container">
+<h4 class="font-bold text-on-surface mb-sm"><span class="text-primary">사람</span> 중심 기술</h4>
+<p class="text-[15px] text-on-surface/70 leading-relaxed">기술의 본질은 사람입니다. AI와 데이터를 통해 사람을 이해하고 배려하는 서비스를 만듭니다.</p>
+</div>
+<div class="glass-panel rounded-xl p-lg border-t-2 border-primary-container">
+<h4 class="font-bold text-on-surface mb-sm"><span class="text-primary">사람</span> 중심 혁신</h4>
+<p class="text-[15px] text-on-surface/70 leading-relaxed">관광, 농업, 에너지 등 현장의 목소리를 반영한 서비스로 새로운 가치를 창출합니다.</p>
+</div>
+<div class="glass-panel rounded-xl p-lg border-t-2 border-primary-container">
+<h4 class="font-bold text-on-surface mb-sm"><span class="text-primary">사람</span> 중심 플랫폼</h4>
+<p class="text-[15px] text-on-surface/70 leading-relaxed">단순 구축을 넘어 실제 활용되고 성과로 이어지는 플랫폼을 구현합니다.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- 3. 연혁 -->
+<section>
+<span class="kinetic-accent font-label-bold text-label-bold uppercase tracking-widest block mb-xs">연혁</span>
+<h2 class="text-[28px] sm:text-[36px] leading-[1.2] font-bold mb-sm">한 걸음씩, 함께 쌓아온 25년</h2>
+<p class="text-on-surface/70 text-[15px] mb-md leading-relaxed">1995년 디자인학원 연구소에서 시작해, ICT의 모든 변화의 순간을 현장과 함께 걸어온 넥스트이지의 발자취입니다.</p>
+<div class="grid grid-cols-2 gap-sm shrink-0 md:w-[300px]">
+<div class="glass-panel rounded-xl py-sm text-center"><div class="text-xl font-bold kinetic-accent">2000년</div><div class="text-[11px] text-on-surface/50 mt-0.5">설립연도</div></div>
+<div class="glass-panel rounded-xl py-sm text-center"><div class="text-xl font-bold kinetic-accent">25년+</div><div class="text-[11px] text-on-surface/50 mt-0.5">역사</div></div>
+<div class="glass-panel rounded-xl py-sm text-center"><div class="text-xl font-bold kinetic-accent">40건+</div><div class="text-[11px] text-on-surface/50 mt-0.5">특허/인증</div></div>
+<div class="glass-panel rounded-xl py-sm text-center"><div class="text-xl font-bold kinetic-accent">10건+</div><div class="text-[11px] text-on-surface/50 mt-0.5">수상실적</div></div>
+</div>
+<div class="flex flex-col gap-md mt-md">
+<div class="hist-page w-full shrink-0 px-1">
+<div class="glass-panel rounded-xl p-lg md:p-xl">
+<div class="flex items-baseline gap-md mb-md border-b border-white/10 pb-sm"><span class="text-2xl md:text-3xl font-bold kinetic-accent">2000 – 2005</span><span class="text-xs text-on-surface/50 uppercase tracking-widest">창립 · 기반 구축</span></div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-x-xl gap-y-sm">
+<div class="flex gap-md"><span class="text-primary-container font-bold w-14 shrink-0 text-sm">2000</span><div class="text-[15px] text-on-surface/80 leading-snug">㈜넥스트이지 법인 설립</div></div>
+<div class="flex gap-md"><span class="text-primary-container font-bold w-14 shrink-0 text-sm">2001</span><div class="text-[15px] text-on-surface/80 leading-snug">인터넷여행사 '제주114' 오픈 · 제주도청 웹메일시스템 · 세계섬문화축제 홈페이지</div></div>
+<div class="flex gap-md"><span class="text-primary-container font-bold w-14 shrink-0 text-sm">2002</span><div class="text-[15px] text-on-surface/80 leading-snug">벤처기업 등록(신기술) · 제주도청 웹메일시스템 구축</div></div>
+<div class="flex gap-md"><span class="text-primary-container font-bold w-14 shrink-0 text-sm">2003</span><div class="text-[15px] text-on-surface/80 leading-snug">전산업협동조합 가입 · 제주지식산업진흥원 입주</div></div>
+<div class="flex gap-md"><span class="text-primary-container font-bold w-14 shrink-0 text-sm">2004</span><div class="text-[15px] text-on-surface/80 leading-snug">프로그램 등록 4건(CMS·여행사 솔루션) · 정보화구축 컨설팅 업체 선정</div></div>
+<div class="flex gap-md"><span class="text-primary-container font-bold w-14 shrink-0 text-sm">2005</span><div class="text-[15px] text-on-surface/80 leading-snug">RIS — RFID 관광지 e-쿠폰 구매시스템</div></div>
+</div>
+</div>
+</div>
+<div class="hist-page w-full shrink-0 px-1">
+<div class="glass-panel rounded-xl p-lg md:p-xl">
+<div class="flex items-baseline gap-md mb-md border-b border-white/10 pb-sm"><span class="text-2xl md:text-3xl font-bold kinetic-accent">2006 – 2010</span><span class="text-xs text-on-surface/50 uppercase tracking-widest">성장 · 인증</span></div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-x-xl gap-y-sm">
+<div class="flex gap-md"><span class="text-primary-container font-bold w-14 shrink-0 text-sm">2006</span><div class="text-[15px] text-on-surface/80 leading-snug">대한민국 e-비즈니스대상(장관상) · INNOBIZ 선정 · RFID U-Ticketing 특허출원 · 한국문화콘텐츠진흥원 CRC</div></div>
+<div class="flex gap-md"><span class="text-primary-container font-bold w-14 shrink-0 text-sm">2007</span><div class="text-[15px] text-on-surface/80 leading-snug">기상청 지역특화시스템 구축(전국 1위) · 산학연 공동기술개발 · 성장유망중소기업 · 자본금 증자</div></div>
+<div class="flex gap-md"><span class="text-primary-container font-bold w-14 shrink-0 text-sm">2008</span><div class="text-[15px] text-on-surface/80 leading-snug">기업부설연구소 설립 · INNOBIZ 재선정 · 뉴IT 융합기술 사업자 · 환경자원연구원 홈페이지 구축</div></div>
+<div class="flex gap-md"><span class="text-primary-container font-bold w-14 shrink-0 text-sm">2009</span><div class="text-[15px] text-on-surface/80 leading-snug">지식경제부장관상(SW산업발전) · 성장유망중소기업 · 특허스타기업 선정 · 특허출원(웹페이지 음성 서비스)</div></div>
+<div class="flex gap-md"><span class="text-primary-container font-bold w-14 shrink-0 text-sm">2010</span><div class="text-[15px] text-on-surface/80 leading-snug">벤처기업인증(연구개발기업) · 수출유망중소기업 · 지방기술혁신(UCC) · 융합형 방송콘텐츠 '제주올레'</div></div>
+</div>
+</div>
+</div>
+<div class="hist-page w-full shrink-0 px-1">
+<div class="glass-panel rounded-xl p-lg md:p-xl">
+<div class="flex items-baseline gap-md mb-md border-b border-white/10 pb-sm"><span class="text-2xl md:text-3xl font-bold kinetic-accent">2011 – 2015</span><span class="text-xs text-on-surface/50 uppercase tracking-widest">기술 · 특허</span></div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-x-xl gap-y-sm">
+<div class="flex gap-md"><span class="text-primary-container font-bold w-14 shrink-0 text-sm">2011</span><div class="text-[15px] text-on-surface/80 leading-snug">INNOBIZ 재선정 · ISO 9001 인증 · 지방기술혁신(UCC) · IT선도기업 육성 선정</div></div>
+<div class="flex gap-md"><span class="text-primary-container font-bold w-14 shrink-0 text-sm">2012</span><div class="text-[15px] text-on-surface/80 leading-snug">ISO 9001 인증 · SW품질인증(Sukso114) · 전기차 예약충전·발전예측 특허출원 · 벤처기업(연구개발) 재인증</div></div>
+<div class="flex gap-md"><span class="text-primary-container font-bold w-14 shrink-0 text-sm">2013</span><div class="text-[15px] text-on-surface/80 leading-snug">정보통신공사업·산업디자인전문회사 등록 · SW품질인증(MICE-NICE) · 수출유망중소기업 · 스마트그리드 특허등록</div></div>
+<div class="flex gap-md"><span class="text-primary-container font-bold w-14 shrink-0 text-sm">2014</span><div class="text-[15px] text-on-surface/80 leading-snug">발전예측모델·전기차 예약충전 특허등록 · INNOBIZ 재선정 · 벤처기업 재인증 · SW품질인증(Ticket-Nice)</div></div>
+<div class="flex gap-md"><span class="text-primary-container font-bold w-14 shrink-0 text-sm">2015</span><div class="text-[15px] text-on-surface/80 leading-snug">ISO 9001 인증 · SW품질인증(s-WEMS)</div></div>
+</div>
+</div>
+</div>
+<div class="hist-page w-full shrink-0 px-1">
+<div class="glass-panel rounded-xl p-lg md:p-xl">
+<div class="flex items-baseline gap-md mb-md border-b border-white/10 pb-sm"><span class="text-2xl md:text-3xl font-bold kinetic-accent">2016 – 2020</span><span class="text-xs text-on-surface/50 uppercase tracking-widest">솔루션 · R&amp;D</span></div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-x-xl gap-y-sm">
+<div class="flex gap-md"><span class="text-primary-container font-bold w-14 shrink-0 text-sm">2016</span><div class="text-[15px] text-on-surface/80 leading-snug">음식점 추천시스템(빅데이터) 특허출원 · 벤처기업 재인증 · 프로그램 등록 3건(JEJU O2O)</div></div>
+<div class="flex gap-md"><span class="text-primary-container font-bold w-14 shrink-0 text-sm">2017</span><div class="text-[15px] text-on-surface/80 leading-snug">SW품질인증(CMS-Nice v1.1) · ISO14001 인증 · 추천알고리즘(AHP) 특허출원 · INNOBIZ 재선정 · 연구개발서비스업 신고</div></div>
+<div class="flex gap-md"><span class="text-primary-container font-bold w-14 shrink-0 text-sm">2018</span><div class="text-[15px] text-on-surface/80 leading-snug">벤처기업 재인증 · SW품질인증(제주생물자원 관리시스템) · 사무실 이전(첨단로 245-13)</div></div>
+<div class="flex gap-md"><span class="text-primary-container font-bold w-14 shrink-0 text-sm">2019</span><div class="text-[15px] text-on-surface/80 leading-snug">4IR AWARDS 플랫폼·트래블테크 부문 대상 · 가족친화인증기업 선정 · MAINBIZ 재선정 · SW품질인증(AMNOTE)</div></div>
+<div class="flex gap-md"><span class="text-primary-container font-bold w-14 shrink-0 text-sm">2020</span><div class="text-[15px] text-on-surface/80 leading-snug">전자문서 위변조 방지 특허출원 2건 · SW품질인증(베트남 전자세금계산서) · INNOBIZ 재선정 · 벤처기업 재인증</div></div>
+</div>
+</div>
+</div>
+<div class="hist-page w-full shrink-0 px-1">
+<div class="glass-panel rounded-xl p-lg md:p-xl border border-primary-container/40 shadow-[0_0_24px_rgba(255,102,0,0.18)]">
+<div class="flex items-baseline gap-md mb-md border-b border-white/10 pb-sm"><span class="text-2xl md:text-3xl font-bold kinetic-accent">2021 – 2025</span><span class="text-xs text-on-surface/50 uppercase tracking-widest">AI · AX 확산</span></div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-x-xl gap-y-sm">
+<div class="flex gap-md"><span class="text-primary-container font-bold w-14 shrink-0 text-sm">2021</span><div class="text-[15px] text-on-surface/80 leading-snug">제주 수출유공기업 수출 장려상 · 상표 등록(섬프로)</div></div>
+<div class="flex gap-md"><span class="text-primary-container font-bold w-14 shrink-0 text-sm">2022</span><div class="text-[15px] text-on-surface/80 leading-snug">가족친화인증기업 재선정 · 벤처기업 재인증 · MAINBIZ 재선정</div></div>
+<div class="flex gap-md"><span class="text-primary-container font-bold w-14 shrink-0 text-sm">2023</span><div class="text-[15px] text-on-surface/80 leading-snug">기술혁신형 이노비즈(INNOBIZ) 재선정</div></div>
+<div class="flex gap-md"><span class="text-primary-container font-bold w-14 shrink-0 text-sm">2024</span><div class="text-[15px] text-on-surface/80 leading-snug">태양광 발전량 범용 예측모델 특허출원 · 라이브 방송 기반 관광 OTA 플랫폼 특허출원 · 가족친화인증 재선정 · 전문연구사업자 인증</div></div>
+<div class="flex gap-md"><span class="text-primary-container font-bold w-14 shrink-0 text-sm">2025</span><div class="text-[15px] text-on-surface/90 leading-snug font-semibold">벤처기업 재인증 · 경영혁신형 중소기업(MAINBIZ) 재선정</div></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 4. 인증·수상 -->
+<section>
+<span class="kinetic-accent font-label-bold text-label-bold uppercase tracking-widest block mb-xs">인증 및 수상 현황</span>
+<h2 class="text-[28px] sm:text-[36px] leading-[1.2] font-bold mb-sm">검증된 기술력, 쌓아온 신뢰의 증표</h2>
+<p class="text-on-surface/70 text-[15px] mb-md leading-relaxed">GS 품질인증부터 정부 수상까지 — 공인기관이 인정한 넥스트이지의 40여 건의 인증·수상입니다.</p>
+<div class="grid grid-cols-2 gap-sm shrink-0 md:w-[300px]">
+<div class="glass-panel rounded-xl py-sm text-center"><div class="text-xl font-bold kinetic-accent">7건</div><div class="text-[11px] text-on-surface/50 mt-0.5">수상</div></div>
+<div class="glass-panel rounded-xl py-sm text-center"><div class="text-xl font-bold kinetic-accent">9건</div><div class="text-[11px] text-on-surface/50 mt-0.5">GS 품질인증</div></div>
+<div class="glass-panel rounded-xl py-sm text-center"><div class="text-xl font-bold kinetic-accent">13건</div><div class="text-[11px] text-on-surface/50 mt-0.5">인증</div></div>
+<div class="glass-panel rounded-xl py-sm text-center"><div class="text-xl font-bold kinetic-accent">8건</div><div class="text-[11px] text-on-surface/50 mt-0.5">등록·신고</div></div>
+</div>
+<div class="flex flex-col gap-md mt-md">
+<div class="awd-page w-full shrink-0 px-1">
+<div class="glass-panel rounded-xl p-lg md:p-xl">
+<div class="flex items-center gap-md mb-md border-b border-white/10 pb-sm"><span class="material-symbols-outlined kinetic-accent text-3xl">emoji_events</span><span class="text-2xl md:text-3xl font-bold kinetic-accent">수상</span><span class="text-xs text-on-surface/50 uppercase tracking-widest ml-auto">Awards</span></div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-x-xl gap-y-sm">
+<div class="text-[15px] text-on-surface/80 leading-snug">· 4IR AWARDS 트래블테크 부문 대상 <span class="text-primary font-semibold">3년 연속</span> (2017~2019)</div>
+<div class="text-[15px] text-on-surface/80 leading-snug">· 대한민국 e-비즈니스 대상 (산자부 장관상, 2006)</div>
+<div class="text-[15px] text-on-surface/80 leading-snug">· 지식경제부 장관 표창 (2009)</div>
+<div class="text-[15px] text-on-surface/80 leading-snug">· 제주경제상 (제주테크노파크, 2018)</div>
+<div class="text-[15px] text-on-surface/80 leading-snug">· 제주도지사 표창장 (2017)</div>
+<div class="text-[15px] text-on-surface/80 leading-snug">· 공로상 (제주지역사업평가원, 2013)</div>
+<div class="text-[15px] text-on-surface/80 leading-snug">· 수출유공기업 수출 장려상 (2021)</div>
+</div>
+</div>
+</div>
+<div class="awd-page w-full shrink-0 px-1">
+<div class="glass-panel rounded-xl p-lg md:p-xl border border-primary-container/40 shadow-[0_0_24px_rgba(255,102,0,0.18)]">
+<div class="flex items-center gap-md mb-md border-b border-white/10 pb-sm"><span class="material-symbols-outlined kinetic-accent text-3xl">verified</span><span class="text-2xl md:text-3xl font-bold kinetic-accent">GS인증</span><span class="text-sm text-primary font-semibold">9건</span><span class="text-xs text-on-surface/50 ml-auto">SW 품질인증 · TTA</span></div>
+<div class="grid grid-cols-2 md:grid-cols-3 gap-x-xl gap-y-sm">
+<div class="text-sm text-on-surface/80">· MICE-NICE</div>
+<div class="text-sm text-on-surface/80">· CMS-Nice v1.1</div>
+<div class="text-sm text-on-surface/80">· s-WEMS</div>
+<div class="text-sm text-on-surface/80">· Ticket-Nice</div>
+<div class="text-sm text-on-surface/80">· Sukso114</div>
+<div class="text-sm text-on-surface/80">· ezM-Maker</div>
+<div class="text-sm text-on-surface/80">· AMNOTE 회계</div>
+<div class="text-sm text-on-surface/80">· 베트남 전자세금계산서</div>
+<div class="text-sm text-on-surface/80">· 제주생물자원 관리시스템</div>
+</div>
+</div>
+</div>
+<div class="awd-page w-full shrink-0 px-1">
+<div class="glass-panel rounded-xl p-lg md:p-xl">
+<div class="flex items-center gap-md mb-md border-b border-white/10 pb-sm"><span class="material-symbols-outlined kinetic-accent text-3xl">workspace_premium</span><span class="text-2xl md:text-3xl font-bold kinetic-accent">인증</span><span class="text-xs text-on-surface/50 uppercase tracking-widest ml-auto">Certifications</span></div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-x-xl gap-y-sm">
+<div class="text-[15px] text-on-surface/80 leading-snug">· 벤처기업 확인 (중소기업진흥공단)</div>
+<div class="text-[15px] text-on-surface/80 leading-snug">· 기술혁신형 중소기업 (Inno-Biz)</div>
+<div class="text-[15px] text-on-surface/80 leading-snug">· 경영혁신형 중소기업 (Main-Biz)</div>
+<div class="text-[15px] text-on-surface/80 leading-snug">· 가족친화 인증기업 (여성가족부)</div>
+<div class="text-[15px] text-on-surface/80 leading-snug">· ISO 9001 / ISO 14001</div>
+<div class="text-[15px] text-on-surface/80 leading-snug">· 직접생산확인 6건 (중소기업중앙회)</div>
+<div class="text-[15px] text-on-surface/80 leading-snug">· 투명경영 인증</div>
+</div>
+</div>
+</div>
+<div class="awd-page w-full shrink-0 px-1">
+<div class="glass-panel rounded-xl p-lg md:p-xl">
+<div class="flex items-center gap-md mb-md border-b border-white/10 pb-sm"><span class="material-symbols-outlined kinetic-accent text-3xl">assignment_turned_in</span><span class="text-2xl md:text-3xl font-bold kinetic-accent">등록·신고</span><span class="text-xs text-on-surface/50 uppercase tracking-widest ml-auto">Licenses</span></div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-x-xl gap-y-sm">
+<div class="text-[15px] text-on-surface/80 leading-snug">· 사업자등록 · 관광사업등록 (2000)</div>
+<div class="text-[15px] text-on-surface/80 leading-snug">· 통신판매업 신고 (2005)</div>
+<div class="text-[15px] text-on-surface/80 leading-snug">· 정보통신공사업 등록 (2013)</div>
+<div class="text-[15px] text-on-surface/80 leading-snug">· 산업디자인전문회사 신고 (2013)</div>
+<div class="text-[15px] text-on-surface/80 leading-snug">· 연구개발서비스업 신고 (과기정통부)</div>
+<div class="text-[15px] text-on-surface/80 leading-snug">· 전문연구사업자 인증 (2024)</div>
+<div class="text-[15px] text-on-surface/80 leading-snug">· 농공상융합 협업기업 선정 (2024)</div>
+</div>
+</div>
+</div>
+<div class="awd-page w-full shrink-0 px-1">
+<div class="glass-panel rounded-xl p-lg md:p-xl">
+<div class="flex items-center gap-md mb-md border-b border-white/10 pb-sm"><span class="material-symbols-outlined kinetic-accent text-3xl">handshake</span><span class="text-2xl md:text-3xl font-bold kinetic-accent">회원</span><span class="text-xs text-on-surface/50 uppercase tracking-widest ml-auto">Memberships</span></div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-x-xl gap-y-sm">
+<div class="text-[15px] text-on-surface/80 leading-snug">· 한국무역협회</div>
+<div class="text-[15px] text-on-surface/80 leading-snug">· 한국정보통신공사협회</div>
+<div class="text-[15px] text-on-surface/80 leading-snug">· 제주특별자치도관광협회</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 5. 오시는 길 -->
+<section>
+<span class="kinetic-accent font-label-bold text-label-bold uppercase tracking-widest block">찾아오는 길</span>
+<h2 class="text-[28px] sm:text-[36px] leading-[1.2] font-bold mt-xs mb-md">사람과 기술이 만나는 자리,<br><span class="kinetic-accent">제주첨단과학단지</span></h2>
+<div class="mb-md">
+<span class="kinetic-accent font-label-bold text-label-bold uppercase tracking-widest block">찾아오는 길</span>
+<span class="text-on-surface/40 text-sm">Location</span>
+</div>
+<h1 class="text-[40px] md:text-[64px] leading-[1.1] font-bold mb-md">사람과 기술이 만나는 자리,<br><span class="kinetic-accent">제주첨단과학단지</span></h1>
+<p class="text-on-surface/70 text-[15px] mb-lg">넥스트이지는 제주첨단과학기술단지 내에 위치하고 있습니다. 언제든 편하게 찾아주세요.</p>
+<!-- map -->
+<a href="https://map.kakao.com/?q=제주시%20첨단로%20213-3" target="_blank" rel="noopener" class="block glass-panel rounded-xl border-2 border-dashed border-white/15 h-[240px] flex flex-col items-center justify-center text-center hover:border-primary transition-colors mb-lg">
+<span class="material-symbols-outlined text-5xl text-on-surface/40 mb-sm">location_on</span>
+<div class="text-on-surface/50">카카오맵 연동 영역</div>
+<div class="text-xs text-on-surface/30 mt-1">제주시 첨단로 213-3, 408, 409호</div>
+</a>
+<!-- info cards -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-md mb-lg">
+<div class="glass-panel rounded-xl p-lg">
+<div class="flex items-center gap-sm mb-md"><span class="material-symbols-outlined text-primary-container">location_on</span><h4 class="font-bold">주소</h4></div>
+<p class="text-[15px] text-on-surface/75 leading-relaxed mb-md">제주특별자치도 제주시 첨단로 213-3, 408, 409호</p>
+<a href="https://map.kakao.com/?q=제주시%20첨단로%20213-3" target="_blank" rel="noopener" class="text-primary text-sm inline-flex items-center gap-1 hover:text-primary-container transition-colors"><span class="material-symbols-outlined text-sm">near_me</span> 길찾기</a>
+</div>
+<div class="glass-panel rounded-xl p-lg">
+<div class="flex items-center gap-sm mb-md"><span class="material-symbols-outlined text-primary-container">call</span><h4 class="font-bold">SI개발사업부</h4></div>
+<div class="space-y-1.5 text-sm"><div class="flex justify-between"><span class="text-on-surface/50">전화</span><span class="font-semibold">064) 721-8118</span></div><div class="flex justify-between"><span class="text-on-surface/50">팩스</span><span class="font-semibold">064) 726-0816</span></div></div>
+</div>
+<div class="glass-panel rounded-xl p-lg">
+<div class="flex items-center gap-sm mb-md"><span class="material-symbols-outlined text-primary-container">apartment</span><h4 class="font-bold">e-Tour사업부</h4></div>
+<div class="space-y-1.5 text-sm"><div class="flex justify-between gap-sm"><span class="text-on-surface/50">제주114닷컴</span><span class="font-semibold">064) 721-1140</span></div><div class="flex justify-between gap-sm"><span class="text-on-surface/50">섬프로</span><span class="font-semibold">064) 721-3341</span></div></div>
+</div>
+</div>
+<!-- 교통 안내 -->
+<div class="glass-panel rounded-xl p-lg">
+<span class="kinetic-accent font-label-bold text-label-bold uppercase tracking-widest block mb-md">교통 안내</span>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-lg">
+<div class="flex gap-md"><span class="material-symbols-outlined text-primary-container">directions_bus</span><div><div class="font-bold mb-1">버스 이용 시</div><div class="text-[15px] text-on-surface/70 leading-relaxed">첨단과학단지 정류장 하차 후 도보 5분<br>제주 시내버스 이용</div></div></div>
+<div class="flex gap-md"><span class="material-symbols-outlined text-primary-container">directions_car</span><div><div class="font-bold mb-1">차량 이용 시</div><div class="text-[15px] text-on-surface/70 leading-relaxed">제주공항에서 차량으로 약 15분 소요<br>첨단과학단지 내 주차장 이용 가능</div></div></div>
+</div>
+</div>
+</section>
+</main>
+<!-- ===== Footer ===== -->
+<footer class="relative z-10 w-full bg-surface-container-lowest border-t border-white/10">
+<div class="max-w-[1600px] mx-auto px-lg py-lg flex flex-col gap-3 text-xs">
+<div class="flex flex-col gap-1.5 text-on-surface-variant">
+<span class="font-bold text-on-surface text-sm">㈜넥스트이지</span>
+<span>대표이사 강주경</span>
+<span>제주특별자치도 제주시 첨단로 213-3, 408·409호</span>
+<span class="text-primary-container font-semibold">064-721-8118</span>
+</div>
+<div class="flex flex-wrap items-center gap-1.5 pt-2 border-t border-white/5">
+<span class="px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-[11px] text-on-surface-variant">벤처기업</span>
+<span class="px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-[11px] text-on-surface-variant">기술혁신형(INNOBIZ)</span>
+<span class="px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-[11px] text-on-surface-variant">경영혁신형(MAINBIZ)</span>
+<span class="px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-[11px] text-on-surface-variant">가족친화 인증기업</span>
+<span class="px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-[11px] text-on-surface-variant">ISO 9001·14001</span>
+<span class="px-2 py-0.5 rounded-full bg-primary-container/15 border border-primary-container/30 text-[11px] text-primary font-semibold">외 인증 13건</span>
+</div>
+<div class="pt-2 border-t border-white/5">
+<a href="../about.html?view=pc" class="inline-flex items-center gap-1 text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined text-sm">desktop_windows</span>PC 버전으로 보기</a>
+</div>
+</div>
+</footer>
+<script>
+        /* 메인카피 글자 셔머 */
+        (function () {
+            var h = document.getElementById('main-copy'); if (!h) return; var idx = 0;
+            (function walk(node) {
+                Array.prototype.slice.call(node.childNodes).forEach(function (child) {
+                    if (child.nodeType === 3) {
+                        var frag = document.createDocumentFragment();
+                        Array.from(child.textContent).forEach(function (ch) {
+                            if (ch === ' ') { frag.appendChild(document.createTextNode(' ')); return; }
+                            var s = document.createElement('span'); s.className = 'char'; s.textContent = ch;
+                            s.style.animationDelay = (idx * 0.05).toFixed(2) + 's'; idx++; frag.appendChild(s);
+                        });
+                        node.replaceChild(frag, child);
+                    } else if (child.nodeType === 1 && child.tagName !== 'BR' && !child.classList.contains('kinetic-accent')) { walk(child); }
+                });
+            })(h);
+        })();
+        /* 모바일 햄버거 메뉴 */
+        (function () {
+            var btn = document.getElementById('navToggle'), menu = document.getElementById('mobileMenu'), icon = document.getElementById('navIcon');
+            if (!btn || !menu) return;
+            function setOpen(o) { menu.classList.toggle('hidden', !o); btn.setAttribute('aria-expanded', o ? 'true' : 'false'); if (icon) icon.textContent = o ? 'close' : 'menu'; }
+            btn.addEventListener('click', function () { setOpen(menu.classList.contains('hidden')); });
+            menu.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', function () { setOpen(false); }); });
+            window.addEventListener('resize', function () { if (window.innerWidth >= 768) setOpen(false); });
+        })();
+    </script>
+</body></html>
