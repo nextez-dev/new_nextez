@@ -3,6 +3,35 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
 <title>NEXTEZ - Portfolio</title>
+<!-- ===== 모바일 자동 감지 → m/ 리다이렉트 (PC는 그대로) ===== -->
+<style id="preCloak">html{visibility:hidden}</style>
+<noscript><style>html{visibility:visible!important}</style></noscript>
+<script>
+(function () {
+  function reveal(){ var s=document.getElementById('preCloak'); if(s&&s.parentNode){ s.parentNode.removeChild(s); } }
+  try {
+    var qs = new URLSearchParams(location.search);
+    var force = qs.get('view');
+    if (force) { try { localStorage.setItem('viewMode', force); } catch (e) {} }
+    var mode = force || (function(){ try { return localStorage.getItem('viewMode'); } catch (e) { return null; } })();
+    if (mode === 'pc') { reveal(); return; }
+    var isMobile = (mode === 'mobile');
+    if (!mode) {
+      var ua = navigator.userAgent || '';
+      var uaMobile = /Android|iPhone|iPod|Windows Phone|BlackBerry|Mobile/i.test(ua);
+      var iPadOS = /iPad/i.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+      var smallSide = Math.min(screen.width, screen.height) <= 820;
+      isMobile = (uaMobile || iPadOS) && smallSide;
+    }
+    if (isMobile) {
+      var page = location.pathname.split('/').pop() || 'index.html';
+      location.replace('m/' + page + location.search + location.hash);
+      return;
+    }
+    reveal();
+  } catch (e) { reveal(); }
+})();
+</script>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link as="style" crossorigin="" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">

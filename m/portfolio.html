@@ -2,7 +2,7 @@
 <head>
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport">
-<title>NEXTEZ | Capabilities Overview</title>
+<title>NEXTEZ - Project Portfolio</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link as="style" crossorigin="" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
@@ -39,22 +39,17 @@
         /* 모바일 반응형: 화면잠금 해제 → 세로 스크롤 허용 */
         html { -webkit-text-size-adjust: 100%; }
         body { font-family: 'Pretendard Variable', Pretendard, sans-serif; background-color: #131313; color: #e5e2e1; overflow-x: hidden; }
-        .slide-number { -webkit-text-stroke: 1.5px rgba(255, 102, 0, 0.4); color: transparent; }
         .glass-panel { background: rgba(26, 26, 26, 0.55); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(46, 46, 46, 0.6); }
-        .kinetic-gradient { background: linear-gradient(135deg, #ff6600 0%, #ffb596 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
-        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
+        .grid-pattern { background-image: linear-gradient(rgba(255,102,0,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,102,0,0.5) 1px, transparent 1px); background-size: 40px 40px; }
         .char { display: inline-block; will-change: filter; filter: brightness(0.8); animation: charShine 5s ease-in-out infinite; }
         @keyframes charShine { 0%,55%,100% { filter: brightness(0.8); } 26% { filter: brightness(1.55) drop-shadow(0 0 8px rgba(255,255,255,0.35)); } }
         .emph .char { position: relative; }
         .emph .char::before { content:''; position:absolute; top:-0.34em; left:50%; transform:translateX(-50%); width:0.16em; height:0.16em; border-radius:9999px; background:#ff6600; }
     </style>
 </head>
-<body class="bg-background text-on-surface antialiased min-h-[100dvh] selection:bg-primary-container selection:text-on-primary-container">
+<body class="bg-background text-on-surface antialiased min-h-[100dvh] selection:bg-primary-container">
 <!-- 배경 -->
-<div class="fixed inset-0 z-0">
-<img class="w-full h-full object-cover opacity-40" alt="" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJgAwoZeNH-uvXwSXG-39COP-quT4rnVjMQhmlwgu243YZZX0jhO2DwRhnD1SHC5icCCBztmUNsXxOYUe2nJeByxkw7b0a_9SZbCTS4ql5NBIjWYTfeSsm6ZJbwdI04OEoyU8MLKhccvEBQu9w4H-qTaKTf_zxul3y3Li0nZ800dpR8ivvBaypUpDriKjnlOOUkQ2fdWiz0zdjtPgrPkY7IWlNgaLSgp2VcERZCb4gmcpWhoqdcDvLPZ9zy_SGAS-0DbLTclwqH1Vl">
-<div class="absolute inset-0 bg-gradient-to-b from-background/85 via-background/70 to-background/95"></div>
-</div>
+<div class="fixed inset-0 z-0 grid-pattern opacity-[0.05] pointer-events-none"></div>
 <!-- ===== Header (모바일 햄버거) ===== -->
 <header class="fixed w-full top-0 border-b border-white/10 bg-background/85 backdrop-blur-md z-50">
 <div class="flex items-center w-full px-lg py-md max-w-[1600px] mx-auto">
@@ -62,8 +57,8 @@
 <nav class="hidden md:flex items-center gap-lg ml-auto">
 <a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors px-sm py-xs rounded" href="index.html">Home</a>
 <a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors px-sm py-xs rounded" href="services.html">Services</a>
-<a class="font-body-md text-body-md text-primary font-bold border-b-2 border-primary pb-1" href="capabilities.html">Capabilities</a>
-<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors px-sm py-xs rounded" href="portfolio.html">Project Portfolio</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors px-sm py-xs rounded" href="capabilities.html">Capabilities</a>
+<a class="font-body-md text-body-md text-primary font-bold border-b-2 border-primary pb-1" href="portfolio.html">Project Portfolio</a>
 <a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors px-sm py-xs rounded" href="../about.html">About</a>
 <a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors px-sm py-xs rounded" href="../news.html">Newsroom</a>
 </nav>
@@ -75,8 +70,8 @@
 <nav class="flex flex-col px-lg py-xs max-w-[1600px] mx-auto">
 <a class="py-4 text-base text-on-surface hover:text-primary border-b border-white/5" href="index.html">Home</a>
 <a class="py-4 text-base text-on-surface hover:text-primary border-b border-white/5" href="services.html">Services</a>
-<a class="py-4 text-base font-bold text-primary border-b border-white/5" href="capabilities.html">Capabilities</a>
-<a class="py-4 text-base text-on-surface hover:text-primary border-b border-white/5" href="portfolio.html">Project Portfolio</a>
+<a class="py-4 text-base text-on-surface hover:text-primary border-b border-white/5" href="capabilities.html">Capabilities</a>
+<a class="py-4 text-base font-bold text-primary border-b border-white/5" href="portfolio.html">Project Portfolio</a>
 <a class="py-4 text-base text-on-surface hover:text-primary border-b border-white/5" href="../about.html">About</a>
 <a class="py-4 text-base text-on-surface hover:text-primary" href="../news.html">Newsroom</a>
 </nav>
@@ -86,90 +81,82 @@
 <main class="relative z-10 pt-[96px] pb-12 px-lg max-w-[1100px] mx-auto">
 <!-- Hero -->
 <div class="mb-xl">
-<span class="font-bold text-[12px] tracking-widest text-primary uppercase mb-sm block">Capabilities</span>
-<h1 id="main-copy" class="text-[28px] sm:text-[40px] md:text-[56px] leading-[1.2] font-bold tracking-tight mb-md drop-shadow-2xl">산업의 본질을 꿰뚫는 <span class="text-primary-container emph">넥스트이지</span><span class="kinetic-gradient">의 독보적 역량</span></h1>
-<p class="text-on-surface text-[15px] sm:text-base md:text-lg drop-shadow-md leading-relaxed">현장 데이터로 AI를 만들고, AI로 다시 현장을 운영합니다 — <span class="text-primary-container font-semibold">데이터 → AI → 구축 → 운영</span> 전 과정을 직접 수행하는 4대 역량.</p>
+<span class="font-bold text-[12px] tracking-widest text-primary uppercase mb-sm block">Portfolio</span>
+<h1 id="main-copy" class="text-[26px] sm:text-[36px] md:text-[52px] leading-[1.25] font-bold drop-shadow-2xl">25년, 수많은 <span class="text-primary-container emph">현장</span>에서 만든 것이<br><span class="text-primary-container">지금도 멈추지 않고 돌아갑니다</span></h1>
+<p class="text-on-surface-variant text-[15px] sm:text-base mt-md leading-relaxed">제주 공공·산업 현장에 적용된 360여 개 프로젝트와 54건의 정부 R&amp;D·사업화 — 직접 기획하고, 구축하고, 운영한 결과물을 분야별로 만나보세요.</p>
 </div>
-<!-- 4 capability cards (세로 스택 / sm 이상 2열) -->
+<!-- 4개 분야 카드 (세로 스택 / sm 이상 2열) -->
 <div class="grid grid-cols-1 sm:grid-cols-2 gap-md">
-<!-- 01 AI · Data -->
-<div class="glass-panel rounded-xl p-lg flex flex-col border-t-2 border-t-primary hover:border-primary transition-colors group">
-<div class="flex items-start justify-between mb-md">
-<span class="text-[44px] font-bold slide-number leading-none">01</span>
-<span class="material-symbols-outlined text-primary-container text-[32px]">neurology</span>
+<!-- AI · Data -->
+<div class="glass-panel rounded-xl p-lg border-t-2 border-t-primary flex flex-col">
+<div class="flex items-start justify-between gap-sm mb-sm">
+<div><h3 class="text-xl font-bold leading-tight">AI · Data</h3><span class="text-xs text-on-surface/45">AI · 빅데이터 · <span class="text-primary-container font-semibold">12+건</span></span></div>
+<span class="material-symbols-outlined text-primary-container text-[30px] shrink-0">smart_toy</span>
 </div>
-<h3 class="text-xl font-bold mb-xs">AI · Data</h3>
-<p class="text-[12px] text-on-surface/50 uppercase tracking-widest mb-xs">AI·데이터</p>
-<p class="text-[13px] text-on-surface/65 leading-snug mb-md">현장 운영 데이터로 학습한 AI 모델과, 그 아래 데이터 파이프라인 기술</p>
-<ul class="space-y-1.5 text-[13px] text-on-surface/80 flex-grow">
-<li class="flex gap-sm"><span class="text-primary-container">·</span> 수집·정제·표준화·결합·품질검증 파이프라인</li>
-<li class="flex gap-sm"><span class="text-primary-container">·</span> Computer Vision · LLM/RAG</li>
-<li class="flex gap-sm"><span class="text-primary-container">·</span> AI 예측모형 — 가격·생산량·판매수요·피해규모·발전량</li>
-<li class="flex gap-sm"><span class="text-primary-container">·</span> 관광 60여종 · 4억여건 데이터 보유</li>
-<li class="flex gap-sm"><span class="text-primary-container">·</span> 농업 50여종 · 9백만여건 수집·정제·표준화</li>
-</ul>
-<div class="mt-lg pt-md border-t border-white/10 flex items-center justify-between">
-<div class="flex items-baseline gap-1"><span class="text-2xl font-bold text-primary">12+</span><span class="text-[11px] text-on-surface/50 uppercase tracking-widest">건</span></div>
-<button type="button" data-detail="ai" class="cap-detail-btn flex items-center gap-1 text-[12px] font-bold text-primary-container hover:gap-2 transition-all">KEY PROJECT<svg viewBox="0 0 24 24" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13"/><path d="M12 6l6 6-6 6"/></svg></button>
+<p class="text-[14px] text-on-surface-variant leading-relaxed mb-md">컴퓨터비전·예측·3D 모델과 데이터 파이프라인 — 현장 데이터로 학습하고, 현장 문제를 푸는 AI.</p>
+<div class="flex flex-wrap gap-1.5 mb-md flex-grow content-start">
+<span class="text-[11px] px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-on-surface-variant">컴퓨터비전(YOLO)</span>
+<span class="text-[11px] px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-on-surface-variant">예측 모델</span>
+<span class="text-[11px] px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-on-surface-variant">3D 파이프라인</span>
+<span class="text-[11px] px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-on-surface-variant">LLM·임베딩</span>
+<span class="text-[11px] px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-on-surface-variant">데이터 품질검증</span>
+</div>
+<div class="mt-auto pt-md border-t border-white/10 flex justify-end">
+<button type="button" data-detail="ai" class="cap-detail-btn flex items-center gap-1 text-[13px] font-bold text-primary-container hover:gap-2 transition-all">대표 실적 보기<svg viewBox="0 0 24 24" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13"/><path d="M12 6l6 6-6 6"/></svg></button>
 </div>
 </div>
-<!-- 02 Platform · Solution -->
-<div class="glass-panel rounded-xl p-lg flex flex-col border-t-2 border-t-primary hover:border-primary transition-colors group">
-<div class="flex items-start justify-between mb-md">
-<span class="text-[44px] font-bold slide-number leading-none">02</span>
-<span class="material-symbols-outlined text-primary-container text-[32px]">dashboard</span>
+<!-- Platform · Solution -->
+<div class="glass-panel rounded-xl p-lg border-t-2 border-t-primary flex flex-col">
+<div class="flex items-start justify-between gap-sm mb-sm">
+<div><h3 class="text-xl font-bold leading-tight">Platform · Solution</h3><span class="text-xs text-on-surface/45">플랫폼 · 솔루션 · <span class="text-primary-container font-semibold">37+건</span></span></div>
+<span class="material-symbols-outlined text-primary-container text-[30px] shrink-0">hub</span>
 </div>
-<h3 class="text-xl font-bold mb-xs">Platform · Solution</h3>
-<p class="text-[12px] text-on-surface/50 uppercase tracking-widest mb-xs">플랫폼·솔루션</p>
-<p class="text-[13px] text-on-surface/65 leading-snug mb-md">자체 엔진·아키텍처로 플랫폼을 직접 설계·구축·운영하는 기술 역량</p>
-<ul class="space-y-1.5 text-[13px] text-on-surface/80 flex-grow">
-<li class="flex gap-sm"><span class="text-primary-container">·</span> CMS 저작툴(GS인증) · 멀티도메인 · 다채널</li>
-<li class="flex gap-sm"><span class="text-primary-container">·</span> 클라우드 SaaS 엔지니어링</li>
-<li class="flex gap-sm"><span class="text-primary-container">·</span> 모바일 서비스 · OTA · MICE</li>
-</ul>
-<div class="mt-lg pt-md border-t border-white/10 flex items-center justify-between">
-<div class="flex items-baseline gap-1"><span class="text-2xl font-bold text-primary">75+</span><span class="text-[11px] text-on-surface/50 uppercase tracking-widest">건</span></div>
-<button type="button" data-detail="platform" class="cap-detail-btn flex items-center gap-1 text-[12px] font-bold text-primary-container hover:gap-2 transition-all">KEY PROJECT<svg viewBox="0 0 24 24" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13"/><path d="M12 6l6 6-6 6"/></svg></button>
+<p class="text-[14px] text-on-surface-variant leading-relaxed mb-md">농업·관광·에너지 등 산업 특화 서비스 플랫폼 — OTA·MICE·라이브커머스·쇼핑을 직접 기획하고 운영.</p>
+<div class="flex flex-wrap gap-1.5 mb-md flex-grow content-start">
+<span class="text-[11px] px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-on-surface-variant">OTA·예약</span>
+<span class="text-[11px] px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-on-surface-variant">MICE 통합운영</span>
+<span class="text-[11px] px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-on-surface-variant">Live Commerce</span>
+<span class="text-[11px] px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-on-surface-variant">Shopping</span>
+<span class="text-[11px] px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-on-surface-variant">서비스 플랫폼</span>
 </div>
-</div>
-<!-- 03 Web · System Integration -->
-<div class="glass-panel rounded-xl p-lg flex flex-col border-t-2 border-t-primary hover:border-primary transition-colors group">
-<div class="flex items-start justify-between mb-md">
-<span class="text-[44px] font-bold slide-number leading-none">03</span>
-<span class="material-symbols-outlined text-primary-container text-[32px]">integration_instructions</span>
-</div>
-<h3 class="text-xl font-bold mb-xs">Web · System Integration</h3>
-<p class="text-[12px] text-on-surface/50 uppercase tracking-widest mb-xs">웹·시스템 통합</p>
-<p class="text-[13px] text-on-surface/65 leading-snug mb-md">분석·설계부터 보안·운영까지 책임지는 풀사이클 SI 엔지니어링</p>
-<ul class="space-y-1.5 text-[13px] text-on-surface/80 flex-grow">
-<li class="flex gap-sm"><span class="text-primary-container">·</span> 스프린트·코드리뷰 기반 통합 포털·대용량 DB</li>
-<li class="flex gap-sm"><span class="text-primary-container">·</span> 웹 표준·품질 — 반응형 웹·웹접근성(WA)·다채널</li>
-<li class="flex gap-sm"><span class="text-primary-container">·</span> 보안 — OWASP·DOMPurify(XSS)·접근통제·로깅(RLS)</li>
-<li class="flex gap-sm text-primary/80 pt-1"><span>▸</span> 500+ SI 구축 · 25Y 운영</li>
-</ul>
-<div class="mt-lg pt-md border-t border-white/10 flex items-center justify-between">
-<div class="flex items-baseline gap-1"><span class="text-2xl font-bold text-primary">500+</span><span class="text-[11px] text-on-surface/50 uppercase tracking-widest">건</span></div>
-<button type="button" data-detail="si" class="cap-detail-btn flex items-center gap-1 text-[12px] font-bold text-primary-container hover:gap-2 transition-all">KEY PROJECT<svg viewBox="0 0 24 24" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13"/><path d="M12 6l6 6-6 6"/></svg></button>
+<div class="mt-auto pt-md border-t border-white/10 flex justify-end">
+<button type="button" data-detail="platform" class="cap-detail-btn flex items-center gap-1 text-[13px] font-bold text-primary-container hover:gap-2 transition-all">대표 실적 보기<svg viewBox="0 0 24 24" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13"/><path d="M12 6l6 6-6 6"/></svg></button>
 </div>
 </div>
-<!-- 04 IoT · Energy -->
-<div class="glass-panel rounded-xl p-lg flex flex-col border-t-2 border-t-primary hover:border-primary transition-colors group">
-<div class="flex items-start justify-between mb-md">
-<span class="text-[44px] font-bold slide-number leading-none">04</span>
-<span class="material-symbols-outlined text-primary-container text-[32px]">sensors</span>
+<!-- Web · System Integration -->
+<div class="glass-panel rounded-xl p-lg border-t-2 border-t-primary flex flex-col">
+<div class="flex items-start justify-between gap-sm mb-sm">
+<div><h3 class="text-xl font-bold leading-tight">Web · System Integration</h3><span class="text-xs text-on-surface/45">웹 · 시스템 구축(SI) · <span class="text-primary-container font-semibold">200+건</span></span></div>
+<span class="material-symbols-outlined text-primary-container text-[30px] shrink-0">dns</span>
 </div>
-<h3 class="text-xl font-bold mb-xs">IoT · Energy</h3>
-<p class="text-[12px] text-on-surface/50 uppercase tracking-widest mb-xs">IoT·에너지</p>
-<p class="text-[13px] text-on-surface/65 leading-snug mb-md">현장 센서 데이터를 정제해 신재생에너지를 예측·운영</p>
-<ul class="space-y-1.5 text-[13px] text-on-surface/80 flex-grow">
-<li class="flex gap-sm"><span class="text-primary-container">·</span> IoT 관제 — 농업 센서 100여 대(토양수분35·수분장력74·서리·트랩)</li>
-<li class="flex gap-sm"><span class="text-primary-container">·</span> 센서 정제 — 결측보간·이상치제거·노이즈필터·캘리브레이션</li>
-<li class="flex gap-sm"><span class="text-primary-container">·</span> 에너지 예측 — 태양광 발전량 AI·발전소 통합·KPX 중개</li>
-<li class="flex gap-sm text-primary/80 pt-1"><span>▸</span> 100+ IoT 센서 · TTA 95% / KPX 93.9%</li>
-</ul>
-<div class="mt-lg pt-md border-t border-white/10 flex items-center justify-between">
-<div class="flex items-baseline gap-1"><span class="text-2xl font-bold text-primary">7+</span><span class="text-[11px] text-on-surface/50 uppercase tracking-widest">건</span></div>
-<button type="button" data-detail="iot" class="cap-detail-btn flex items-center gap-1 text-[12px] font-bold text-primary-container hover:gap-2 transition-all">KEY PROJECT<svg viewBox="0 0 24 24" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13"/><path d="M12 6l6 6-6 6"/></svg></button>
+<p class="text-[14px] text-on-surface-variant leading-relaxed mb-md">공공 포털·홈페이지(반응형 웹)부터 대규모 통합 시스템·콘텐츠 관리(CMS)까지 — 25년간 쌓아온 구축 실적.</p>
+<div class="flex flex-wrap gap-1.5 mb-md flex-grow content-start">
+<span class="text-[11px] px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-on-surface-variant">공공 포털</span>
+<span class="text-[11px] px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-on-surface-variant">반응형 웹</span>
+<span class="text-[11px] px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-on-surface-variant">통합 시스템</span>
+<span class="text-[11px] px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-on-surface-variant">CMS</span>
+<span class="text-[11px] px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-on-surface-variant">대규모 유지관리</span>
+</div>
+<div class="mt-auto pt-md border-t border-white/10 flex justify-end">
+<button type="button" data-detail="si" class="cap-detail-btn flex items-center gap-1 text-[13px] font-bold text-primary-container hover:gap-2 transition-all">대표 실적 보기<svg viewBox="0 0 24 24" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13"/><path d="M12 6l6 6-6 6"/></svg></button>
+</div>
+</div>
+<!-- IoT · Energy -->
+<div class="glass-panel rounded-xl p-lg border-t-2 border-t-primary flex flex-col">
+<div class="flex items-start justify-between gap-sm mb-sm">
+<div><h3 class="text-xl font-bold leading-tight">IoT · Energy</h3><span class="text-xs text-on-surface/45">IoT · 에너지 · <span class="text-primary-container font-semibold">7+건</span></span></div>
+<span class="material-symbols-outlined text-primary-container text-[30px] shrink-0">sensors</span>
+</div>
+<p class="text-[14px] text-on-surface-variant leading-relaxed mb-md">IoT 센서 데이터를 수집·정제하고 장비를 관제하며, 신재생에너지를 예측·운영하는 IoT·에너지 기술.</p>
+<div class="flex flex-wrap gap-1.5 mb-md flex-grow content-start">
+<span class="text-[11px] px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-on-surface-variant">IoT 센서·관제</span>
+<span class="text-[11px] px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-on-surface-variant">발전량 예측</span>
+<span class="text-[11px] px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-on-surface-variant">고장 예지</span>
+<span class="text-[11px] px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-on-surface-variant">ESS·풍력</span>
+<span class="text-[11px] px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-on-surface-variant">신재생 운영</span>
+</div>
+<div class="mt-auto pt-md border-t border-white/10 flex justify-end">
+<button type="button" data-detail="iot" class="cap-detail-btn flex items-center gap-1 text-[13px] font-bold text-primary-container hover:gap-2 transition-all">대표 실적 보기<svg viewBox="0 0 24 24" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13"/><path d="M12 6l6 6-6 6"/></svg></button>
 </div>
 </div>
 </div>
@@ -192,11 +179,11 @@
 <span class="px-2 py-0.5 rounded-full bg-primary-container/15 border border-primary-container/30 text-[11px] text-primary font-semibold">외 인증 13건</span>
 </div>
 <div class="pt-2 border-t border-white/5">
-<a href="../capabilities.html?view=pc" class="inline-flex items-center gap-1 text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined text-sm">desktop_windows</span>PC 버전으로 보기</a>
+<a href="../portfolio.html?view=pc" class="inline-flex items-center gap-1 text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined text-sm">desktop_windows</span>PC 버전으로 보기</a>
 </div>
 </div>
 </footer>
-<!-- ===== KEY PROJECT 상세 모달 (모바일: 스크롤 가능) ===== -->
+<!-- ===== 분야별 상세 모달 (Project Portfolio 상세) ===== -->
 <div id="cap-modal" class="fixed inset-0 z-[100] hidden">
 <div class="absolute inset-0 bg-black/70 backdrop-blur-sm" data-close></div>
 <div class="relative z-10 min-h-full flex items-start sm:items-center justify-center p-3 sm:p-6">
@@ -216,7 +203,7 @@
 </div>
 </div>
 <script>
-        /* 메인카피 글자 셔머 (kinetic-gradient 제외) */
+        /* 메인카피 글자 셔머 */
         (function () {
             var h = document.getElementById('main-copy'); if (!h) return; var idx = 0;
             (function walk(node) {
@@ -229,7 +216,7 @@
                             s.style.animationDelay = (idx * 0.05).toFixed(2) + 's'; idx++; frag.appendChild(s);
                         });
                         node.replaceChild(frag, child);
-                    } else if (child.nodeType === 1 && child.tagName !== 'BR' && !child.classList.contains('kinetic-gradient')) { walk(child); }
+                    } else if (child.nodeType === 1 && child.tagName !== 'BR') { walk(child); }
                 });
             })(h);
         })();
