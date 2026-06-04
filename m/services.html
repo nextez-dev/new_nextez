@@ -1,37 +1,8 @@
 <!DOCTYPE html><html class="dark" lang="ko">
 <head>
 <meta charset="utf-8">
-<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport">
 <title>NEXTEZ - Services</title>
-<!-- ===== 모바일 자동 감지 → m/ 리다이렉트 (PC는 그대로) ===== -->
-<style id="preCloak">html{visibility:hidden}</style>
-<noscript><style>html{visibility:visible!important}</style></noscript>
-<script>
-(function () {
-  function reveal(){ var s=document.getElementById('preCloak'); if(s&&s.parentNode){ s.parentNode.removeChild(s); } }
-  try {
-    var qs = new URLSearchParams(location.search);
-    var force = qs.get('view');
-    if (force) { try { localStorage.setItem('viewMode', force); } catch (e) {} }
-    var mode = force || (function(){ try { return localStorage.getItem('viewMode'); } catch (e) { return null; } })();
-    if (mode === 'pc') { reveal(); return; }
-    var isMobile = (mode === 'mobile');
-    if (!mode) {
-      var ua = navigator.userAgent || '';
-      var uaMobile = /Android|iPhone|iPod|Windows Phone|BlackBerry|Mobile/i.test(ua);
-      var iPadOS = /iPad/i.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-      var smallSide = Math.min(screen.width, screen.height) <= 820;
-      isMobile = (uaMobile || iPadOS) && smallSide;
-    }
-    if (isMobile) {
-      var page = location.pathname.split('/').pop() || 'index.html';
-      location.replace('m/' + page + location.search + location.hash);
-      return;
-    }
-    reveal();
-  } catch (e) { reveal(); }
-})();
-</script>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link as="style" crossorigin="" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
@@ -77,163 +48,125 @@
         }
     </script>
 <style>
-        body { font-family: 'Pretendard Variable', Pretendard, sans-serif; background-color: #131313; color: #e5e2e1; overflow: hidden; }
-        .glass-card { background: rgba(26, 26, 26, 0.4); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border: 1px solid rgba(90, 65, 54, 0.5); }
+        /* 모바일 반응형: 화면잠금 해제 → 세로 스크롤 허용 */
+        html { -webkit-text-size-adjust: 100%; }
+        body { font-family: 'Pretendard Variable', Pretendard, sans-serif; background-color: #131313; color: #e5e2e1; overflow-x: hidden; }
+        .glass-card { background: rgba(26, 26, 26, 0.55); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border: 1px solid rgba(90, 65, 54, 0.5); }
         .slide-number { -webkit-text-stroke: 2px rgba(255, 102, 0, 0.25); color: transparent; }
-        /* Single-card fade (appear / disappear) */
-        .fade-slide {
-            position: absolute; inset: 0;
-            opacity: 0;
-            transition: opacity .7s ease; pointer-events: none;
-        }
-        .fade-slide.active { opacity: 1; pointer-events: auto; }
-        /* Modal */
-        #service-modal { transition: opacity .3s ease; }
-        #service-modal.modal-open { opacity: 1; pointer-events: auto; }
-        #service-modal .modal-panel { transition: transform .3s ease, opacity .3s ease; transform: translateY(16px) scale(0.98); }
-        #service-modal.modal-open .modal-panel { transform: translateY(0) scale(1); opacity: 1; }
-        #service-modal.modal-open .modal-panel { pointer-events: auto; }
-        /* main copy shimmer + 강조점 (index 동일) */
         .char { display: inline-block; will-change: filter; filter: brightness(0.8); animation: charShine 5s ease-in-out infinite; }
         @keyframes charShine { 0%,55%,100% { filter: brightness(0.8); } 26% { filter: brightness(1.55) drop-shadow(0 0 8px rgba(255,255,255,0.35)); } }
         .emph .char { position: relative; }
         .emph .char::before { content:''; position:absolute; top:-0.34em; left:50%; transform:translateX(-50%); width:0.16em; height:0.16em; border-radius:9999px; background:#ff6600; }
     </style>
 </head>
-<body class="bg-background text-on-surface antialiased relative h-[100dvh] w-screen overflow-hidden">
-<!-- Background -->
-<div class="absolute inset-0 z-0">
-<img alt="NEXTEZ Services Background" class="w-full h-full object-cover object-center opacity-75" src="IMG/services.jpg">
-<div class="absolute inset-0 bg-gradient-to-r from-background via-background/55 to-background/15"></div>
+<body class="bg-background text-on-surface antialiased min-h-[100dvh]">
+<!-- 배경 -->
+<div class="fixed inset-0 z-0">
+<img alt="NEXTEZ Services Background" class="w-full h-full object-cover object-center opacity-30" src="../IMG/services.jpg">
+<div class="absolute inset-0 bg-gradient-to-b from-background via-background/88 to-background/96"></div>
 </div>
-<!-- TopNavBar -->
-<header class="fixed w-full top-0 border-b border-white/10 bg-background/50 backdrop-blur-md z-50">
+<!-- ===== Header (모바일 햄버거) ===== -->
+<header class="fixed w-full top-0 bg-background/85 backdrop-blur-md border-b border-white/10 z-50">
 <div class="flex items-center w-full px-lg py-md max-w-[1600px] mx-auto">
-<div class="flex items-center gap-sm">
-<a href="index.html" class="text-[32px] leading-none font-bold text-on-surface tracking-tight" style="font-family:'Pretendard Variable',Pretendard,sans-serif">NEXT<span class="text-primary-container ml-1 relative top-[-0.3em] inline-block">EZ</span></a>
-</div>
-<nav class="hidden md:flex items-center gap-lg ml-auto"><a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors hover:bg-surface-container-highest px-sm py-xs rounded" href="index.html">Home</a>
+<a href="index.html" class="text-[26px] sm:text-[32px] leading-none font-bold text-on-surface tracking-tight" style="font-family:'Pretendard Variable',Pretendard,sans-serif">NEXT<span class="text-primary-container ml-1 relative top-[-0.3em] inline-block">EZ</span></a>
+<nav class="hidden md:flex items-center gap-lg ml-auto">
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors px-sm py-xs rounded" href="index.html">Home</a>
 <a class="font-body-md text-body-md text-primary font-bold border-b-2 border-primary pb-1" href="services.html">Services</a>
-<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors hover:bg-surface-container-highest px-sm py-xs rounded" href="capabilities.html">Capabilities</a>
-<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors hover:bg-surface-container-highest px-sm py-xs rounded" href="portfolio.html">Project Portfolio</a>
-<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors hover:bg-surface-container-highest px-sm py-xs rounded" href="about.html">About</a>
-<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors hover:bg-surface-container-highest px-sm py-xs rounded" href="news.html">Newsroom</a></nav>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors px-sm py-xs rounded" href="../capabilities.html">Capabilities</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors px-sm py-xs rounded" href="../portfolio.html">Project Portfolio</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors px-sm py-xs rounded" href="../about.html">About</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors px-sm py-xs rounded" href="../news.html">Newsroom</a>
+</nav>
+<button id="navToggle" type="button" class="md:hidden ml-auto inline-flex items-center justify-center w-11 h-11 -mr-2 rounded-lg text-on-surface hover:bg-white/10 active:scale-95 transition" aria-label="메뉴 열기" aria-expanded="false" aria-controls="mobileMenu">
+<span id="navIcon" class="material-symbols-outlined text-[28px]">menu</span>
+</button>
+</div>
+<div id="mobileMenu" class="md:hidden hidden border-t border-white/10 bg-background/97 backdrop-blur-md">
+<nav class="flex flex-col px-lg py-xs max-w-[1600px] mx-auto">
+<a class="py-4 text-base text-on-surface hover:text-primary border-b border-white/5" href="index.html">Home</a>
+<a class="py-4 text-base font-bold text-primary border-b border-white/5" href="services.html">Services</a>
+<a class="py-4 text-base text-on-surface hover:text-primary border-b border-white/5" href="../capabilities.html">Capabilities</a>
+<a class="py-4 text-base text-on-surface hover:text-primary border-b border-white/5" href="../portfolio.html">Project Portfolio</a>
+<a class="py-4 text-base text-on-surface hover:text-primary border-b border-white/5" href="../about.html">About</a>
+<a class="py-4 text-base text-on-surface hover:text-primary" href="../news.html">Newsroom</a>
+</nav>
 </div>
 </header>
-<!-- Right Social Sidebar -->
-<div class="hidden xl:flex fixed right-2 top-1/2 -translate-y-1/2 z-40 flex-col items-center gap-lg">
-<div class="w-px h-20 bg-white/20"></div>
-<a class="text-on-surface-variant hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined">share</span></a>
-<a class="text-on-surface-variant hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined">mail</span></a>
-<p class="text-label-md text-on-surface-variant tracking-widest uppercase rotate-180" style="writing-mode: vertical-rl;">Follow Us</p>
-</div>
-<!-- Main Area -->
-<main class="relative z-20 h-full w-full flex items-center pt-[72px]">
-<div class="w-full max-w-[1600px] mx-auto px-lg h-full flex items-center justify-between gap-lg">
-<!-- LEFT: main copy + controls -->
-<div class="shrink-0 w-[56%] max-w-4xl flex flex-col gap-xl">
-<div>
+<!-- ===== Main ===== -->
+<main class="relative z-10 pt-[96px] pb-12 px-lg max-w-[1100px] mx-auto">
+<!-- Hero -->
+<div class="mb-xl">
 <span class="font-bold text-[12px] tracking-widest text-primary uppercase mb-sm block">Services</span>
-<h1 id="main-copy" class="text-[34px] md:text-[64px] leading-[1.1] font-bold drop-shadow-2xl md:whitespace-nowrap">산업 현장의 <span class="text-primary-container emph">데이터</span>로 AI를 만들고,<br>AI로 <span class="text-primary-container">산업 현장</span>을 지휘합니다.</h1>
-<p class="font-body-md text-body-md text-on-surface-variant max-w-lg text-lg mt-md leading-relaxed">㈜넥스트이지는 산업 현장의 실전 데이터로 최적화된 AI 솔루션을 구축하며, 지능화된 운영을 통해 대한민국 산업의 AX를 이끌고 있습니다.</p>
+<h1 id="main-copy" class="text-[26px] sm:text-[34px] md:text-[48px] leading-[1.3] font-bold drop-shadow-2xl">산업 현장의 <span class="text-primary-container emph">데이터</span>로 AI를 만들고,<br>AI로 <span class="text-primary-container">산업 현장</span>을 지휘합니다.</h1>
+<p class="text-on-surface-variant text-[15px] sm:text-base mt-md leading-relaxed">㈜넥스트이지는 산업 현장의 실전 데이터로 최적화된 AI 솔루션을 구축하며, 지능화된 운영을 통해 대한민국 산업의 AX를 이끌고 있습니다.</p>
 </div>
-<!-- Controls -->
-<div class="flex items-center gap-md">
-<button id="prevBtn" aria-label="이전" class="w-11 h-11 rounded-full bg-surface-container/70 backdrop-blur-md border border-white/10 flex items-center justify-center hover:bg-primary-container hover:text-black transition-colors">
-<span class="material-symbols-outlined">chevron_left</span>
-</button>
-<button id="nextBtn" aria-label="다음" class="w-11 h-11 rounded-full bg-surface-container/70 backdrop-blur-md border border-white/10 flex items-center justify-center hover:bg-primary-container hover:text-black transition-colors">
-<span class="material-symbols-outlined">chevron_right</span>
-</button>
-<div class="flex gap-sm ml-md">
-<button class="carousel-dot w-3 h-3 rounded-full bg-primary-container transition-colors" data-index="0" aria-label="농업"></button>
-<button class="carousel-dot w-3 h-3 rounded-full bg-outline-variant hover:bg-primary transition-colors" data-index="1" aria-label="관광"></button>
-<button class="carousel-dot w-3 h-3 rounded-full bg-outline-variant hover:bg-primary transition-colors" data-index="2" aria-label="에너지"></button>
-<button class="carousel-dot w-3 h-3 rounded-full bg-outline-variant hover:bg-primary transition-colors" data-index="3" aria-label="스마트시티"></button>
-</div>
-</div>
-</div>
-<!-- RIGHT: single-card fade stage (right-aligned to About menu) -->
-<div id="carousel" class="shrink-0 w-[42%] max-w-[560px] h-[56vh] md:h-[60vh] relative">
-<!-- 고정 배경 박스 (전환되지 않음) -->
-<div class="absolute inset-0 glass-card rounded-xl pointer-events-none"></div>
+<!-- 4개 서비스 세로 스택 -->
+<div class="flex flex-col gap-lg">
 <!-- 1. Agriculture -->
-<article class="fade-slide active" data-service="agriculture">
-<div class="rounded-xl p-lg w-full h-full flex flex-col relative overflow-hidden">
-<div class="absolute top-0 right-0 p-lg opacity-20"><span class="text-[120px] md:text-[160px] font-bold slide-number leading-none select-none">01</span></div>
-<div class="shrink-0 inline-flex items-center gap-sm bg-neutral-100 px-md py-xs rounded-full border border-neutral-300 w-fit">
+<section class="glass-card rounded-xl p-lg relative overflow-hidden">
+<div class="absolute top-1 right-2 opacity-20 pointer-events-none"><span class="text-[80px] font-bold slide-number leading-none select-none">01</span></div>
+<div class="relative inline-flex items-center gap-sm bg-neutral-100 px-md py-xs rounded-full border border-neutral-300 w-fit">
 <span class="material-symbols-outlined text-primary-container text-sm">eco</span>
 <span class="font-label-bold text-label-bold text-neutral-900 uppercase">Agriculture</span>
 </div>
-<div class="z-10 flex flex-col flex-grow min-h-0 mt-md">
-<h2 class="font-headline-lg text-headline-lg text-on-surface font-bold shrink-0">농업 AI/AX 서비스</h2>
-<div class="card-detail flex-grow min-h-0 overflow-y-auto pr-2 my-sm" data-detail="agriculture"></div>
-</div>
-</div>
-</article>
+<h2 class="relative text-2xl font-bold text-on-surface mt-md">농업 AI/AX 서비스</h2>
+<div class="card-detail relative mt-sm" data-detail="agriculture"></div>
+</section>
 <!-- 2. Tourism -->
-<article class="fade-slide" data-service="tourism">
-<div class="rounded-xl p-lg w-full h-full flex flex-col relative overflow-hidden">
-<div class="absolute top-0 right-0 p-lg opacity-20"><span class="text-[120px] md:text-[160px] font-bold slide-number leading-none select-none">02</span></div>
-<div class="shrink-0 inline-flex items-center gap-sm bg-neutral-100 px-md py-xs rounded-full border border-neutral-300 w-fit">
+<section class="glass-card rounded-xl p-lg relative overflow-hidden">
+<div class="absolute top-1 right-2 opacity-20 pointer-events-none"><span class="text-[80px] font-bold slide-number leading-none select-none">02</span></div>
+<div class="relative inline-flex items-center gap-sm bg-neutral-100 px-md py-xs rounded-full border border-neutral-300 w-fit">
 <span class="material-symbols-outlined text-primary-container text-sm">flight_takeoff</span>
 <span class="font-label-bold text-label-bold text-neutral-900 uppercase">Tourism</span>
 </div>
-<div class="z-10 flex flex-col flex-grow min-h-0 mt-md">
-<h2 class="font-headline-lg text-headline-lg text-on-surface font-bold shrink-0">스마트 관광</h2>
-<div class="card-detail flex-grow min-h-0 overflow-y-auto pr-2 my-sm" data-detail="tourism"></div>
-</div>
-</div>
-</article>
+<h2 class="relative text-2xl font-bold text-on-surface mt-md">스마트 관광</h2>
+<div class="card-detail relative mt-sm" data-detail="tourism"></div>
+</section>
 <!-- 3. Energy -->
-<article class="fade-slide" data-service="energy">
-<div class="rounded-xl p-lg w-full h-full flex flex-col relative overflow-hidden">
-<div class="absolute top-0 right-0 p-lg opacity-20"><span class="text-[120px] md:text-[160px] font-bold slide-number leading-none select-none">03</span></div>
-<div class="shrink-0 inline-flex items-center gap-sm bg-neutral-100 px-md py-xs rounded-full border border-neutral-300 w-fit">
+<section class="glass-card rounded-xl p-lg relative overflow-hidden">
+<div class="absolute top-1 right-2 opacity-20 pointer-events-none"><span class="text-[80px] font-bold slide-number leading-none select-none">03</span></div>
+<div class="relative inline-flex items-center gap-sm bg-neutral-100 px-md py-xs rounded-full border border-neutral-300 w-fit">
 <span class="material-symbols-outlined text-primary-container text-sm">bolt</span>
 <span class="font-label-bold text-label-bold text-neutral-900 uppercase">Energy</span>
 </div>
-<div class="z-10 flex flex-col flex-grow min-h-0 mt-md">
-<h2 class="font-headline-lg text-headline-lg text-on-surface font-bold shrink-0">스마트 에너지</h2>
-<div class="card-detail flex-grow min-h-0 overflow-y-auto pr-2 my-sm" data-detail="energy"></div>
-</div>
-</div>
-</article>
+<h2 class="relative text-2xl font-bold text-on-surface mt-md">스마트 에너지</h2>
+<div class="card-detail relative mt-sm" data-detail="energy"></div>
+</section>
 <!-- 4. Platform -->
-<article class="fade-slide" data-service="smartcity">
-<div class="rounded-xl p-lg w-full h-full flex flex-col relative overflow-hidden">
-<div class="absolute top-0 right-0 p-lg opacity-20"><span class="text-[120px] md:text-[160px] font-bold slide-number leading-none select-none">04</span></div>
-<div class="shrink-0 inline-flex items-center gap-sm bg-neutral-100 px-md py-xs rounded-full border border-neutral-300 w-fit">
+<section class="glass-card rounded-xl p-lg relative overflow-hidden">
+<div class="absolute top-1 right-2 opacity-20 pointer-events-none"><span class="text-[80px] font-bold slide-number leading-none select-none">04</span></div>
+<div class="relative inline-flex items-center gap-sm bg-neutral-100 px-md py-xs rounded-full border border-neutral-300 w-fit">
 <span class="material-symbols-outlined text-primary-container text-sm">dashboard</span>
 <span class="font-label-bold text-label-bold text-neutral-900 uppercase">Platform</span>
 </div>
-<div class="z-10 flex flex-col flex-grow min-h-0 mt-md">
-<h2 class="font-headline-lg text-headline-lg text-on-surface font-bold shrink-0">스마트 플랫폼</h2>
-<div class="card-detail flex-grow min-h-0 overflow-y-auto pr-2 my-sm" data-detail="smartcity"></div>
-</div>
-</div>
-</article>
-</div>
+<h2 class="relative text-2xl font-bold text-on-surface mt-md">스마트 플랫폼</h2>
+<div class="card-detail relative mt-sm" data-detail="smartcity"></div>
+</section>
 </div>
 </main>
-<!-- Detail Modal (content TBD) -->
-<div id="service-modal" class="fixed inset-0 z-[100] opacity-0 pointer-events-none">
-<div id="modal-backdrop" class="absolute inset-0 bg-black/55 backdrop-blur-sm"></div>
-<div class="absolute inset-0 w-full max-w-[1600px] mx-auto px-lg pt-[72px] pb-8 flex items-center justify-end pointer-events-none">
-<div class="modal-panel relative w-[42%] max-w-[560px] h-[56vh] md:h-[60vh] overflow-y-auto rounded-xl p-lg opacity-0 text-neutral-800" style="background: rgba(255,255,255,0.7); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border: 1px solid rgba(0,0,0,0.12);">
-<button id="modal-close" aria-label="닫기" class="absolute top-md right-md w-10 h-10 rounded-full bg-surface-container-high/80 flex items-center justify-center hover:bg-primary-container hover:text-black transition-colors z-10">
-<span class="material-symbols-outlined">close</span>
-</button>
-<div class="inline-flex items-center gap-sm bg-neutral-100 px-md py-xs rounded-full border border-neutral-300 w-fit mb-md">
-<span class="material-symbols-outlined text-primary-container text-sm" id="modal-icon">eco</span>
-<span class="font-label-bold text-label-bold text-neutral-900 uppercase" id="modal-label">Agriculture</span>
+<!-- ===== Footer ===== -->
+<footer class="relative z-10 w-full bg-surface-container-lowest border-t border-white/10">
+<div class="max-w-[1600px] mx-auto px-lg py-lg flex flex-col gap-3 text-xs">
+<div class="flex flex-col gap-1.5 text-on-surface-variant">
+<span class="font-bold text-on-surface text-sm">㈜넥스트이지</span>
+<span>대표이사 강주경</span>
+<span>제주특별자치도 제주시 첨단로 213-3, 408·409호</span>
+<span class="text-primary-container font-semibold">064-721-8118</span>
 </div>
-<h2 id="modal-title" class="text-xl md:text-2xl font-bold mb-md pr-10">농업 AI/AX 서비스</h2>
-<div id="modal-body" class="font-body-md text-body-md text-neutral-700 leading-relaxed"></div>
+<div class="flex flex-wrap items-center gap-1.5 pt-2 border-t border-white/5">
+<span class="px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-[11px] text-on-surface-variant">벤처기업</span>
+<span class="px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-[11px] text-on-surface-variant">기술혁신형(INNOBIZ)</span>
+<span class="px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-[11px] text-on-surface-variant">경영혁신형(MAINBIZ)</span>
+<span class="px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-[11px] text-on-surface-variant">가족친화 인증기업</span>
+<span class="px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-[11px] text-on-surface-variant">ISO 9001·14001</span>
+<span class="px-2 py-0.5 rounded-full bg-primary-container/15 border border-primary-container/30 text-[11px] text-primary font-semibold">외 인증 13건</span>
+</div>
+<div class="pt-2 border-t border-white/5">
+<a href="../services.html?view=pc" class="inline-flex items-center gap-1 text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined text-sm">desktop_windows</span>PC 버전으로 보기</a>
 </div>
 </div>
-</div>
-<!-- ===== Service detail templates (injected into modal: SVG icon + 서비스 개요 + 솔루션) ===== -->
+</footer>
+<!-- ===== 서비스/솔루션 상세 템플릿 (원본 추출, 숨김) ===== -->
 <div id="tpl-agriculture" class="hidden">
 <section class="mb-md">
 <ul class="space-y-sm">
@@ -277,8 +210,8 @@
 <div class="mt-md">
 <div class="text-[11px] text-on-surface-variant mb-1.5 flex items-center gap-1"><span class="material-symbols-outlined text-sm text-primary-container">desktop_windows</span>솔루션 대시보드 (예시 화면)</div>
 <div class="grid grid-cols-2 gap-md">
-<img src="IMG/board01.jpg" alt="데이터 파이프라인 대시보드 1" class="w-full h-auto rounded-lg border border-white/10 shadow-lg">
-<img src="IMG/board02.jpg" alt="데이터 파이프라인 대시보드 2" class="w-full h-auto rounded-lg border border-white/10 shadow-lg">
+<img src="../IMG/board01.jpg" alt="데이터 파이프라인 대시보드 1" class="w-full h-auto rounded-lg border border-white/10 shadow-lg">
+<img src="../IMG/board02.jpg" alt="데이터 파이프라인 대시보드 2" class="w-full h-auto rounded-lg border border-white/10 shadow-lg">
 </div>
 </div>
 </div>
@@ -453,187 +386,82 @@
 </div>
 </div>
 <script>
-        (function () {
-            const carousel = document.getElementById('carousel');
-            const slides = Array.from(document.querySelectorAll('.fade-slide'));
-            const dots = Array.from(document.querySelectorAll('.carousel-dot'));
-            const prevBtn = document.getElementById('prevBtn');
-            const nextBtn = document.getElementById('nextBtn');
-            const AUTO_MS = 9000;            // 현재 시간 간격 유지
-            let current = 0, timer = null, paused = false;
+(function () {
+  /* 1) 각 서비스 카드에 개요+솔루션 목록 주입 */
+  document.querySelectorAll('.card-detail').forEach(function (el) {
+    var tpl = document.getElementById('tpl-' + el.dataset.detail);
+    if (tpl) el.innerHTML = tpl.innerHTML;
+  });
 
-            function render() {
-                slides.forEach((s, i) => s.classList.toggle('active', i === current));
-                dots.forEach((d, i) => {
-                    const on = i === current;
-                    d.classList.toggle('bg-primary-container', on);
-                    d.classList.toggle('bg-outline-variant', !on);
-                });
-            }
-            function go(i) { current = (i + slides.length) % slides.length; render(); }
-            function next() { go(current + 1); }
-            function prev() { go(current - 1); }
-            function startAuto() { stopAuto(); if (!paused) timer = setInterval(next, AUTO_MS); }
-            function stopAuto() { if (timer) { clearInterval(timer); timer = null; } }
-            function restart() { stopAuto(); startAuto(); }
+  /* 2) 개별 솔루션 자세히 보기 (카드 내부 인플레이스 전환 + BACK) */
+  var SOLUTIONS = {
+    'data-pipeline': { title: '데이터 수집·정제·표준화 솔루션', tpl: 'tpl-sol-datapipeline' },
+    'agri-dx':       { title: '농업 DX 전환 플랫폼', tpl: 'tpl-sol-agridx' },
+    'ai-applied':    { title: 'AI 활용 솔루션', tpl: 'tpl-sol-aiapplied' },
+    'smart-tour':    { title: '스마트 관광 솔루션', tpl: 'tpl-sol-smarttour' },
+    'live-ota':      { title: '라이브 커머스 관광 OTA 솔루션', tpl: 'tpl-sol-liveota' },
+    'solar-ai':      { title: '태양광 발전량 AI예측 및 모니터링 솔루션', tpl: 'tpl-sol-solarai' },
+    'mice':          { title: 'MICE 행사 통합운영 지원 솔루션', tpl: 'tpl-sol-mice' },
+    'cms':           { title: 'CMS 웹사이트 콘텐츠 관리 솔루션', tpl: 'tpl-sol-cms' },
+    'gallery':       { title: '개인 갤러리형 홈페이지 자동 구축 솔루션', tpl: 'tpl-sol-gallery' }
+  };
+  var saved = new WeakMap();
+  function showSolution(trigger, key) {
+    var s = SOLUTIONS[key]; if (!s) return;
+    var cd = trigger.closest('.card-detail'); if (!cd) return;
+    var titleEl = cd.previousElementSibling;
+    if (!saved.has(cd)) saved.set(cd, { body: cd.innerHTML, titleText: titleEl ? titleEl.textContent : '', titleClass: titleEl ? titleEl.className : '' });
+    if (titleEl) { titleEl.classList.remove('text-on-surface'); titleEl.classList.add('text-primary-container'); titleEl.textContent = s.title; }
+    var tpl = document.getElementById(s.tpl);
+    cd.innerHTML =
+      '<div class="text-on-surface">' +
+      (tpl ? tpl.innerHTML : '') +
+      '<div class="text-right mt-md"><button type="button" class="sol-back inline-flex items-center gap-1 text-sm font-semibold text-primary-container hover:underline"><span class="material-symbols-outlined text-base">arrow_back</span>BACK</button></div>' +
+      '</div>';
+    var sec = cd.closest('section'); if (sec) sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+  function backSolution(cd) {
+    if (!saved.has(cd)) return;
+    var sv = saved.get(cd);
+    cd.innerHTML = sv.body;
+    var t = cd.previousElementSibling;
+    if (t) { t.textContent = sv.titleText; t.className = sv.titleClass; }
+    saved.delete(cd);
+  }
+  document.addEventListener('click', function (e) {
+    var sol = e.target.closest('[data-sol]');
+    if (sol) { e.preventDefault(); showSolution(sol, sol.dataset.sol); return; }
+    var back = e.target.closest('.sol-back');
+    if (back) { e.preventDefault(); var cd = back.closest('.card-detail'); if (cd) backSolution(cd); }
+  });
 
-            nextBtn.addEventListener('click', () => { next(); restart(); });
-            prevBtn.addEventListener('click', () => { prev(); restart(); });
-            dots.forEach(d => d.addEventListener('click', () => { go(parseInt(d.dataset.index, 10)); restart(); }));
+  /* 3) 메인카피 글자 셔머 */
+  (function () {
+    var h = document.getElementById('main-copy'); if (!h) return; var idx = 0;
+    (function walk(node) {
+      Array.prototype.slice.call(node.childNodes).forEach(function (child) {
+        if (child.nodeType === 3) {
+          var frag = document.createDocumentFragment();
+          Array.from(child.textContent).forEach(function (ch) {
+            if (ch === ' ') { frag.appendChild(document.createTextNode(' ')); return; }
+            var sp = document.createElement('span'); sp.className = 'char'; sp.textContent = ch;
+            sp.style.animationDelay = (idx * 0.05).toFixed(2) + 's'; idx++; frag.appendChild(sp);
+          });
+          node.replaceChild(frag, child);
+        } else if (child.nodeType === 1 && child.tagName !== 'BR') { walk(child); }
+      });
+    })(h);
+  })();
 
-            carousel.addEventListener('mouseenter', stopAuto);
-            carousel.addEventListener('mouseleave', () => { if (!paused) startAuto(); });
-
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'ArrowRight') { next(); restart(); }
-                else if (e.key === 'ArrowLeft') { prev(); restart(); }
-                else if (e.key === 'Escape') { closeModal(); }
-            });
-
-            // ---- Modal ----
-            const SERVICES = {
-                agriculture: { icon: 'eco',            label: 'Agriculture', title: '농업 AI/AX 서비스' },
-                tourism:     { icon: 'flight_takeoff', label: 'Tourism',     title: '스마트 관광' },
-                energy:      { icon: 'bolt',           label: 'Energy',      title: '스마트 에너지' },
-                smartcity:   { icon: 'dashboard',  label: 'Platform',  title: '스마트 플랫폼' }
-            };
-            const modal = document.getElementById('service-modal');
-            const modalIcon = document.getElementById('modal-icon');
-            const modalLabel = document.getElementById('modal-label');
-            const modalTitle = document.getElementById('modal-title');
-
-            function openModal(key) {
-                const s = SERVICES[key];
-                if (!s) return;
-                modalIcon.textContent = s.icon;
-                modalLabel.textContent = s.label;
-                modalTitle.textContent = s.title;
-                const tpl = document.getElementById('tpl-' + key);
-                document.getElementById('modal-body').innerHTML = tpl ? tpl.innerHTML : '';
-                paused = true; stopAuto();
-                modal.classList.add('modal-open');
-            }
-            function closeModal() {
-                modal.classList.remove('modal-open');
-                paused = false; startAuto();
-            }
-            document.querySelectorAll('.detail-btn').forEach(btn => {
-                btn.addEventListener('click', () => openModal(btn.dataset.service));
-            });
-            document.getElementById('modal-close').addEventListener('click', closeModal);
-            document.getElementById('modal-backdrop').addEventListener('click', closeModal);
-
-            // Expose each service's detail (icon + 개요 + 솔루션) directly on its card
-            document.querySelectorAll('.card-detail').forEach(el => {
-                const tpl = document.getElementById('tpl-' + el.dataset.detail);
-                if (tpl) el.innerHTML = tpl.innerHTML;
-            });
-
-            // ---- 개별 솔루션 자세히 보기 (카드 내부 전환) ----
-            const SOLUTIONS = {
-                'data-pipeline': { icon: 'database', title: '데이터 수집·정제·표준화 솔루션', tpl: 'tpl-sol-datapipeline' },
-                'agri-dx': { icon: 'hub', title: '농업 DX 전환 플랫폼', tpl: 'tpl-sol-agridx' },
-                'ai-applied': { icon: 'smart_toy', title: 'AI 활용 솔루션', tpl: 'tpl-sol-aiapplied' },
-                'smart-tour': { icon: 'travel_explore', title: '스마트 관광 솔루션', tpl: 'tpl-sol-smarttour' },
-                'live-ota': { icon: 'live_tv', title: '라이브 커머스 관광 OTA 솔루션', tpl: 'tpl-sol-liveota' },
-                'solar-ai': { icon: 'solar_power', title: '태양광 발전량 AI예측 및 모니터링 솔루션', tpl: 'tpl-sol-solarai' },
-                'mice': { icon: 'event', title: 'MICE 행사 통합운영 지원 솔루션', tpl: 'tpl-sol-mice' },
-                'cms': { icon: 'web', title: 'CMS 웹사이트 콘텐츠 관리 솔루션', tpl: 'tpl-sol-cms' },
-                'gallery': { icon: 'photo_library', title: '개인 갤러리형 홈페이지 자동 구축 솔루션', tpl: 'tpl-sol-gallery' }
-            };
-            const _solSaved = new WeakMap();
-            function _cardInner(cd){ const a=cd.closest('.fade-slide'); return a?a.firstElementChild:null; }
-            function showSolution(trigger, key) {
-                const s = SOLUTIONS[key]; if (!s) return;
-                const cd = trigger.closest('.card-detail'); if (!cd) return;
-                const titleEl = cd.previousElementSibling;
-                const inner = _cardInner(cd);
-                if (!_solSaved.has(cd)) _solSaved.set(cd, { body: cd.innerHTML, titleText: titleEl ? titleEl.textContent : '', titleClass: titleEl ? titleEl.className : '' });
-                if (titleEl) { titleEl.classList.remove('text-on-surface'); titleEl.classList.add('text-primary-container'); titleEl.textContent = s.title; }
-                if (inner && !inner.querySelector('.sol-close')) {
-                    const b = document.createElement('button');
-                    b.type = 'button';
-                    b.className = 'sol-close absolute top-md right-md w-9 h-9 rounded-full bg-white/10 hover:bg-primary-container hover:text-black flex items-center justify-center transition-colors z-30';
-                    b.setAttribute('aria-label', '닫기');
-                    b.innerHTML = '<span class="material-symbols-outlined">close</span>';
-                    inner.appendChild(b);
-                }
-                const tpl = document.getElementById(s.tpl);
-                cd.innerHTML =
-                    '<div class="text-on-surface">' +
-                    (tpl ? tpl.innerHTML : '') +
-                    '<div class="text-right mt-md"><button type="button" class="sol-back inline-flex items-center gap-1 text-sm font-semibold text-primary-container hover:underline"><span class="material-symbols-outlined text-base">arrow_back</span>BACK</button></div>' +
-                    '</div>';
-                cd.scrollTop = 0; paused = true; stopAuto();
-            }
-            function backSolution(cd) {
-                if (_solSaved.has(cd)) {
-                    const sv = _solSaved.get(cd);
-                    const inner = _cardInner(cd);
-                    if (inner) { const x = inner.querySelector('.sol-close'); if (x) x.remove(); }
-                    cd.innerHTML = sv.body;
-                    const t = cd.previousElementSibling;
-                    if (t) { t.textContent = sv.titleText; t.className = sv.titleClass; }
-                    _solSaved.delete(cd);
-                }
-                paused = false; startAuto();
-            }
-            document.addEventListener('click', function (e) {
-                const sol = e.target.closest('[data-sol]');
-                if (sol) { e.preventDefault(); showSolution(sol, sol.dataset.sol); return; }
-                const back = e.target.closest('.sol-back, .sol-close');
-                if (back) {
-                    e.preventDefault();
-                    let cd = back.closest('.card-detail');
-                    if (!cd) { const a = back.closest('.fade-slide'); if (a) cd = a.querySelector('.card-detail'); }
-                    if (cd) backSolution(cd);
-                }
-            });
-
-            render();
-            startAuto();
-        })();
-    </script>
-<!-- BOTTOM : 회사 정보 + 인증 (공통) -->
-<footer class="fixed bottom-0 left-0 w-full z-40 bg-surface-container-lowest/85 backdrop-blur-md border-t border-white/10">
-<div class="max-w-[1600px] mx-auto px-lg lg:px-[88px] py-sm flex flex-col md:flex-row md:items-center justify-between gap-2 text-xs">
-<div class="flex flex-wrap items-center gap-x-md gap-y-1 text-on-surface-variant">
-<span class="font-bold text-on-surface">㈜넥스트이지</span>
-<span class="text-on-surface/25">|</span><span>대표이사 강주경</span>
-<span class="text-on-surface/25">|</span><span>제주특별자치도 제주시 첨단로 213-3, 408·409호</span>
-<span class="text-on-surface/25">|</span><span class="text-primary-container font-semibold">064-721-8118</span>
-</div>
-<div class="flex flex-wrap items-center gap-1.5">
-<span class="px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-[11px] text-on-surface-variant">벤처기업</span>
-<span class="px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-[11px] text-on-surface-variant">기술혁신형(INNOBIZ)</span>
-<span class="px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-[11px] text-on-surface-variant">경영혁신형(MAINBIZ)</span>
-<span class="px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-[11px] text-on-surface-variant">가족친화 인증기업</span>
-<span class="px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-[11px] text-on-surface-variant">ISO 9001·14001</span>
-<span class="px-2 py-0.5 rounded-full bg-primary-container/15 border border-primary-container/30 text-[11px] text-primary font-semibold">외 인증 13건</span>
-</div>
-</div>
-</footer>
-<script>
-(function(){
-  var h=document.getElementById('main-copy'); if(!h) return;
-  var idx=0;
-  (function walk(node){
-    Array.prototype.slice.call(node.childNodes).forEach(function(child){
-      if(child.nodeType===3){
-        var frag=document.createDocumentFragment();
-        Array.from(child.textContent).forEach(function(ch){
-          if(ch===' '){frag.appendChild(document.createTextNode(' '));return;}
-          var s=document.createElement('span'); s.className='char'; s.textContent=ch;
-          s.style.animationDelay=(idx*0.05).toFixed(2)+'s'; idx++;
-          frag.appendChild(s);
-        });
-        node.replaceChild(frag,child);
-      } else if(child.nodeType===1 && child.tagName!=='BR' && !child.classList.contains('kinetic-gradient')){
-        walk(child);
-      }
-    });
-  })(h);
+  /* 4) 모바일 햄버거 메뉴 */
+  (function () {
+    var btn = document.getElementById('navToggle'), menu = document.getElementById('mobileMenu'), icon = document.getElementById('navIcon');
+    if (!btn || !menu) return;
+    function setOpen(o) { menu.classList.toggle('hidden', !o); btn.setAttribute('aria-expanded', o ? 'true' : 'false'); if (icon) icon.textContent = o ? 'close' : 'menu'; }
+    btn.addEventListener('click', function () { setOpen(menu.classList.contains('hidden')); });
+    menu.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', function () { setOpen(false); }); });
+    window.addEventListener('resize', function () { if (window.innerWidth >= 768) setOpen(false); });
+  })();
 })();
 </script>
-<script src="contact-modal.js"></script>
 </body></html>
