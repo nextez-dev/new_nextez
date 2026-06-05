@@ -1,0 +1,219 @@
+<!DOCTYPE html><html class="dark" lang="ko">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>NEXTEZ - Portfolio (필터형 비교)</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link as="style" crossorigin="" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface-tint": "#ffb596", "surface": "#131313", "outline-variant": "#5a4136",
+                        "primary-fixed": "#ffdbcd", "on-background": "#e5e2e1", "surface-container-lowest": "#0e0e0e",
+                        "outline": "#aa8a7d", "surface-variant": "#353534", "surface-container-low": "#1c1b1b",
+                        "surface-container": "#201f1f", "on-surface": "#e5e2e1", "surface-dim": "#131313",
+                        "background": "#131313", "surface-container-high": "#2a2a2a", "on-surface-variant": "#e3bfb1",
+                        "surface-container-highest": "#353534", "primary-container": "#ff6600", "on-primary": "#581e00",
+                        "secondary": "#c8c6c5", "primary": "#ffb596", "on-primary-container": "#561d00",
+                        "on-primary-fixed-variant": "#7c2e00"
+                    },
+                    borderRadius: { "DEFAULT": "0.5rem", "lg": "0.75rem", "xl": "1rem", "full": "9999px" },
+                    spacing: { "md": "16px", "xs": "4px", "xl": "40px", "gutter": "24px", "sm": "8px", "unit": "4px", "lg": "24px" },
+                    fontFamily: {
+                        "body-md": ["'Pretendard Variable'", "Pretendard", "sans-serif"], "label-bold": ["'Pretendard Variable'", "Pretendard", "sans-serif"],
+                        "headline-xl": ["'Pretendard Variable'", "Pretendard", "sans-serif"], "headline-lg": ["'Pretendard Variable'", "Pretendard", "sans-serif"]
+                    },
+                    fontSize: {
+                        "body-md": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+                        "label-bold": ["12px", { lineHeight: "16px", letterSpacing: "0.05em", fontWeight: "700" }],
+                        "headline-xl": ["48px", { lineHeight: "56px", letterSpacing: "-0.02em", fontWeight: "700" }],
+                        "headline-lg": ["32px", { lineHeight: "40px", letterSpacing: "-0.01em", fontWeight: "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Pretendard Variable', Pretendard, sans-serif; background-color: #131313; color: #e5e2e1; overflow: hidden; }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.12); border-radius: 5px; }
+        .bg-fixed-layer {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
+            background-image: linear-gradient(to top, rgba(19,19,19,0.94), rgba(19,19,19,0.6)), linear-gradient(to right, rgba(19,19,19,0.9), rgba(19,19,19,0.62) 60%, rgba(19,19,19,0.45)), url('IMG/port.jpg');
+            background-size: cover; background-position: center; opacity: 1;
+        }
+        .glass-card { background: rgba(26, 26, 26, 0.5); backdrop-filter: blur(12px); border: 1px solid rgba(90, 65, 54, 0.4); }
+        .grid-pattern { background-image: linear-gradient(to right,rgba(46,46,46,.5) 1px,transparent 1px),linear-gradient(to bottom,rgba(46,46,46,.5) 1px,transparent 1px); background-size: 24px 24px; }
+        .kinetic-accent { color: #ff6600; }
+        .proj-card { transition: border-color .2s, transform .2s, box-shadow .2s; }
+        .proj-card:hover { border-color: #ff6600; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,.35); }
+        /* filter chip */
+        .fchip { transition: all .2s; }
+        .fchip.active { background: #ff6600; color: #131313; border-color: #ff6600; font-weight: 700; }
+        .char { display: inline-block; will-change: filter; filter: brightness(0.8); animation: charShine 5s ease-in-out infinite; }
+        @keyframes charShine { 0%,55%,100% { filter: brightness(0.8); } 26% { filter: brightness(1.55) drop-shadow(0 0 8px rgba(255,255,255,0.35)); } }
+        .emph .char { position: relative; }
+        .emph .char::before { content:''; position:absolute; top:-0.34em; left:50%; transform:translateX(-50%); width:0.16em; height:0.16em; border-radius:9999px; background:#ff6600; }
+    </style>
+</head>
+<body class="bg-background text-on-surface antialiased selection:bg-primary-container h-[100dvh] overflow-hidden">
+<div class="bg-fixed-layer"></div>
+<div class="fixed inset-0 z-0 grid-pattern opacity-[0.07] pointer-events-none"></div>
+<!-- TopNavBar -->
+<header class="fixed w-full top-0 border-b border-white/10 bg-background/70 backdrop-blur-md z-50">
+<div class="flex items-center w-full px-lg py-md max-w-[1600px] mx-auto">
+<div class="flex items-center gap-sm">
+<a href="index.html" class="text-[32px] leading-none font-bold text-on-surface tracking-tight" style="font-family:'Pretendard Variable',Pretendard,sans-serif">NEXT<span class="text-primary-container ml-1 relative top-[-0.3em] inline-block">EZ</span></a>
+</div>
+<nav class="hidden md:flex items-center gap-lg ml-auto">
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors hover:bg-surface-container-highest px-sm py-xs rounded" href="index.html">Home</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors hover:bg-surface-container-highest px-sm py-xs rounded" href="services.html">Services</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors hover:bg-surface-container-highest px-sm py-xs rounded" href="capabilities.html">Capabilities</a>
+<a class="font-body-md text-body-md text-primary font-bold border-b-2 border-primary pb-1" href="portfolio.html">Project Portfolio</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors hover:bg-surface-container-highest px-sm py-xs rounded" href="about.html">About</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors hover:bg-surface-container-highest px-sm py-xs rounded" href="news.html">Newsroom</a>
+</nav>
+</div>
+</header>
+<!-- 비교 안내 배지 -->
+<a href="portfolio.html" class="fixed top-[68px] right-4 z-50 inline-flex items-center gap-1 text-[12px] font-bold px-3 py-1.5 rounded-full bg-primary-container/15 border border-primary-container/40 text-primary hover:bg-primary-container hover:text-black transition-colors"><span class="material-symbols-outlined text-sm">compare_arrows</span>기존(영역형) 버전 보기</a>
+<!-- Single-screen Portfolio (필터형) -->
+<main class="h-[100dvh] w-full relative overflow-hidden">
+<div class="h-full flex items-center px-lg pt-[80px] pb-12">
+<div class="w-full max-w-[1280px] mx-auto grid lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] gap-xl items-center">
+<!-- LEFT : main copy -->
+<div>
+<span class="font-label-bold text-label-bold text-primary uppercase tracking-widest inline-flex items-center gap-2 mb-md">Portfolio <span class="text-[10px] px-2 py-0.5 rounded-full bg-primary-container/15 border border-primary-container/40 normal-case tracking-normal">필터형 · 비교용</span></span>
+<h1 id="main-copy" class="text-[52px] xl:text-[64px] leading-[1.1] font-bold mb-lg">25년, 수많은 <span class="text-primary-container emph">현장</span>에서 만든 것이<br><span class="text-primary-container">지금도 멈추지 않고 돌아갑니다</span></h1>
+<p class="text-on-surface-variant text-base leading-relaxed max-w-lg mb-lg">제주 공공·산업 현장에 적용된 360여 개 프로젝트와 54건의 정부 R&amp;D·사업화 — <span class="text-on-surface font-semibold">분야 필터</span>로 대표 실적을 한눈에 골라보세요.</p>
+<!-- 분야 필터 칩 -->
+<div id="filter-bar" class="flex flex-wrap gap-2"></div>
+<div id="filter-count" class="text-sm text-on-surface-variant mt-md"></div>
+</div>
+<!-- RIGHT : 필터형 프로젝트 그리드 -->
+<div id="proj-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-sm max-h-[74vh] overflow-y-auto pr-1 content-start"></div>
+</div>
+</div>
+</main>
+<script>
+        // ===== 기술분야 데이터 (portfolio.html 과 동일) =====
+        const TECH_FIELDS = [
+            { key: 'ai', en: 'AI · Data', kr: 'AI · 빅데이터', icon: 'smart_toy', count: '12+',
+              groups: [
+                { label: 'SI', items: [
+                    { n: '제주농업 DX기반 구축 사업', c: '제주특별자치도농업기술원', flag: true },
+                    { n: '제주 농업 디지털 영농지원', c: '제주특별자치도농업기술원', flag: true } ]},
+                { label: 'R&D', items: [
+                    { n: '빅데이터 플랫폼 구축 및 센터', c: '한국정보화진흥원' },
+                    { n: '인공지능 기반 맞춤형 관광 추천', c: '문화체육관광부' },
+                    { n: '그린에너지 AI융합 지원', c: '정보통신산업진흥원' } ]} ] },
+            { key: 'platform', en: 'Platform · Solution', kr: '플랫폼 · 솔루션', icon: 'hub', count: '75+',
+              groups: [
+                { label: 'SI', items: [
+                    { n: '탐나오', c: '제주관광협회' },
+                    { n: '여수엔', c: '여수시청' },
+                    { n: '제주DA 플랫폼', c: '제주특별자치도농업기술원', flag: true },
+                    { n: '제주국제전기차엑스포', c: '' } ]},
+                { label: 'R&D', items: [
+                    { n: '노인 통합돌봄 영양관리 재가서비스 플랫폼', c: '중소벤처기업부' },
+                    { n: '제주관광 라이브 커머스 OTA 플랫폼', c: '중소벤처기업부' },
+                    { n: '테마프리마켓 운영 서비스 플랫폼', c: '중소벤처기업부' },
+                    { n: '제주관광 O2O 서비스 플랫폼', c: '산업통상자원부' },
+                    { n: '관광지 할인 Ticket 판매 운영 플랫폼', c: '산업통상자원부' },
+                    { n: '관광 챗봇 서비스 플랫폼', c: '산업통상자원부' } ]} ] },
+            { key: 'si', en: 'Web · System Integration', kr: '웹 · 시스템 구축 (SI)', icon: 'dns', count: '500+',
+              groups: [
+                { label: 'SI', items: [
+                    { n: '제주시청', c: '' },
+                    { n: '제주관광협회', c: '' },
+                    { n: '제주특별자치도농업기술원', c: '' } ]} ] },
+            { key: 'iot', en: 'IoT · Energy', kr: 'IoT · 에너지', icon: 'sensors', count: '7+',
+              groups: [
+                { label: 'R&D', items: [
+                    { n: '제주 그린에너지 AI융합 지원', c: '정보통신산업진흥원' },
+                    { n: '전기차 운영 서비스 기술 개발', c: '산업통상자원부' },
+                    { n: 'ESS 연계형 스마트 풍력에너지 운영', c: '제주지역사업평가원' } ]} ] }
+        ];
+
+        (function () {
+            const esc = s => (s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+            const META = {};
+            TECH_FIELDS.forEach(f => META[f.key] = { en: f.en, kr: f.kr, icon: f.icon, count: f.count });
+
+            // 프로젝트 평탄화
+            const PROJECTS = [];
+            TECH_FIELDS.forEach(f => f.groups.forEach(g => g.items.forEach(it =>
+                PROJECTS.push({ field: f.key, label: g.label, n: it.n, c: it.c || '', flag: !!it.flag })
+            )));
+
+            // 카드 렌더
+            const gridEl = document.getElementById('proj-grid');
+            gridEl.innerHTML = PROJECTS.map(p => {
+                const labelColor = p.label === 'R&D' ? 'bg-primary/15 text-primary-container border-primary/30' : 'bg-primary-container/20 text-primary border-primary-container/30';
+                return '<div class="proj-card glass-card rounded-lg p-md flex flex-col" data-field="' + p.field + '">' +
+                    '<div class="flex items-center gap-2 mb-1.5 flex-wrap">' +
+                        '<span class="text-[10px] font-bold px-1.5 py-0.5 rounded border ' + labelColor + '">' + p.label + '</span>' +
+                        (p.flag ? '<span class="text-[10px] px-1.5 py-0.5 rounded-full bg-primary-container/20 text-primary border border-primary-container/40">대표</span>' : '') +
+                        (p.c ? '<span class="text-[11px] text-on-surface/45 truncate min-w-0">' + esc(p.c) + '</span>' : '') +
+                    '</div>' +
+                    '<h4 class="text-sm font-bold text-on-surface leading-snug mb-2 flex-grow">' + esc(p.n) + '</h4>' +
+                    '<div class="flex items-center gap-1 text-[11px] font-semibold text-primary-container mt-auto">' +
+                        '<span class="material-symbols-outlined text-sm">' + META[p.field].icon + '</span>' + esc(META[p.field].en) +
+                    '</div>' +
+                '</div>';
+            }).join('');
+
+            // 필터 칩 렌더
+            const barEl = document.getElementById('filter-bar');
+            const countEl = document.getElementById('filter-count');
+            const chips = [{ key: 'all', en: '전체' }].concat(TECH_FIELDS.map(f => ({ key: f.key, en: f.en, icon: f.icon })));
+            barEl.innerHTML = chips.map((c, i) =>
+                '<button type="button" data-filter="' + c.key + '" class="fchip ' + (i === 0 ? 'active' : '') + ' inline-flex items-center gap-1 text-[13px] px-3 py-1.5 rounded-full bg-surface-container/70 border border-white/15 text-on-surface-variant hover:border-primary">' +
+                (c.icon ? '<span class="material-symbols-outlined text-base">' + c.icon + '</span>' : '') + c.en + '</button>'
+            ).join('');
+
+            let active = 'all';
+            function apply() {
+                let shown = 0;
+                document.querySelectorAll('.proj-card').forEach(card => {
+                    const on = (active === 'all' || card.dataset.field === active);
+                    card.style.display = on ? '' : 'none';
+                    if (on) shown++;
+                });
+                const label = active === 'all' ? '전체' : META[active].en;
+                countEl.textContent = label + ' · ' + shown + '개 프로젝트';
+                gridEl.scrollTop = 0;
+            }
+            barEl.addEventListener('click', e => {
+                const b = e.target.closest('button[data-filter]');
+                if (!b) return;
+                active = b.dataset.filter;
+                document.querySelectorAll('.fchip').forEach(x => x.classList.toggle('active', x === b));
+                apply();
+            });
+            apply();
+
+            // 메인카피 셔머
+            (function () {
+                const h = document.getElementById('main-copy'); if (!h) return; let idx = 0;
+                (function walk(node) {
+                    Array.prototype.slice.call(node.childNodes).forEach(function (child) {
+                        if (child.nodeType === 3) {
+                            const frag = document.createDocumentFragment();
+                            Array.from(child.textContent).forEach(function (ch) {
+                                if (ch === ' ') { frag.appendChild(document.createTextNode(' ')); return; }
+                                const s = document.createElement('span'); s.className = 'char'; s.textContent = ch;
+                                s.style.animationDelay = (idx * 0.05).toFixed(2) + 's'; idx++; frag.appendChild(s);
+                            });
+                            node.replaceChild(frag, child);
+                        } else if (child.nodeType === 1 && child.tagName !== 'BR') { walk(child); }
+                    });
+                })(h);
+            })();
+        })();
+</script>
+</body></html>
